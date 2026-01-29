@@ -1,0 +1,722 @@
+/* Global Cursor Reset */
+* {
+    cursor: none !important;
+}
+
+/* Basic Cleanups */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #F9F5F0;
+    /* Cursor handled by * selector above */
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #3E2723;
+    /* Dark Brown Outline */
+    border-radius: 50%;
+    pointer-events: none;
+    /* Pass clicks through */
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+body.cursor-pressed #custom-cursor {
+    background-color: #3E2723;
+    /* Solid Fill */
+    transform: translate(-50%, -50%) scale(0.8);
+    /* Slight shrink on click */
+}
+
+/* ===== Splash Screen ===== */
+#splash-screen {
+    transition: opacity 1s ease-out;
+}
+
+#splash-screen.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Breathing Ball - Matching Cursor Language */
+.splash-circle {
+    animation: breathe 3s ease-in-out infinite;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
+}
+
+@keyframes breathe {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+/* Ripple Effect - Stone in Water */
+.splash-ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3E2723;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: ripple 4s ease-out infinite;
+    pointer-events: none;
+}
+
+.splash-ripple.delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 0;
+    }
+}
+
+/* Ball Expansion on Click */
+.splash-circle.expand {
+    animation: expand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes expand {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(40);
+        opacity: 0;
+    }
+}
+
+/* Hide ripples during expansion */
+#splash-ball.expanding .splash-ripple {
+    animation: none;
+    opacity: 0;
+}
+
+/* ===== Tutorial Animation ===== */
+#tutorial-overlay {
+    background: transparent;
+}
+
+#tutorial-cursor {
+    opacity: 0;
+    transform: translate(-50%, -50%);
+}
+
+#tutorial-cursor.active {
+    opacity: 1;
+    animation: tutorialSequence 3.5s ease-in-out forwards;
+}
+
+#tutorial-cursor.pressed {
+    background-color: #3E2723;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Tutorial cursor animation sequence */
+@keyframes tutorialSequence {
+
+    /* Appear in center */
+    0% {
+        left: 50%;
+        top: 50%;
+        opacity: 0;
+    }
+
+    10% {
+        left: 50%;
+        top: 50%;
+        opacity: 1;
+    }
+
+    /* Press down (simulated via class) */
+    20% {
+        left: 50%;
+        top: 50%;
+        opacity: 1;
+    }
+
+    /* Drag to the left */
+    70% {
+        left: 25%;
+        top: 45%;
+        opacity: 1;
+    }
+
+    /* Release and fade */
+    85% {
+        left: 25%;
+        top: 45%;
+        opacity: 1;
+    }
+
+    100% {
+        left: 25%;
+        top: 45%;
+        opacity: 0;
+    }
+}
+
+/* Fonts */
+@font-face {
+    font-family: 'EzerFranzisca';
+    src: url('EzerFranziscaTRIALONLY-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SimplerPro';
+    src: url('SimplerPro_Alte-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SimplerPro';
+    src: url('SimplerPro_Alte-SemiBold.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SimplerPro';
+    src: url('SimplerPro_Alte-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Hide Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Lightbox Open State helper */
+.lightbox-open {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.lightbox-open #lightbox-card {
+    transform: scale(1) !important;
+}
+
+/* Book Hover Effect (handled in JS/Tailwind mostly, but utility here) */
+/* Book Hover Effect & Editorial Spotlight */
+.book-card {
+    /* Cinematic transition: Slower, smoother ease-in-out */
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+        opacity 0.8s ease,
+        filter 0.8s ease;
+    will-change: transform, opacity, filter;
+
+    /* Transparent Background Support */
+    background: transparent !important;
+    box-shadow: none !important;
+    /* Use drop-shadow for the image shape instead of box box-shadow */
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+}
+
+.book-card:hover {
+    z-index: 50;
+    /* On hover, we still want a snappy response, but maybe respect the new physics */
+    transform: scale(1.05) translateY(-8px);
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.3)) !important;
+}
+
+/* Inactive State: Background Noise */
+/* Inactive State: Background Noise */
+.book-card.dimmed {
+    opacity: 0.1 !important;
+    /* Dimming */
+    filter: grayscale(100%) !important;
+    /* Ghost effect */
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+/* Active State: The Focus */
+.book-card.focused {
+    opacity: 1 !important;
+    filter: none;
+    /* Crisp */
+    transform: scale(1.02);
+    /* Subtle lift */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    z-index: 10;
+    /* Raise slightly above dimmed */
+}
+
+/* 3D Book Logic */
+/* STEP 2: The CSS Geometry (Overwrite completely) */
+
+:root {
+    --book-width: 240px;
+    --book-height: 360px;
+    --book-depth: 50px;
+    /* Thicker for better visibility */
+
+    /* Typography Variables (using existing fonts) */
+    --font-heading: 'EzerFranzisca', 'David Libre', serif;
+    --font-body: 'SimplerPro', 'Heebo', sans-serif;
+
+    /* Reader Panel Colors */
+    --reader-bg: #F9F5F0;
+    --reader-text: #3E2723;
+    --reader-text-muted: rgba(62, 39, 35, 0.6);
+}
+
+/* ===== Reader Panel (Focus & Isolation) ===== */
+#reader-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: flex;
+    flex-direction: row;
+    background-color: var(--reader-bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+#reader-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Book Isolation - Fade out all books when reader is open */
+body.reader-active .book-scene {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+/* Selected book stays visible during transition */
+body.reader-active .book-scene.selected-book {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+}
+
+/* Left: Hero Cover Container - FLIP animation target */
+#reader-cover-container {
+    width: 35%;
+    min-width: 280px;
+    max-width: 400px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: linear-gradient(135deg, rgba(62, 39, 35, 0.03) 0%, transparent 100%);
+    /* No slide - just appear */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#reader-panel.open #reader-cover-container {
+    opacity: 1;
+}
+
+#reader-cover {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Right: Content Panel - BLUR TO FOCUS animation */
+#reader-content {
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    padding: 60px 80px 100px 80px;
+    /* Extra bottom padding for infinite scroll */
+    direction: rtl;
+    text-align: right;
+    /* Blur-to-Focus animation */
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.6s ease 0.2s, filter 0.6s ease 0.2s;
+}
+
+#reader-panel.open #reader-content {
+    opacity: 1;
+    filter: blur(0px);
+}
+
+/* Close Button */
+#reader-close {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--reader-text);
+    border-radius: 50%;
+    background: var(--reader-bg);
+    color: var(--reader-text);
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.4s, background-color 0.2s ease, transform 0.2s ease;
+    z-index: 90;
+}
+
+#reader-panel.open #reader-close {
+    opacity: 1;
+}
+
+#reader-close:hover {
+    background-color: var(--reader-text);
+    color: var(--reader-bg);
+    transform: scale(1.1);
+}
+
+/* Reader Title */
+#reader-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--reader-text);
+    margin-bottom: 12px;
+    line-height: 1.2;
+}
+
+/* Reader Meta */
+#reader-meta {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--reader-text-muted);
+    margin-bottom: 32px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Loading Spinner */
+#reader-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    color: var(--reader-text-muted);
+    font-family: var(--font-body);
+}
+
+#reader-spinner::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--reader-text);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#reader-spinner.hidden {
+    display: none;
+}
+
+/* Reader Text Content */
+#reader-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--reader-text);
+    max-width: 700px;
+}
+
+/* Chapter Divider for Infinite Scroll */
+.chapter-divider {
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+    gap: 16px;
+}
+
+.chapter-divider::before,
+.chapter-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, transparent, rgba(62, 39, 35, 0.2), transparent);
+}
+
+.chapter-divider-text {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--reader-text-muted);
+    white-space: nowrap;
+}
+
+/* Bottom Loading Spinner for Infinite Scroll */
+#reader-bottom-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#reader-bottom-spinner.loading {
+    opacity: 1;
+}
+
+#reader-bottom-spinner::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--reader-text-muted);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Scroll Sentinel for IntersectionObserver */
+#reader-scroll-sentinel {
+    height: 1px;
+    width: 100%;
+}
+
+#reader-text p {
+    margin-bottom: 1.5em;
+}
+
+#reader-text h1,
+#reader-text h2,
+#reader-text h3 {
+    font-family: var(--font-heading);
+    margin-top: 2em;
+    margin-bottom: 0.8em;
+}
+
+/* Error State */
+#reader-error {
+    padding: 40px;
+    text-align: center;
+    color: var(--reader-text-muted);
+    font-family: var(--font-body);
+}
+
+#reader-error.hidden {
+    display: none;
+}
+
+/* WikiSource Content Cleanup - Hide all navigation and UI elements */
+#reader-text .mw-editsection,
+#reader-text .mw-jump-link,
+#reader-text .noprint,
+#reader-text .mw-empty-elt,
+#reader-text .sistersitebox,
+#reader-text .navbox,
+#reader-text #coordinates,
+#reader-text .mw-parser-output>.hatnote,
+#reader-text .mw-parser-output>.dablink,
+#reader-text .catlinks,
+#reader-text .printfooter,
+#reader-text .mw-references-wrap,
+#reader-text .reference,
+#reader-text .mw-headline-anchor,
+#reader-text #toc,
+#reader-text .toc,
+#reader-text .toccolours,
+#reader-text .navigation-not-searchable,
+#reader-text .mw-indicators,
+#reader-text .mw-cite-backlink,
+#reader-text .external,
+#reader-text [role="navigation"],
+#reader-text .poem-navigation,
+#reader-text .poem-nav,
+#reader-text .chapter-navigation,
+#reader-text .chapter-nav,
+#reader-text .prevnext,
+#reader-text .prev-next,
+#reader-text .ws-noexport,
+#reader-text .ws-header,
+#reader-text .ws-footer,
+#reader-text .plainlinks,
+#reader-text .infobox,
+#reader-text .thumbinner,
+#reader-text .thumb,
+#reader-text .mbox-small,
+#reader-text .ambox,
+#reader-text .tmbox,
+#reader-text .ombox,
+#reader-text .fmbox,
+#reader-text .cmbox,
+#reader-text .dmbox,
+#reader-text .imbox,
+#reader-text table.wikitable.collapsible,
+#reader-text div[style*="text-align:center"]>table,
+#reader-text hr+table,
+#reader-text table:first-child {
+    display: none !important;
+}
+
+/* Hide header-style tables (often navigation) */
+#reader-text table[style*="background"] {
+    display: none !important;
+}
+
+/* Improve poem/verse display */
+#reader-text .poem,
+#reader-text .verse {
+    font-family: var(--font-body);
+    line-height: 2;
+    margin: 1.5em 0;
+    padding-right: 20px;
+}
+
+/* Style the actual content nicely */
+#reader-text .mw-parser-output>p,
+#reader-text .mw-parser-output>div:not([class]) p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+}
+
+#reader-text table:not([class]) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+
+#reader-text table:not([class]) td,
+#reader-text table:not([class]) th {
+    padding: 8px 12px;
+    border: 1px solid rgba(62, 39, 35, 0.1);
+}
+
+#reader-text a {
+    color: #4A0E18;
+    text-decoration: none;
+    border-bottom: 1px dotted rgba(74, 14, 24, 0.3);
+}
+
+#reader-text a:hover {
+    border-bottom-style: solid;
+}
+
+/* 1. ENABLE 3D SPACE */
+.book-scene {
+    width: var(--book-width);
+    height: var(--book-height);
+    perspective: 2000px;
+    /* Crucial for depth */
+
+    /* Layout Integration: Kept absolute for Stream */
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Reset */
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Drag Interaction Cursors */
+#canvas {
+    cursor: grab;
+}
+
+#canvas:active {
+    cursor: grabbing;
+}
+
+.book-wrap {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d !important;
+    /* CRITICAL: Forces 3D children */
+    transform-origin: center center;
+    transition: transform 0.1s linear;
+    will-change: transform;
+}
+
+/* 2. GENERIC FACE RULES */
+.face {
+    position: absolute;
+    background-color: transparent;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    /* Center all faces by default */
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    /* Removed box-shadow: inset to avoid any borders */
+}
+
+/* 3. POSITION THE FACES */
+
+/* Front: Width x Height, moved forward */
+.face.front {
+    width: var(--book-width);
+    height: var(--book-height);
+    margin-left: calc(var(--book-width) / -2);
+    margin-top: calc(var(--book-height) / -2);
+    transform: translateZ(calc(var(--book-depth) / 2));
+    z-index: 2;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Hide all other faces to show only the flat cover - no borders */
+.face.back,
+.face.spine,
+.face.pages,
+.face.top,
+.face.bottom {
+    display: none;
+}
+
+/* Dimmed State */
+.book-scene.dimmed {
+    opacity: 0.1;
+    filter: grayscale(100%);
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}

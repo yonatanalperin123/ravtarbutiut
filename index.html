@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Library - Digital Archive</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=David+Libre:wght@400;500;700&family=Heebo:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Tailwind CSS (CDN for standalone usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#F9F5F0',
+                        maroon: '#4A0E18',
+                        'book-navy': '#2C344E',
+                        'book-brown': '#5D3A29',
+                        'book-green': '#2E3D30',
+                        'book-stone': '#D4D4D8',
+                    },
+                    fontFamily: {
+                        sans: ['SimplerPro', 'Heebo', 'sans-serif'],
+                        serif: ['EzerFranzisca', 'David Libre', 'serif'],
+                        logo: ['EzerFranzisca', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-cream text-maroon overflow-hidden h-screen w-screen select-none font-sans">
+
+    <!-- Splash Screen (The Foyer) -->
+    <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-cream">
+        <!-- Title -->
+        <h1 class="font-serif text-4xl md:text-5xl text-maroon tracking-wide mb-4">הספרייה</h1>
+        <!-- Subtitle -->
+        <p class="text-sm text-maroon/50 font-sans mb-6">מדפים חדשים לדור חדש</p>
+
+        <!-- Description -->
+        <p class="text-sm text-maroon/60 font-sans max-w-md text-center leading-relaxed mb-20 px-4">
+            הספרייה נוצרה על מנת להוות מרחב דיגיטלי לספרות התרבותית של דור חדש <span class="whitespace-nowrap">בציונות
+                הדתית.</span>
+        </p>
+
+        <!-- Breathing Ball Container -->
+        <div id="splash-ball" class="relative flex items-center justify-center cursor-pointer mt-2">
+            <!-- Main Circle (matching custom-cursor style) -->
+            <div class="splash-circle w-[50px] h-[50px] border-[1.5px] border-[#3E2723] rounded-full"></div>
+            <!-- Ripple Elements -->
+            <div class="splash-ripple"></div>
+            <div class="splash-ripple delay-2"></div>
+        </div>
+
+        <!-- Call to Action -->
+        <p class="text-[10px] text-maroon/40 mt-8 font-sans tracking-wide">לחץ להיכנס</p>
+    </div>
+
+    <!-- Tutorial Overlay (Shows after splash) -->
+    <div id="tutorial-overlay" class="fixed inset-0 z-[90] pointer-events-none hidden">
+        <!-- Fake Cursor for Tutorial -->
+        <div id="tutorial-cursor" class="absolute w-[20px] h-[20px] border-[1.5px] border-[#3E2723] rounded-full">
+        </div>
+        <!-- Hint Text with Capsule Background -->
+        <div id="tutorial-hint"
+            class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-sm text-maroon/80 font-sans opacity-0 transition-opacity duration-500 bg-cream px-6 py-3 rounded-full shadow-lg border border-maroon/10">
+            גרור כדי לחקור את המדף
+        </div>
+    </div>
+
+    <!-- Background Texture -->
+    <div
+        class="fixed inset-0 pointer-events-none opacity-[0.03] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+    </div>
+
+    <!-- Immersive Navigation (Left Anchor) -->
+    <!-- Immersive Navigation (The Ethereal Reveal) -->
+    <!-- Overlay Sidebar Navigation -->
+    <div id="nav-drawer-container" class="fixed right-0 top-0 h-full z-[60] flex items-center group">
+
+        <!-- Trigger Area (Click to Open) -->
+        <div id="nav-trigger"
+            class="absolute right-0 top-0 h-full w-[100px] flex items-center justify-end pr-8 cursor-pointer z-[50]">
+            <!-- The DOT Anchor -->
+            <div id="nav-dot" class="w-3 h-3 bg-maroon rounded-full transition-all duration-300">
+            </div>
+        </div>
+
+        <!-- Sidebar Panel (Overlay) -->
+        <!-- Translates in from right. Background solid cream to cover books. Border Left matches cursor. -->
+        <div id="sidebar-panel" dir="rtl"
+            class="fixed right-0 top-0 h-full w-[230px] bg-cream border-l-[1.5px] border-[#3E2723] transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center pr-8 pl-6 shadow-2xl text-right items-start z-[70]">
+
+            <div class="mb-10 text-right">
+                <h1 class="font-serif text-2xl font-bold text-maroon leading-none tracking-tight">הספריה</h1>
+                <p class="text-[9px] font-medium tracking-normal text-maroon/50 mt-2">ספרים לדור חדש</p>
+            </div>
+
+            <!-- Search & Filter Section -->
+            <div class="w-full mb-8 relative" dir="rtl">
+                <!-- Search Input -->
+                <div class="relative w-full flex items-center">
+                    <input type="text" id="search-input" placeholder="חיפוש במדף..."
+                        class="w-full bg-transparent border-b border-[#3E2723] text-maroon placeholder-maroon/40 text-sm py-1 pl-12 pr-1 focus:outline-none focus:border-maroon/80 transition-colors text-right font-sans mb-6">
+
+                    <!-- Reset Button: Positioned at end of input -->
+                    <button id="reset-filter"
+                        class="hidden absolute left-0 bottom-7 text-[10px] font-bold text-maroon/60 hover:text-maroon transition-colors bg-transparent border-none cursor-pointer">
+                        נקה
+                    </button>
+                </div>
+
+                <!-- Tag Cloud -->
+                <div id="tag-cloud-wrapper"
+                    class="text-right overflow-hidden h-0 opacity-0 transition-all duration-500 ease-out">
+                    <h3 class="text-[10px] font-bold text-maroon/60 mb-2 tracking-wide text-right">סינון לפי נושא:</h3>
+                    <div id="tag-cloud" class="flex flex-wrap justify-start gap-x-2 gap-y-2">
+                        <!-- Tags injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Removed Category Navigation -->
+
+            <div class="mt-16 border-t border-maroon/10 pt-6 text-right">
+                <a href="#" class="block text-xs text-maroon/40 hover:text-maroon mb-1 transition-colors">אודות</a>
+                <!-- Link Removed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 z-[60] flex items-center justify-center px-4 hidden opacity-0 transition-opacity duration-500">
+        <!-- Backdrop -->
+        <div id="lightbox-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer"></div>
+
+        <!-- Modal Card: New Elegant Design -->
+        <div id="lightbox-card" dir="ltr"
+            class="relative w-full max-w-[700px] bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.4)] flex flex-row transform scale-95 transition-transform duration-500 rounded-lg overflow-hidden">
+
+            <!-- Left: Book Cover -->
+            <div id="lb-cover-container" class="w-[280px] flex-shrink-0 relative overflow-hidden">
+                <img id="lb-cover" src="" alt="Book Cover" class="w-full h-full object-cover">
+            </div>
+
+            <!-- Right: Content Panel -->
+            <div class="flex-1 p-8 flex flex-col text-left bg-white min-h-[400px]">
+
+                <!-- Close Button -->
+                <button id="lb-close"
+                    class="absolute top-4 right-4 text-maroon/40 hover:text-maroon transition-colors z-10">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="15" y1="5" x2="5" y2="15" />
+                        <line x1="5" y1="5" x2="15" y2="15" />
+                    </svg>
+                </button>
+
+                <!-- Title -->
+                <h2 id="lb-title"
+                    class="font-serif font-bold text-2xl text-[#3E2723] mb-2 leading-tight tracking-tight">
+                    Book Title
+                </h2>
+
+                <!-- Metadata: Author | Publisher | Year -->
+                <div id="lb-meta"
+                    class="text-sm font-sans text-[#5D4037]/70 mb-6 flex flex-wrap gap-x-3 gap-y-1 justify-start">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Dashed Separator -->
+                <div class="flex justify-center gap-2 mb-6">
+                    <span class="w-4 h-[2px] bg-[#3E2723]/30 rounded-full"></span>
+                    <span class="w-4 h-[2px] bg-[#3E2723]/30 rounded-full"></span>
+                    <span class="w-4 h-[2px] bg-[#3E2723]/30 rounded-full"></span>
+                    <span class="w-4 h-[2px] bg-[#3E2723]/30 rounded-full"></span>
+                    <span class="w-4 h-[2px] bg-[#3E2723]/30 rounded-full"></span>
+                </div>
+
+                <!-- Quote Section -->
+                <div id="lb-quotes-container" class="flex-1 flex flex-col justify-center items-center px-4">
+                    <!-- Injected by JS -->
+                </div>
+
+                <!-- Tags (Pill Shaped) -->
+                <div id="lb-tags" class="mt-6 flex flex-wrap justify-center gap-2">
+                    <!-- Tags injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reader Panel (Dynamic WikiSource Reader) -->
+    <div id="reader-panel">
+        <!-- Close Button -->
+        <button id="reader-close">×</button>
+
+        <!-- Left: Hero Book Cover -->
+        <div id="reader-cover-container">
+            <img id="reader-cover" src="" alt="כריכת ספר">
+        </div>
+
+        <!-- Right: Content Panel -->
+        <div id="reader-content">
+            <h1 id="reader-title"></h1>
+            <div id="reader-meta"></div>
+
+            <!-- Loading Spinner (Initial) -->
+            <div id="reader-spinner">טוען תוכן...</div>
+
+            <!-- Content Area -->
+            <div id="reader-text"></div>
+
+            <!-- Bottom Spinner for Infinite Scroll -->
+            <div id="reader-bottom-spinner"></div>
+
+            <!-- Scroll Sentinel for IntersectionObserver -->
+            <div id="reader-scroll-sentinel"></div>
+
+            <!-- Error State -->
+            <div id="reader-error" class="hidden">
+                <p>לא נמצא תוכן לטקסט זה.</p>
+                <p>נסה שוב מאוחר יותר.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infinite Books Canvas -->
+    <div id="canvas" class="absolute top-0 left-0 w-full h-full cursor-grab active:cursor-grabbing">
+        <div id="camera"
+            class="absolute top-0 left-0 w-full h-full transform-gpu origin-top-left transition-transform duration-75 ease-out">
+            <!-- Book Container (World Space) -->
+            <div id="world" class="absolute top-0 left-0 w-[3000px] h-[2000px]">
+                <!-- Books will be injected here by JS -->
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-cursor"></div>
+    <script src="script.js"></script>
+</body>
+
+</html>
