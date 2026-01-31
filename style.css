@@ -45,22 +45,30 @@ body.cursor-pressed #custom-cursor {
     pointer-events: none;
 }
 
-/* Breathing Ball - Matching Cursor Language */
-.splash-circle {
-    animation: breathe 3s ease-in-out infinite;
+/* Progress Circle SVG - Smooth stroke animation */
+#progress-circle {
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
 }
 
-@keyframes breathe {
+.progress-stroke {
+    transition: stroke-dashoffset 0.3s ease-out;
+}
+
+/* Breathing animation for the progress circle while loading */
+@keyframes pulse {
 
     0%,
     100% {
-        transform: scale(1);
+        transform: rotate(-90deg) scale(1);
     }
 
     50% {
-        transform: scale(1.15);
+        transform: rotate(-90deg) scale(1.08);
     }
+}
+
+#progress-circle {
+    animation: pulse 2.5s ease-in-out infinite;
 }
 
 /* Ripple Effect - Stone in Water */
@@ -94,19 +102,19 @@ body.cursor-pressed #custom-cursor {
     }
 }
 
-/* Ball Expansion on Click */
-.splash-circle.expand {
-    animation: expand 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Progress Circle Expansion on Click */
+#progress-circle.expand {
+    animation: expandCircle 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes expand {
+@keyframes expandCircle {
     0% {
-        transform: scale(1);
+        transform: rotate(-90deg) scale(1);
         opacity: 1;
     }
 
     100% {
-        transform: scale(40);
+        transform: rotate(-90deg) scale(40);
         opacity: 0;
     }
 }
@@ -115,6 +123,70 @@ body.cursor-pressed #custom-cursor {
 #splash-ball.expanding .splash-ripple {
     animation: none;
     opacity: 0;
+}
+
+/* ===== Intro Scene ===== */
+#intro-scene {
+    transition: opacity 0.8s ease-out;
+}
+
+#intro-scene.visible {
+    opacity: 1;
+}
+
+#intro-scene.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Intro Image Containers */
+.intro-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.intro-image {
+    width: 280px;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease-out;
+}
+
+@media (max-width: 768px) {
+    .intro-image {
+        width: 240px;
+        height: 320px;
+    }
+}
+
+.intro-image-container:hover .intro-image {
+    transform: scale(1.03);
+}
+
+/* Intro Paragraphs - Staggered Fade In */
+.intro-paragraph {
+    margin-bottom: 1.5em;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(20px);
+    text-align: justify;
+    text-align-last: right;
+}
+
+.intro-paragraph.visible {
+    opacity: 1 !important;
+    transform: translateY(0);
+}
+
+/* Continue Button Animation */
+#intro-continue {
+    transition: opacity 0.6s ease-out;
+}
+
+#intro-continue.visible {
+    opacity: 1;
 }
 
 /* ===== Tutorial Animation ===== */
@@ -294,6 +366,95 @@ body.cursor-pressed #custom-cursor {
     --reader-text-muted: rgba(62, 39, 35, 0.6);
 }
 
+/* ===== About Panel ===== */
+#about-panel {
+    position: fixed;
+    inset: 0;
+    z-index: 85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--reader-bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+#about-panel.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#about-content {
+    max-width: 650px;
+    padding: 60px;
+    direction: rtl;
+    text-align: right;
+    /* Blur-to-Focus animation */
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.6s ease 0.2s, filter 0.6s ease 0.2s;
+}
+
+#about-panel.open #about-content {
+    opacity: 1;
+    filter: blur(0px);
+}
+
+#about-title {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--reader-text);
+    margin-bottom: 32px;
+    line-height: 1.2;
+}
+
+#about-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 2;
+    color: var(--reader-text);
+}
+
+#about-text p {
+    margin-bottom: 1.5em;
+}
+
+#about-text p:last-child {
+    margin-bottom: 0;
+}
+
+#about-close {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    width: 33px;
+    height: 33px;
+    border: 1.5px solid var(--reader-text);
+    border-radius: 50%;
+    background: var(--reader-bg);
+    color: var(--reader-text);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.4s ease 0.4s, background-color 0.2s ease, transform 0.2s ease;
+    z-index: 90;
+}
+
+#about-panel.open #about-close {
+    opacity: 1;
+}
+
+#about-close:hover {
+    background-color: var(--reader-text);
+    color: var(--reader-bg);
+    transform: scale(1.1);
+}
+
 /* ===== Reader Panel (Focus & Isolation) ===== */
 #reader-panel {
     position: fixed;
@@ -334,13 +495,15 @@ body.reader-active .book-scene.selected-book {
     max-width: 400px;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 40px;
+    justify-content: flex-start;
+    padding: 40px 20px;
     background: linear-gradient(135deg, rgba(62, 39, 35, 0.03) 0%, transparent 100%);
     /* No slide - just appear */
     opacity: 0;
     transition: opacity 0.3s ease;
+    overflow-y: auto;
 }
 
 #reader-panel.open #reader-cover-container {
@@ -349,8 +512,9 @@ body.reader-active .book-scene.selected-book {
 
 #reader-cover {
     max-width: 100%;
-    max-height: 80vh;
+    max-height: 50vh;
     object-fit: contain;
+    flex-shrink: 0;
     /* No shadow or border to preserve PNG transparency */
 }
 
@@ -379,13 +543,13 @@ body.reader-active .book-scene.selected-book {
     position: fixed;
     top: 24px;
     left: 24px;
-    width: 44px;
-    height: 44px;
+    width: 33px;
+    height: 33px;
     border: 1.5px solid var(--reader-text);
     border-radius: 50%;
     background: var(--reader-bg);
     color: var(--reader-text);
-    font-size: 24px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -541,6 +705,70 @@ body.reader-active .book-scene.selected-book {
 
 #reader-error.hidden {
     display: none;
+}
+
+/* ===== Chapter Navigation (Below Cover) ===== */
+#reader-nav {
+    width: 100%;
+    margin-top: 24px;
+    direction: rtl;
+    text-align: center;
+}
+
+#reader-nav.hidden {
+    display: none;
+}
+
+#reader-nav-header {
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    color: var(--reader-text-muted);
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(62, 39, 35, 0.1);
+}
+
+#reader-nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 4px 0;
+}
+
+.reader-nav-item {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: right;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--reader-text);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.reader-nav-item:hover {
+    background: rgba(62, 39, 35, 0.08);
+}
+
+.reader-nav-item.active {
+    background: rgba(62, 39, 35, 0.12);
+    font-weight: 600;
+}
+
+/* Group headers for complex texts */
+.reader-nav-group {
+    width: 100%;
+    padding: 8px 0 4px;
+    font-family: var(--font-heading);
+    font-size: 0.75rem;
+    color: var(--reader-text-muted);
+    text-align: center;
 }
 
 /* WikiSource Content Cleanup - Hide all navigation and UI elements */

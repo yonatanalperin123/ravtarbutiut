@@ -48,25 +48,73 @@
         <!-- Title -->
         <h1 class="font-serif text-4xl md:text-5xl text-maroon tracking-wide mb-4">הספרייה</h1>
         <!-- Subtitle -->
-        <p class="text-sm text-maroon/50 font-sans mb-6">מדפים חדשים לדור חדש</p>
+        <p class="text-sm text-maroon/50 font-sans mb-16">מדפים חדשים לדור חדש</p>
 
-        <!-- Description -->
-        <p class="text-sm text-maroon/60 font-sans max-w-md text-center leading-relaxed mb-20 px-4">
-            הספרייה נוצרה על מנת להוות מרחב דיגיטלי לספרות התרבותית של דור חדש <span class="whitespace-nowrap">בציונות
-                הדתית.</span>
-        </p>
-
-        <!-- Breathing Ball Container -->
-        <div id="splash-ball" class="relative flex items-center justify-center cursor-pointer mt-2">
-            <!-- Main Circle (matching custom-cursor style) -->
-            <div class="splash-circle w-[50px] h-[50px] border-[1.5px] border-[#3E2723] rounded-full"></div>
-            <!-- Ripple Elements -->
-            <div class="splash-ripple"></div>
-            <div class="splash-ripple delay-2"></div>
+        <!-- Progress Circle Container -->
+        <div id="splash-ball" class="relative flex items-center justify-center">
+            <!-- SVG Progress Circle -->
+            <svg id="progress-circle" class="w-[50px] h-[50px] transform -rotate-90" viewBox="0 0 50 50">
+                <!-- Background Circle (Track) -->
+                <circle cx="25" cy="25" r="23" fill="none" stroke="#3E2723" stroke-width="1.5" stroke-opacity="0.2" />
+                <!-- Progress Circle (Fills as loading progresses) -->
+                <circle id="progress-stroke" cx="25" cy="25" r="23" fill="none" stroke="#3E2723" stroke-width="1.5"
+                    stroke-linecap="round" stroke-dasharray="144.51" stroke-dashoffset="144.51"
+                    class="progress-stroke" />
+            </svg>
         </div>
+    </div>
 
-        <!-- Call to Action -->
-        <p class="text-[10px] text-maroon/40 mt-8 font-sans tracking-wide">לחץ להיכנס</p>
+    <!-- Intro Scene (Personal Story) -->
+    <div id="intro-scene" class="fixed inset-0 z-[95] bg-cream hidden opacity-0">
+        <div class="w-full h-full flex flex-col items-center justify-start overflow-y-auto py-16 px-8">
+
+            <!-- Images Section -->
+            <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl">
+                <div class="intro-image-container">
+                    <img src="library1.png" alt="הספרייה בבית הוריי" class="intro-image">
+                </div>
+                <div class="intro-image-container">
+                    <img src="library2.jpg" alt="הספרייה בבית הוריי" class="intro-image">
+                </div>
+            </div>
+
+            <!-- Image Caption -->
+            <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide">הספרייה בבית הוריי</p>
+
+            <!-- Running Text -->
+            <div id="intro-text" dir="rtl"
+                class="max-w-2xl text-right font-sans text-maroon/80 leading-loose text-base md:text-lg px-4">
+                <p class="intro-paragraph opacity-0">הספרייה היא מרכז הבית היהודי.</p>
+                <p class="intro-paragraph opacity-0">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
+                    מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
+                <p class="intro-paragraph opacity-0">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
+                    הספרייה בסלון שמהווה את מרכז הבית. גם בשאר החדרים בבית בכל חדר ישנה <span
+                        class="whitespace-nowrap">ספרייה קטנה.</span></p>
+                <p class="intro-paragraph opacity-0">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
+                    חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים והספרים שמכילים אותם הם חלק אינטגרלי
+                    מחיי היום יום של <span class="whitespace-nowrap">היהודי המאמין.</span></p>
+                <p class="intro-paragraph opacity-0">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
+                    <span class="whitespace-nowrap">דתיים לאומיים.</span>
+                </p>
+                <p class="intro-paragraph opacity-0">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
+                        class="whitespace-nowrap">הערכיים התורניים.</span></p>
+                <p class="intro-paragraph opacity-0 font-medium">כאלה ששמים דגש גם על התורה <span
+                        class="whitespace-nowrap">וגם על האדם.</span></p>
+            </div>
+
+            <!-- Continue Button -->
+            <div id="intro-continue" class="mt-16 opacity-0 cursor-pointer flex flex-col items-center group">
+                <div
+                    class="w-10 h-10 border border-maroon/30 rounded-full flex items-center justify-center group-hover:border-maroon/60 transition-colors mb-3">
+                    <svg class="w-4 h-4 text-maroon/50 group-hover:text-maroon transition-colors" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                </div>
+                <span class="text-xs text-maroon/40 group-hover:text-maroon/60 transition-colors">להיכנס לספרייה</span>
+            </div>
+        </div>
     </div>
 
     <!-- Tutorial Overlay (Shows after splash) -->
@@ -136,8 +184,31 @@
             <!-- Removed Category Navigation -->
 
             <div class="mt-16 border-t border-maroon/10 pt-6 text-right">
-                <a href="#" class="block text-xs text-maroon/40 hover:text-maroon mb-1 transition-colors">אודות</a>
+                <a href="#" id="about-link"
+                    class="block text-xs text-maroon/40 hover:text-maroon mb-1 transition-colors">אודות</a>
                 <!-- Link Removed -->
+            </div>
+        </div>
+    </div>
+
+    <!-- About Panel -->
+    <div id="about-panel">
+        <!-- Close Button -->
+        <button id="about-close">×</button>
+
+        <!-- Content -->
+        <div id="about-content">
+            <h1 id="about-title">אודות הספריה</h1>
+
+            <div id="about-text">
+                <p>הציונות הדתית נמצאת כרגע על ציר שצד אחד שלו שמרני והצד השני ליברלי.</p>
+
+                <p>רבים מהדור הצעיר נוטים יותר לצד הליברלי מאשר לצד השמרני בעוד רוב המערכות הקיימות כיום (הרבנות הראשית,
+                    רבני הישיבות הגדולות והייצוג הפוליטי) נוטים לכיוון השמרני כך שהצד הליברלי של המפה נעלם בתוך הציבור
+                    הכללי בלי ייצוג כתת מגזר בפני עצמו.</p>
+
+                <p>לכן נוצרה הפלטפורמה הזו בה כל אחד יכול לגשת לספרייה של ספרים שבעיני מייצגים את הקאנון התרבותי החדש של
+                    בני הציונות הדתית שאוחזים בשני קצוות התרבות - דתית וישראלית כאחד.</p>
             </div>
         </div>
     </div>
@@ -208,9 +279,17 @@
         <!-- Close Button -->
         <button id="reader-close">×</button>
 
-        <!-- Left: Hero Book Cover -->
+        <!-- Left: Hero Book Cover + Chapter Navigation -->
         <div id="reader-cover-container">
             <img id="reader-cover" src="" alt="כריכת ספר">
+
+            <!-- Chapter Navigation (Below Cover) -->
+            <div id="reader-nav" class="hidden">
+                <div id="reader-nav-header">פרקים</div>
+                <div id="reader-nav-list">
+                    <!-- Chapter links injected here -->
+                </div>
+            </div>
         </div>
 
         <!-- Right: Content Panel -->

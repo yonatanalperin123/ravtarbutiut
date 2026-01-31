@@ -200,6 +200,175 @@ const BOOKS_DATA = [
         color: "bg-book-stone",
         textColor: "text-maroon",
         wikisourcePage: "סיפורי_מעשיות"
+    },
+    {
+        id: 15,
+        title: "תנ\"ך",
+        author: "",
+        year: 0,
+        publisher: "קורן",
+        cover: "15.png",
+        summary: "ספר הספרים - התורה, הנביאים והכתובים.",
+        quotes: ["בראשית ברא אלהים את השמים ואת הארץ."],
+        tags: ["יהדות", "תנ\"ך", "קלאסיקה"],
+        category: "thought",
+        color: "bg-book-navy",
+        textColor: "text-white",
+        sefariaRef: "Genesis.1"
+    },
+    {
+        id: 16,
+        title: "חזרה בלי תשובה",
+        author: "חיים באר",
+        year: 2019,
+        publisher: "עם עובד",
+        cover: "16.png",
+        summary: "רומן על חיים של זיכרון, אהבה ואובדן.",
+        quotes: ["הזיכרון הוא הבית שלנו."],
+        tags: ["פרוזה", "רומן", "ישראלי"],
+        category: "prose",
+        color: "bg-book-green",
+        textColor: "text-white"
+    },
+    {
+        id: 17,
+        title: "חרשתא",
+        author: "יצחק שמי",
+        year: 1929,
+        publisher: "עם עובד",
+        cover: "17.png",
+        summary: "נובלה על חיי הכפר הערבי בארץ ישראל.",
+        quotes: ["האדמה היא האם של הכל."],
+        tags: ["פרוזה", "קלאסיקה", "ארץ ישראל"],
+        category: "prose",
+        color: "bg-book-brown",
+        textColor: "text-white"
+    },
+    {
+        id: 18,
+        title: "לוחות ושברי לוחות",
+        author: "הרב שג\"ר",
+        year: 2013,
+        publisher: "ידיעות ספרים",
+        cover: "18.png",
+        summary: "עיונים בתורה ובמחשבת ישראל בעידן הפוסטמודרני.",
+        quotes: ["השבר הוא חלק מהשלמות."],
+        tags: ["יהדות", "מחשבה", "פילוסופיה"],
+        category: "thought",
+        color: "bg-book-stone",
+        textColor: "text-maroon"
+    },
+    {
+        id: 19,
+        title: "והארץ ניתנה לבני אדם",
+        author: "אברהם יהושע השל",
+        year: 1965,
+        publisher: "ידיעות ספרים",
+        cover: "19.png",
+        summary: "על האדם, האלוהים והעולם במחשבה היהודית.",
+        quotes: ["האדם הוא שליח של האלוהים."],
+        tags: ["יהדות", "מחשבה", "פילוסופיה"],
+        category: "thought",
+        color: "bg-book-navy",
+        textColor: "text-white"
+    },
+    {
+        id: 20,
+        title: "פניני הלכה",
+        author: "הרב אליעזר מלמד",
+        year: 2000,
+        publisher: "הר ברכה",
+        cover: "20.png",
+        summary: "סדרת ספרי הלכה מקיפה לדור החדש.",
+        quotes: ["ההלכה היא דרך חיים."],
+        tags: ["יהדות", "הלכה", "מדריך"],
+        category: "thought",
+        color: "bg-book-green",
+        textColor: "text-white"
+    },
+    {
+        id: 21,
+        title: "תמול שלשום",
+        author: "ש\"י עגנון",
+        year: 1945,
+        publisher: "שוקן",
+        cover: "21.png",
+        summary: "רומן על עלייתו של יצחק קומר לארץ ישראל.",
+        quotes: ["כל אדם הוא עולם בפני עצמו."],
+        tags: ["פרוזה", "קלאסיקה", "ארץ ישראל"],
+        category: "prose",
+        color: "bg-book-brown",
+        textColor: "text-white"
+    },
+    {
+        id: 22,
+        title: "הנסיך הקטן",
+        author: "אנטואן דה סנט אקזופרי",
+        year: 1943,
+        publisher: "עם עובד",
+        cover: "22.png",
+        summary: "סיפור פילוסופי על מהות החיים והאהבה.",
+        quotes: ["הדברים החשובים באמת נראים רק בלב."],
+        tags: ["פרוזה", "פילוסופיה", "קלאסיקה"],
+        category: "prose",
+        color: "bg-book-stone",
+        textColor: "text-maroon"
+    },
+    {
+        id: 23,
+        title: "התפילה",
+        author: "הרב יוסף דוב סולובייצ'יק",
+        year: 2003,
+        publisher: "קורן",
+        cover: "23.png",
+        summary: "הגות עמוקה על משמעות התפילה.",
+        quotes: ["התפילה היא שיחת הנפש עם בוראה."],
+        tags: ["יהדות", "מחשבה", "תפילה"],
+        category: "thought",
+        color: "bg-book-navy",
+        textColor: "text-white"
+    },
+    {
+        id: 24,
+        title: "שירת כל חי",
+        author: "הרב נתן שטרנהרץ",
+        year: 1870,
+        publisher: "ברסלב",
+        cover: "24.png",
+        summary: "ליקוט תפילות ושירים מבית מדרשו של רבי נחמן.",
+        quotes: ["השירה היא נשמת העולם."],
+        tags: ["יהדות", "שירה", "חסידות"],
+        category: "poetry",
+        color: "bg-book-green",
+        textColor: "text-white"
+    },
+    {
+        id: 25,
+        title: "מה את מבקשת",
+        author: "לאה אילון",
+        year: 2018,
+        publisher: "כנרת",
+        cover: "25.png",
+        summary: "רומן על נשים, אמונה וזהות.",
+        quotes: ["החיפוש הוא הדרך."],
+        tags: ["פרוזה", "רומן", "נשים"],
+        category: "prose",
+        color: "bg-book-brown",
+        textColor: "text-white"
+    },
+    {
+        id: 26,
+        title: "מדריך הטרמפיסט לגלקסיה",
+        author: "דאגלס אדמס",
+        year: 1979,
+        publisher: "כנרת",
+        cover: "26.png",
+        summary: "קומדיית מדע בדיוני קלאסית על החיים, היקום והכל.",
+        quotes: ["התשובה לחיים, ליקום ולכל דבר היא 42."],
+        tags: ["מדע בדיוני", "הומור", "קלאסיקה"],
+        category: "prose",
+        color: "bg-book-stone",
+        textColor: "text-maroon"
     }
 ];
 
@@ -243,7 +412,15 @@ const DOM = {
     readerClose: document.getElementById('reader-close'),
     readerBottomSpinner: document.getElementById('reader-bottom-spinner'),
     readerScrollSentinel: document.getElementById('reader-scroll-sentinel'),
-    readerContent: document.getElementById('reader-content')
+    readerContent: document.getElementById('reader-content'),
+    // Reader Navigation UI
+    readerNav: document.getElementById('reader-nav'),
+    readerNavHeader: document.getElementById('reader-nav-header'),
+    readerNavList: document.getElementById('reader-nav-list'),
+    // About Panel UI
+    aboutPanel: document.getElementById('about-panel'),
+    aboutClose: document.getElementById('about-close'),
+    aboutLink: document.getElementById('about-link')
 };
 
 let state = {
@@ -269,7 +446,11 @@ let state = {
     // Infinite Scroll State
     currentRef: null,
     nextRef: null,
-    isLoadingMore: false
+    isLoadingMore: false,
+    // Navigation State
+    bookIndex: null, // Cached book index from Sefaria API
+    // About Panel State
+    aboutOpen: false
 };
 
 // 1. Scattering Layout Logic
@@ -279,28 +460,9 @@ const SCATTER_DATA = [];
 // Allowed rotations: 0, 15, -15 degrees
 const ROTATIONS = [0, 15, -15];
 
-// Number of times each book appears (duplicates for fuller look)
-const BOOK_DUPLICATES = 3;
-
-// Create expanded book list with duplicates
-let EXPANDED_BOOKS = [];
-function createExpandedBookList() {
-    EXPANDED_BOOKS = [];
-    for (let i = 0; i < BOOK_DUPLICATES; i++) {
-        BOOKS_DATA.forEach((book, index) => {
-            EXPANDED_BOOKS.push({
-                ...book,
-                originalIndex: index,
-                duplicateNum: i
-            });
-        });
-    }
-}
-
 function generateScatteredLayout() {
     // Reset
     SCATTER_DATA.length = 0;
-    createExpandedBookList();
 
     // Collision Config - Tighter spacing so books can touch
     const BOOK_W = 240;
@@ -336,8 +498,8 @@ function generateScatteredLayout() {
         return rotation;
     }
 
-    // Use expanded books list with duplicates
-    EXPANDED_BOOKS.forEach((book, index) => {
+    // Use BOOKS_DATA directly (no duplicates)
+    BOOKS_DATA.forEach((book, index) => {
         let placed = false;
         let attempts = 0;
 
@@ -369,7 +531,7 @@ function generateScatteredLayout() {
                     x,
                     y,
                     rotation: getUniqueRotation(x, y), // Ensures different rotation from neighbors
-                    bookIndex: book.originalIndex // Reference to original book data
+                    bookIndex: index // Reference to book data
                 });
                 placed = true;
             }
@@ -383,7 +545,7 @@ function generateScatteredLayout() {
                 x: fallbackX,
                 y: fallbackY,
                 rotation: getUniqueRotation(fallbackX, fallbackY),
-                bookIndex: book.originalIndex
+                bookIndex: index
             });
         }
     });
@@ -742,6 +904,177 @@ async function loadBookContent(sefariaRef) {
 }
 
 /**
+ * Fetch book index/structure from Sefaria API
+ * @param {string} bookRef - The Sefaria book reference
+ * @returns {Promise<Object>} Book index with chapters info
+ */
+async function fetchBookIndex(bookRef) {
+    try {
+        // Extract book name from reference (e.g., "Genesis.1" -> "Genesis")
+        const bookName = bookRef.split('.')[0].split(',')[0].trim();
+        const url = `https://www.sefaria.org/api/v2/raw/index/${encodeURIComponent(bookName)}`;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            console.warn('Could not fetch book index:', response.status);
+            return null;
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Failed to fetch book index:', error);
+        return null;
+    }
+}
+
+/**
+ * Render chapter navigation based on book structure
+ * @param {Object} bookIndex - The book index from Sefaria
+ * @param {string} bookRef - The current book reference
+ */
+function renderChapterNav(bookIndex, bookRef) {
+    if (!DOM.readerNavList || !bookIndex) return;
+
+    DOM.readerNavList.innerHTML = '';
+
+    // Get the book name for building refs
+    const bookName = bookRef.split('.')[0].split(',')[0].trim();
+
+    // Special handling for Tanakh - show books instead of chapters
+    const tanakhBooks = [
+        // Torah
+        { en: 'Genesis', he: 'בראשית' },
+        { en: 'Exodus', he: 'שמות' },
+        { en: 'Leviticus', he: 'ויקרא' },
+        { en: 'Numbers', he: 'במדבר' },
+        { en: 'Deuteronomy', he: 'דברים' },
+        // Nevi'im
+        { en: 'Joshua', he: 'יהושע' },
+        { en: 'Judges', he: 'שופטים' },
+        { en: 'I Samuel', he: 'שמואל א' },
+        { en: 'II Samuel', he: 'שמואל ב' },
+        { en: 'I Kings', he: 'מלכים א' },
+        { en: 'II Kings', he: 'מלכים ב' },
+        { en: 'Isaiah', he: 'ישעיהו' },
+        { en: 'Jeremiah', he: 'ירמיהו' },
+        { en: 'Ezekiel', he: 'יחזקאל' },
+        { en: 'Hosea', he: 'הושע' },
+        { en: 'Joel', he: 'יואל' },
+        { en: 'Amos', he: 'עמוס' },
+        { en: 'Obadiah', he: 'עובדיה' },
+        { en: 'Jonah', he: 'יונה' },
+        { en: 'Micah', he: 'מיכה' },
+        { en: 'Nahum', he: 'נחום' },
+        { en: 'Habakkuk', he: 'חבקוק' },
+        { en: 'Zephaniah', he: 'צפניה' },
+        { en: 'Haggai', he: 'חגי' },
+        { en: 'Zechariah', he: 'זכריה' },
+        { en: 'Malachi', he: 'מלאכי' },
+        // Ketuvim
+        { en: 'Psalms', he: 'תהילים' },
+        { en: 'Proverbs', he: 'משלי' },
+        { en: 'Job', he: 'איוב' },
+        { en: 'Song of Songs', he: 'שיר השירים' },
+        { en: 'Ruth', he: 'רות' },
+        { en: 'Lamentations', he: 'איכה' },
+        { en: 'Ecclesiastes', he: 'קהלת' },
+        { en: 'Esther', he: 'אסתר' },
+        { en: 'Daniel', he: 'דניאל' },
+        { en: 'Ezra', he: 'עזרא' },
+        { en: 'Nehemiah', he: 'נחמיה' },
+        { en: 'I Chronicles', he: 'דברי הימים א' },
+        { en: 'II Chronicles', he: 'דברי הימים ב' }
+    ];
+
+    // Check if this is Tanakh
+    const isTanakh = bookName === 'Genesis' || bookRef.includes('Genesis');
+
+    if (isTanakh) {
+        // Update header
+        if (DOM.readerNavHeader) {
+            DOM.readerNavHeader.textContent = 'ספרי התנ"ך';
+        }
+
+        // Render Tanakh books
+        tanakhBooks.forEach(book => {
+            const btn = document.createElement('button');
+            btn.className = 'reader-nav-item';
+            btn.textContent = book.he;
+            btn.addEventListener('click', () => jumpToChapter(`${book.en}.1`));
+            DOM.readerNavList.appendChild(btn);
+        });
+        return;
+    }
+
+    const schema = bookIndex.schema;
+    if (!schema) return;
+
+    // Handle complex texts with multiple sections
+    if (schema.nodes && schema.nodes.length > 0) {
+        // Complex text - show section names
+        schema.nodes.forEach(node => {
+            if (node.titles && node.titles.length > 0) {
+                const heTitle = node.titles.find(t => t.lang === 'he')?.text || node.titles[0].text;
+                const enTitle = node.key || node.titles[0].text;
+
+                const btn = document.createElement('button');
+                btn.className = 'reader-nav-item';
+                btn.textContent = heTitle;
+                btn.addEventListener('click', () => jumpToChapter(`${bookName}, ${enTitle}`));
+                DOM.readerNavList.appendChild(btn);
+            }
+        });
+    } else if (schema.lengths && schema.lengths.length > 0) {
+        // Simple text with chapters
+        const numChapters = schema.lengths[0];
+        const sectionName = schema.sectionNames?.[0] || 'פרק';
+
+        // Hebrew chapter names
+        const hebrewNums = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י',
+            'יא', 'יב', 'יג', 'יד', 'טו', 'טז', 'יז', 'יח', 'יט', 'כ',
+            'כא', 'כב', 'כג', 'כד', 'כה', 'כו', 'כז', 'כח', 'כט', 'ל',
+            'לא', 'לב', 'לג', 'לד', 'לה', 'לו', 'לז', 'לח', 'לט', 'מ',
+            'מא', 'מב', 'מג', 'מד', 'מה', 'מו', 'מז', 'מח', 'מט', 'נ'];
+
+        for (let i = 1; i <= Math.min(numChapters, 50); i++) {
+            const btn = document.createElement('button');
+            btn.className = 'reader-nav-item';
+            btn.textContent = `${sectionName} ${hebrewNums[i - 1] || i}`;
+            btn.addEventListener('click', () => jumpToChapter(`${bookName}.${i}`));
+            DOM.readerNavList.appendChild(btn);
+        }
+    }
+}
+
+/**
+ * Jump to a specific chapter
+ * @param {string} ref - The Sefaria reference to jump to
+ */
+async function jumpToChapter(ref) {
+    if (!state.readerBook) return;
+
+    // Show loading
+    DOM.readerSpinner.classList.remove('hidden');
+    DOM.readerText.innerHTML = '';
+
+    // Load new content
+    const result = await loadBookContent(ref);
+
+    DOM.readerSpinner.classList.add('hidden');
+    DOM.readerText.innerHTML = result.htmlContent;
+
+    // Update state
+    state.currentRef = ref;
+    state.nextRef = result.nextRef;
+
+    // Scroll to top
+    if (DOM.readerContent) {
+        DOM.readerContent.scrollTop = 0;
+    }
+}
+
+/**
  * Open the Reader Panel with Focus & Isolation transition
  * @param {Object} book - The book object
  * @param {HTMLElement} bookNode - The clicked book DOM node (optional)
@@ -788,6 +1121,11 @@ async function openReaderPanel(book, bookNode = null) {
 
     // Priority: 1. Sefaria, 2. WikiSource, 3. Summary fallback
     if (book.sefariaRef) {
+        // Show navigation for Sefaria books
+        if (DOM.readerNav) {
+            DOM.readerNav.classList.remove('hidden');
+        }
+
         // Use Sefaria API
         const result = await loadBookContent(book.sefariaRef);
         DOM.readerSpinner.classList.add('hidden');
@@ -804,7 +1142,20 @@ async function openReaderPanel(book, bookNode = null) {
             // Setup infinite scroll observer
             setupInfiniteScrollObserver();
         }
+
+        // Fetch and render chapter navigation (async, non-blocking)
+        fetchBookIndex(book.sefariaRef).then(bookIndex => {
+            if (bookIndex) {
+                state.bookIndex = bookIndex;
+                renderChapterNav(bookIndex, book.sefariaRef);
+            }
+        });
     } else if (book.wikisourcePage) {
+        // Hide navigation for WikiSource books
+        if (DOM.readerNav) {
+            DOM.readerNav.classList.add('hidden');
+        }
+
         // Fallback to WikiSource (no infinite scroll)
         const content = await fetchBookContent(book.wikisourcePage);
         DOM.readerSpinner.classList.add('hidden');
@@ -816,6 +1167,11 @@ async function openReaderPanel(book, bookNode = null) {
             DOM.readerError.classList.remove('hidden');
         }
     } else {
+        // Hide navigation for no-source books
+        if (DOM.readerNav) {
+            DOM.readerNav.classList.add('hidden');
+        }
+
         // No external source - show summary instead
         DOM.readerSpinner.classList.add('hidden');
         DOM.readerText.innerHTML = `
@@ -913,6 +1269,7 @@ function closeReaderPanel() {
     state.readerBook = null;
     state.currentRef = null;
     state.nextRef = null;
+    state.bookIndex = null;
 
     // Remove book isolation effect
     document.body.classList.remove('reader-active');
@@ -927,6 +1284,11 @@ function closeReaderPanel() {
         infiniteScrollObserver = null;
     }
 
+    // Hide navigation
+    if (DOM.readerNav) {
+        DOM.readerNav.classList.add('hidden');
+    }
+
     DOM.readerPanel.classList.remove('open');
 }
 
@@ -935,17 +1297,61 @@ DOM.readerClose.addEventListener('click', closeReaderPanel);
 
 // Close on Escape key
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && state.readerOpen) {
-        closeReaderPanel();
+    if (e.key === 'Escape') {
+        if (state.readerOpen) closeReaderPanel();
+        if (state.aboutOpen) closeAboutPanel();
     }
 });
 
+// ===== About Panel =====
+/**
+ * Open the About Panel
+ */
+function openAboutPanel() {
+    state.aboutOpen = true;
+    document.body.classList.add('reader-active'); // Use same isolation effect
+    DOM.aboutPanel.classList.add('open');
+    // Close sidebar if open
+    closeSidebar();
+}
+
+/**
+ * Close the About Panel
+ */
+function closeAboutPanel() {
+    state.aboutOpen = false;
+    document.body.classList.remove('reader-active');
+    DOM.aboutPanel.classList.remove('open');
+}
+
+// About Panel Event Listeners
+if (DOM.aboutClose) {
+    DOM.aboutClose.addEventListener('click', closeAboutPanel);
+}
+
+if (DOM.aboutLink) {
+    DOM.aboutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAboutPanel();
+    });
+}
+
 
 // 4. Search & Filter
-// Extract unique tags
+// Extract unique tags - limited to 15 most frequent
 function extractUniqueTags() {
     const allTags = BOOKS_DATA.flatMap(book => book.tags || []);
-    return [...new Set(allTags)].sort();
+
+    // Count frequency of each tag
+    const tagCount = {};
+    allTags.forEach(tag => {
+        tagCount[tag] = (tagCount[tag] || 0) + 1;
+    });
+
+    // Sort by frequency (most common first) and limit to 15
+    return Object.keys(tagCount)
+        .sort((a, b) => tagCount[b] - tagCount[a])
+        .slice(0, 15);
 }
 
 function renderTags() {
@@ -1126,7 +1532,75 @@ window.addEventListener('keydown', (e) => {
 // Splash Screen Logic
 const splashScreen = document.getElementById('splash-screen');
 const splashBall = document.getElementById('splash-ball');
-const splashCircle = splashBall?.querySelector('.splash-circle');
+const progressStroke = document.getElementById('progress-stroke');
+const progressCircle = document.getElementById('progress-circle');
+
+// Intro Scene Elements
+const introScene = document.getElementById('intro-scene');
+const introParagraphs = document.querySelectorAll('.intro-paragraph');
+const introContinue = document.getElementById('intro-continue');
+
+// Progress circle constants
+const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 23; // 2πr where r=23
+
+/**
+ * Update the progress circle stroke based on loading progress (0-1)
+ */
+function updateProgressCircle(progress) {
+    if (!progressStroke) return;
+    // strokeDashoffset goes from circumference (0%) to 0 (100%)
+    const offset = CIRCLE_CIRCUMFERENCE * (1 - progress);
+    progressStroke.style.strokeDashoffset = offset;
+}
+
+/**
+ * Show the intro scene with staggered paragraph animations
+ */
+function showIntroScene() {
+    if (!introScene) return;
+
+    // Show and fade in the intro scene
+    introScene.classList.remove('hidden');
+    setTimeout(() => {
+        introScene.classList.add('visible');
+    }, 50);
+
+    // Stagger the paragraph animations
+    introParagraphs.forEach((paragraph, index) => {
+        setTimeout(() => {
+            paragraph.classList.add('visible');
+        }, 600 + (index * 400)); // Start after 600ms, 400ms between each
+    });
+
+    // Show continue button after all paragraphs
+    const continueDelay = 600 + (introParagraphs.length * 400) + 500;
+    setTimeout(() => {
+        if (introContinue) {
+            introContinue.classList.add('visible');
+        }
+    }, continueDelay);
+}
+
+/**
+ * Dismiss the intro scene and show the library
+ */
+function dismissIntroScene() {
+    if (!introScene) return;
+
+    // Fade out intro scene
+    introScene.classList.add('fade-out');
+
+    // Show the main canvas, then start tutorial
+    setTimeout(() => {
+        // Show the canvas/library
+        if (DOM.canvas) {
+            DOM.canvas.style.visibility = 'visible';
+            DOM.canvas.style.opacity = '1';
+        }
+        introScene.style.display = 'none';
+        playTutorialAnimation();
+    }, 800);
+}
 
 // Tutorial Elements
 const tutorialOverlay = document.getElementById('tutorial-overlay');
@@ -1204,7 +1678,7 @@ function playTutorialAnimation() {
     setTimeout(() => {
         tutorialCursor.classList.remove('active');
 
-        // Find a book to click
+        // Find a book to hover over
         const firstBook = document.querySelector('.book-scene');
         if (firstBook) {
             const rect = firstBook.getBoundingClientRect();
@@ -1217,16 +1691,12 @@ function playTutorialAnimation() {
             tutorialCursor.style.top = `${targetY}px`;
             tutorialCursor.style.opacity = '1';
 
-            // Click the book
+            // Just show click animation (no opening anything)
             setTimeout(() => {
                 tutorialCursor.classList.add('pressed');
 
-                // Open the lightbox
+                // Release after a moment
                 setTimeout(() => {
-                    const bookIndex = parseInt(firstBook.dataset.globalIndex);
-                    if (BOOKS_DATA[bookIndex]) {
-                        openLightbox(BOOKS_DATA[bookIndex]);
-                    }
                     tutorialCursor.classList.remove('pressed');
                 }, 200);
             }, 900);
@@ -1248,36 +1718,90 @@ function playTutorialAnimation() {
     }, 5500);
 }
 
-function dismissSplash() {
-    if (!splashScreen) return;
+/**
+ * Preload all book cover images with progress tracking
+ * Updates the progress circle as images load
+ */
+function preloadAllImages() {
+    const uniqueCovers = [...new Set(BOOKS_DATA.map(book => book.cover))];
+    const totalImages = uniqueCovers.length;
+    let loadedCount = 0;
 
-    // 1. Stop ripples and expand the ball
-    if (splashBall) {
-        splashBall.classList.add('expanding');
-    }
-    if (splashCircle) {
-        splashCircle.classList.add('expand');
-    }
+    const loadPromises = uniqueCovers.map(src => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                loadedCount++;
+                updateProgressCircle(loadedCount / totalImages);
+                resolve();
+            };
+            img.onerror = () => {
+                loadedCount++;
+                updateProgressCircle(loadedCount / totalImages);
+                resolve(); // Resolve even on error to not block
+            };
+            img.src = src;
+        });
+    });
 
-    // 2. Fade out splash screen after ball starts expanding
-    setTimeout(() => {
-        splashScreen.classList.add('fade-out');
-    }, 300);
-
-    // 3. Remove from DOM after transition completes
-    setTimeout(() => {
-        splashScreen.style.display = 'none';
-    }, 1300);
-
-    // 4. Start tutorial animation after splash fully fades
-    setTimeout(() => {
-        playTutorialAnimation();
-    }, 1400);
+    return Promise.all(loadPromises);
 }
 
-// Click handler - click anywhere on splash screen to dismiss
-if (splashScreen) {
-    splashScreen.addEventListener('click', dismissSplash);
+// Preloading state
+let imagesLoaded = false;
+let minimumTimeElapsed = false;
+const MINIMUM_SPLASH_TIME = 1500; // 1.5 seconds minimum
+
+// Start preloading immediately
+const preloadStart = Date.now();
+preloadAllImages().then(() => {
+    imagesLoaded = true;
+    updateSplashState();
+});
+
+// Minimum time timer
+setTimeout(() => {
+    minimumTimeElapsed = true;
+    updateSplashState();
+}, MINIMUM_SPLASH_TIME);
+
+// Update splash screen based on loading state
+function updateSplashState() {
+    if (imagesLoaded && minimumTimeElapsed) {
+        // Ready - auto dismiss splash and show intro
+        dismissSplash();
+    }
+}
+
+function dismissSplash() {
+    // Don't dismiss until everything is ready
+    if (!imagesLoaded || !minimumTimeElapsed) return;
+    if (!splashScreen) return;
+
+    // Hide the main canvas until intro scene is dismissed
+    if (DOM.canvas) {
+        DOM.canvas.style.visibility = 'hidden';
+        DOM.canvas.style.opacity = '0';
+        DOM.canvas.style.transition = 'opacity 0.5s ease-out';
+    }
+
+    // 1. Show intro scene underneath splash (it will be revealed when splash fades)
+    showIntroScene();
+
+    // 2. Fade out splash screen
+    setTimeout(() => {
+        splashScreen.classList.add('fade-out');
+    }, 200);
+
+    // 3. Remove splash from DOM after transition completes
+    setTimeout(() => {
+        splashScreen.style.display = 'none';
+    }, 1200);
+}
+
+// Click handler for intro scene continue button
+if (introContinue) {
+    introContinue.addEventListener('click', dismissIntroScene);
 }
 
 // Init Tags
