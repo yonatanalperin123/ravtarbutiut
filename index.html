@@ -43,33 +43,75 @@
 
 <body class="bg-cream text-maroon overflow-hidden h-screen w-screen select-none font-sans">
 
-    <!-- Splash Screen (The Foyer) -->
-    <div id="splash-screen" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-cream">
-        <!-- Title -->
-        <h1 class="font-serif text-4xl md:text-5xl text-maroon tracking-wide mb-4">הספרייה</h1>
-        <!-- Subtitle -->
-        <p class="text-sm text-maroon/50 font-sans mb-16">מדפים חדשים לדור חדש</p>
+    <!-- Arrange Mode Toggle (FAB - Bottom Left) -->
+    <button id="view-toggle"
+        class="fixed bottom-8 left-8 z-50 w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+        aria-label="Toggle Arrange Mode">
+        <!-- Move Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="group-hover:scale-110 transition-transform">
+            <polyline points="5 9 2 12 5 15"></polyline>
+            <polyline points="9 5 12 2 15 5"></polyline>
+            <polyline points="15 19 12 22 9 19"></polyline>
+            <polyline points="19 9 22 12 19 15"></polyline>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <line x1="12" y1="2" x2="12" y2="22"></line>
+        </svg>
+        <!-- Tooltip -->
+        <span
+            class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">סדר
+            ספרים</span>
+    </button>
 
-        <!-- Progress Circle Container -->
-        <div id="splash-ball" class="relative flex items-center justify-center">
-            <!-- SVG Progress Circle -->
-            <svg id="progress-circle" class="w-[50px] h-[50px] transform -rotate-90" viewBox="0 0 50 50">
-                <!-- Background Circle (Track) -->
-                <circle cx="25" cy="25" r="23" fill="none" stroke="#3E2723" stroke-width="1.5" stroke-opacity="0.2" />
-                <!-- Progress Circle (Fills as loading progresses) -->
-                <circle id="progress-stroke" cx="25" cy="25" r="23" fill="none" stroke="#3E2723" stroke-width="1.5"
-                    stroke-linecap="round" stroke-dasharray="144.51" stroke-dashoffset="144.51"
-                    class="progress-stroke" />
-            </svg>
-        </div>
-    </div>
+    <!-- Night Mode Toggle (FAB - Bottom Left, second button) -->
+    <button id="night-mode-toggle"
+        class="fixed bottom-8 left-24 z-50 w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+        aria-label="Toggle Night Mode">
+        <!-- Moon Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="group-hover:scale-110 transition-transform">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+        <!-- Tooltip -->
+        <span
+            class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">מצב
+            לילה</span>
+    </button>
 
-    <!-- Intro Scene (Personal Story) -->
-    <div id="intro-scene" class="fixed inset-0 z-[95] bg-cream hidden opacity-0">
-        <div class="w-full h-full flex flex-col items-center justify-start overflow-y-auto py-16 px-8">
+    <!-- Candle Light Effect (follows cursor) -->
+    <div id="candle-light" class="fixed pointer-events-none z-40 opacity-0 transition-opacity duration-500"></div>
+
+    <!-- Dust Particles Container -->
+    <div id="dust-particles"
+        class="fixed inset-0 pointer-events-none z-30 overflow-hidden opacity-0 transition-opacity duration-500"></div>
+
+    <!-- Scrollable Landing Page (Combines Splash + Intro) -->
+    <div id="landing-page" class="fixed inset-0 z-[95] bg-cream overflow-y-auto">
+
+        <!-- Section 1: Hero Title (Full Screen) -->
+        <section id="landing-hero" class="min-h-screen flex flex-col items-center justify-center relative">
+            <h1 id="landing-title"
+                class="font-serif text-7xl md:text-[10rem] text-maroon font-bold tracking-tight text-center leading-none">
+                הספרייה
+            </h1>
+            <p id="landing-subtitle" class="font-sans text-lg md:text-2xl text-maroon/50 tracking-wide mt-4">
+                מדפים לדור חדש
+            </p>
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 flex flex-col items-center animate-bounce">
+                <p class="text-maroon/40 text-xs mb-2 font-medium">גלול להמשך</p>
+                <div class="w-[1px] h-8 bg-maroon/20"></div>
+            </div>
+        </section>
+
+        <!-- Section 2: Images & Story -->
+        <section id="landing-story" class="min-h-screen flex flex-col items-center justify-start py-24 px-8">
 
             <!-- Images Section -->
-            <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl">
+            <div
+                class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl intro-reveal">
                 <div class="intro-image-container">
                     <img src="library1.png" alt="הספרייה בבית הוריי" class="intro-image">
                 </div>
@@ -79,42 +121,42 @@
             </div>
 
             <!-- Image Caption -->
-            <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide">הספרייה בבית הוריי</p>
+            <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide intro-reveal">הספרייה בבית הוריי</p>
 
             <!-- Running Text -->
             <div id="intro-text" dir="rtl"
                 class="max-w-2xl text-right font-sans text-maroon/80 leading-loose text-base md:text-lg px-4">
-                <p class="intro-paragraph opacity-0">הספרייה היא מרכז הבית היהודי.</p>
-                <p class="intro-paragraph opacity-0">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
+                <p class="intro-paragraph">הספרייה היא מרכז הבית היהודי.</p>
+                <p class="intro-paragraph">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
                     מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
-                <p class="intro-paragraph opacity-0">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
+                <p class="intro-paragraph">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
                     הספרייה בסלון שמהווה את מרכז הבית. גם בשאר החדרים בבית בכל חדר ישנה <span
                         class="whitespace-nowrap">ספרייה קטנה.</span></p>
-                <p class="intro-paragraph opacity-0">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
+                <p class="intro-paragraph">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
                     חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים והספרים שמכילים אותם הם חלק אינטגרלי
                     מחיי היום יום של <span class="whitespace-nowrap">היהודי המאמין.</span></p>
-                <p class="intro-paragraph opacity-0">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
+                <p class="intro-paragraph">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
                     <span class="whitespace-nowrap">דתיים לאומיים.</span>
                 </p>
-                <p class="intro-paragraph opacity-0">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
+                <p class="intro-paragraph">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
                         class="whitespace-nowrap">הערכיים התורניים.</span></p>
-                <p class="intro-paragraph opacity-0 font-medium">כאלה ששמים דגש גם על התורה <span
-                        class="whitespace-nowrap">וגם על האדם.</span></p>
+                <p class="intro-paragraph font-medium">כאלה ששמים דגש גם על התורה <span class="whitespace-nowrap">וגם על
+                        האדם.</span></p>
             </div>
 
-            <!-- Continue Button -->
-            <div id="intro-continue" class="mt-16 opacity-0 cursor-pointer flex flex-col items-center group">
+            <!-- Enter Button -->
+            <button id="enter-library" class="mt-20 mb-16 cursor-pointer flex flex-col items-center group intro-reveal">
                 <div
-                    class="w-10 h-10 border border-maroon/30 rounded-full flex items-center justify-center group-hover:border-maroon/60 transition-colors mb-3">
-                    <svg class="w-4 h-4 text-maroon/50 group-hover:text-maroon transition-colors" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
+                    class="w-14 h-14 bg-maroon text-cream rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 mb-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </div>
-                <span class="text-xs text-maroon/40 group-hover:text-maroon/60 transition-colors">להיכנס לספרייה</span>
-            </div>
-        </div>
+                <span class="text-sm text-maroon/60 group-hover:text-maroon transition-colors font-medium">להיכנס
+                    לספרייה</span>
+            </button>
+        </section>
     </div>
 
     <!-- Tutorial Overlay (Shows after splash) -->
@@ -316,7 +358,6 @@
             </div>
         </div>
     </div>
-
     <!-- Infinite Books Canvas -->
     <div id="canvas" class="absolute top-0 left-0 w-full h-full cursor-grab active:cursor-grabbing">
         <div id="camera"

@@ -391,16 +391,29 @@ const DOM = {
     lbDesc: document.getElementById('lb-desc'),
     lbTags: document.getElementById('lb-tags'),
     lbCover: document.getElementById('lb-cover'),
-    // Search UI
+    // Search UI (Legacy)
     searchInput: document.getElementById('search-input'),
     resetBtn: document.getElementById('reset-filter'),
     tagCloud: document.getElementById('tag-cloud'),
     tagCloudWrapper: document.getElementById('tag-cloud-wrapper'),
-    // Sidebar UI
+    // Sidebar UI (Legacy Overlay)
     navDrawerContainer: document.getElementById('nav-drawer-container'),
     sidebarPanel: document.getElementById('sidebar-panel'),
     navTrigger: document.getElementById('nav-trigger'),
     navDot: document.getElementById('nav-dot'),
+    // NEW: Persistent Sidebar UI
+    persistentSidebar: document.getElementById('persistent-sidebar'),
+    sidebarSearchInput: document.getElementById('sidebar-search-input'),
+    sidebarReset: document.getElementById('sidebar-reset'),
+    sidebarTags: document.getElementById('sidebar-tags'),
+    sidebarAboutLink: document.getElementById('sidebar-about-link'),
+    categoryButtons: document.querySelectorAll('.category-btn'),
+    // Hero Title (Legacy Ref for removal later if needed, now used in Hero Flow)
+    heroTitle: document.getElementById('hero-title'),
+    // Hero Flow Elements
+    heroSection: document.getElementById('hero-section'),
+    heroTitleContainer: document.getElementById('hero-title-container'),
+    heroScrollIndicator: document.getElementById('hero-scroll-indicator'),
     // Reader Panel UI
     readerPanel: document.getElementById('reader-panel'),
     readerCover: document.getElementById('reader-cover'),
@@ -417,6 +430,22 @@ const DOM = {
     readerNav: document.getElementById('reader-nav'),
     readerNavHeader: document.getElementById('reader-nav-header'),
     readerNavList: document.getElementById('reader-nav-list'),
+
+    // View Toggle
+    viewToggle: document.getElementById('view-toggle'),
+
+    // Landing Page Elements (New Scroll Intro)
+    landingPage: document.getElementById('landing-page'),
+    landingTitle: document.getElementById('landing-title'),
+    landingSubtitle: document.getElementById('landing-subtitle'),
+    landingHero: document.getElementById('landing-hero'),
+    landingStory: document.getElementById('landing-story'),
+    enterLibrary: document.getElementById('enter-library'),
+
+    // Hero Elements (Legacy - may be unused now)
+    heroMainTitle: document.getElementById('hero-main-title'),
+    heroSubtitle: document.getElementById('hero-subtitle'),
+
     // About Panel UI
     aboutPanel: document.getElementById('about-panel'),
     aboutClose: document.getElementById('about-close'),
@@ -424,6 +453,7 @@ const DOM = {
 };
 
 let state = {
+    arrangeMode: false, // When true, user can drag books; when false, pan canvas
     activeCategory: 'all',
     activeBook: null,
     pan: { x: 0, y: 0 },
@@ -432,6 +462,11 @@ let state = {
     dragStart: { x: 0, y: 0 },
     initialPan: { x: 0, y: 0 },
     activeNodes: new Map(), // key: index, value: DOM Element
+    // Book Dragging State
+    draggingBook: null, // Reference to book node being dragged
+    draggingBookIndex: null, // Index of book being dragged
+    bookDragStart: { x: 0, y: 0 }, // Initial book position
+    clickedBook: null, // Book that was clicked (for distinguishing drag vs click)
     // Sidebar State
     sidebarOpen: false,
     // Search State
@@ -450,11 +485,111 @@ let state = {
     // Navigation State
     bookIndex: null, // Cached book index from Sefaria API
     // About Panel State
-    aboutOpen: false
+    aboutOpen: false,
+    // Hero State
+    heroShrunk: false,
+    heroDismissed: false,
+    // Z-Index Counter for book stacking
+    topZIndex: 10 // Starts at 10, increments each time a book is picked up
 };
 
+
+
+// ===== NEW HERO FLOW =====
+function showHeroSection() {
+    if (!DOM.heroSection) {
+        // Fallback if hero section missing
+        showIntroScene();
+        return;
+    }
+
+    DOM.heroSection.classList.remove('hidden');
+
+    // Animate In elements - Scroll Up / Slide In (No Fade In)
+
+    // Initial State (set immediately when unhidden)
+    DOM.heroMainTitle.style.transform = 'translateY(100vh)';
+    DOM.heroMainTitle.style.opacity = '1'; // Ensure visible so we see it slide
+    DOM.heroMainTitle.style.transition = 'transform 1.5s cubic-bezier(0.16, 1, 0.3, 1)'; // Smooth easing
+
+    // Trigger Animation
+    setTimeout(() => {
+        if (DOM.heroTitleContainer) {
+            // Reset to natural position
+            DOM.heroTitleContainer.style.transform = 'translateY(0)';
+            DOM.heroTitleContainer.classList.remove('opacity-0', 'translate-y-8'); // Remove legacy classes
+
+            // Also animate the specific title container if needed
+            DOM.heroTitleContainer.style.opacity = '1';
+        }
+    }, 100);
+
+    setTimeout(() => {
+        if (DOM.heroScrollIndicator) {
+            DOM.heroScrollIndicator.classList.remove('opacity-0');
+        }
+
+        // Add scroll listeners after delay
+        setupHeroDismissListeners();
+    }, 1200);
+}
+
+function setupHeroDismissListeners() {
+    let triggered = false;
+
+    const dismiss = () => {
+        if (triggered) return;
+        triggered = true;
+        dismissHeroSection();
+
+        // Cleanup
+        window.removeEventListener('wheel', dismiss);
+        window.removeEventListener('scroll', dismiss);
+        window.removeEventListener('touchmove', dismiss);
+        window.removeEventListener('click', dismiss);
+    };
+
+    window.addEventListener('wheel', dismiss, { passive: true });
+    window.addEventListener('touchmove', dismiss, { passive: true });
+    window.addEventListener('click', dismiss);
+}
+
+function dismissHeroSection() {
+    if (!DOM.heroSection || state.heroDismissed) return;
+    state.heroDismissed = true;
+
+    // 1. Shrink Animation First
+    if (DOM.heroTitleContainer) {
+        DOM.heroTitleContainer.style.transition = 'transform 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s ease';
+        DOM.heroTitleContainer.style.transform = 'scale(0.6)'; // Shrink to 60%
+        // We keep opacity 1 during shrink, or maybe slight fade if desired?
+        // User said: "slowly shrinks and only then does the introduction appear"
+    }
+
+    if (DOM.heroScrollIndicator) {
+        DOM.heroScrollIndicator.style.opacity = '0';
+    }
+
+    // 2. Wait for shrink to complete, THEN show Intro + Fade out Hero
+    setTimeout(() => {
+        // Trigger Intro Scene Logic
+        showIntroScene();
+
+        // Fade out Hero Container
+        DOM.heroSection.style.transition = 'opacity 0.8s ease-out';
+        DOM.heroSection.style.opacity = '0';
+
+        // Remove from DOM
+        setTimeout(() => {
+            DOM.heroSection.style.display = 'none';
+        }, 800);
+
+    }, 1000); // Wait 1s (most of the shrink animation)
+}
+
+
 // 1. Scattering Layout Logic
-const TABLE_SIZE = 2500; // Larger size to accommodate more books
+const TABLE_SIZE = 2600; // Decreased from 3000 for even higher density
 const SCATTER_DATA = [];
 
 // Allowed rotations: 0, 15, -15 degrees
@@ -464,11 +599,11 @@ function generateScatteredLayout() {
     // Reset
     SCATTER_DATA.length = 0;
 
-    // Collision Config - Tighter spacing so books can touch
-    const BOOK_W = 240;
-    const BOOK_H = 360;
-    // Adjusted radius - 15% less dense than before
-    const RADIUS = Math.sqrt(BOOK_W * BOOK_W + BOOK_H * BOOK_H) / 2 - 10; // Slightly larger spacing
+    // Collision Config - Books 10% larger (Simulating camera zoom)
+    const BOOK_W = 304; // 276 * 1.1
+    const BOOK_H = 455; // 414 * 1.1
+    // Adjusted radius - Increased further by 10% (Total ~15% spacing increase)
+    const RADIUS = (Math.sqrt(BOOK_W * BOOK_W + BOOK_H * BOOK_H) / 2) * 1.15;
     const NEIGHBOR_RANGE = RADIUS * 2.5; // Range to check for rotation similarity
     const MIN_ROTATION_DIFF = 10; // Minimum degrees difference between adjacent books
 
@@ -502,18 +637,21 @@ function generateScatteredLayout() {
     BOOKS_DATA.forEach((book, index) => {
         let placed = false;
         let attempts = 0;
+        const maxAttempts = 200;
 
-        while (!placed && attempts < 100) {
+        while (!placed && attempts < maxAttempts) {
             attempts++;
 
-            const padding = 200; // Smaller padding for edge books
+            const padding = 300; // 300px visual clearance
             const x = Math.random() * (TABLE_SIZE - padding * 2) + padding;
             const y = Math.random() * (TABLE_SIZE - padding * 2) + padding;
 
-            // Distance Check - tighter collision, sometimes allowing overlap
+            // Distance Check - Strict overlap limit (max 20% overlap ~ 80% distance)
             let collision = false;
-            // Use random threshold to sometimes allow very close placement
-            const minDistThreshold = RADIUS * (0.8 + Math.random() * 0.4); // 80%-120% of radius
+
+            // Allow slight variance but ensure MINIMUM distance is kept high
+            // 0.85 * Radius ensures centers are far enough to prevent full overlap
+            const minDistThreshold = RADIUS * (0.85 + Math.random() * 0.4);
 
             for (const existing of SCATTER_DATA) {
                 const dx = existing.x - x;
@@ -528,25 +666,96 @@ function generateScatteredLayout() {
 
             if (!collision) {
                 SCATTER_DATA.push({
-                    x,
-                    y,
-                    rotation: getUniqueRotation(x, y), // Ensures different rotation from neighbors
-                    bookIndex: index // Reference to book data
+                    x, y,
+                    rotation: getUniqueRotation(x, y),
+                    bookIndex: index
                 });
                 placed = true;
             }
         }
 
-        // Fallback placement - place anyway even if overlapping
+        // Fallback placement - Try to place with relaxed constraints, but still avoid full overlap
+        // Only if absolutely necessary
         if (!placed) {
-            const fallbackX = Math.random() * TABLE_SIZE;
-            const fallbackY = Math.random() * TABLE_SIZE;
+            // Try one more time with strictly minimal safe distance
+            // If even that fails, we expand table implicitly or just find furthest point (too complex)
+            // We'll just place it at a random point but push it slightly if colliding? 
+            // Simplified: Just place it random, chances are low collision in 5000x5000
+
+            const padding = 300;
+            const fallbackX = Math.random() * (TABLE_SIZE - padding * 2) + padding;
+            const fallbackY = Math.random() * (TABLE_SIZE - padding * 2) + padding;
             SCATTER_DATA.push({
                 x: fallbackX,
                 y: fallbackY,
                 rotation: getUniqueRotation(fallbackX, fallbackY),
                 bookIndex: index
             });
+        }
+    });
+}
+
+function generateStacksLayout() {
+    SCATTER_DATA.length = 0;
+
+    // Define Stack Centers (4 Quadrants)
+    const mid = TABLE_SIZE / 2;
+    // Spread them out nicely
+    const spread = 800;
+    const centers = {
+        'thought': { x: mid - spread, y: mid - spread, label: 'מחשבה' },  // Top Left
+        'prose': { x: mid + spread, y: mid - spread, label: 'פרוזה' },  // Top Right
+        'poetry': { x: mid - spread, y: mid + spread, label: 'שירה' },  // Bottom Left
+        'halacha': { x: mid + spread, y: mid + spread, label: 'הלכה' }   // Bottom Right
+    };
+
+    // Use BOOKS_DATA directly
+    BOOKS_DATA.forEach((book, index) => {
+        const cat = book.category || 'thought';
+        const center = centers[cat] || centers['thought'];
+
+        // Random placement within a tight pile (stack feel)
+        const pileRadius = 250;
+        const r = Math.random() * pileRadius;
+        const theta = Math.random() * Math.PI * 2;
+
+        const x = center.x + r * Math.cos(theta);
+        const y = center.y + r * Math.sin(theta);
+
+        // Random messy rotation
+        const rotation = (Math.random() - 0.5) * 40;
+
+        SCATTER_DATA.push({
+            x, y,
+            rotation,
+            bookIndex: index
+        });
+    });
+}
+
+function updateLayout() {
+    const totalBooks = SCATTER_DATA.length;
+    const maxStagger = 0.6; // Max stagger delay in seconds
+
+    SCATTER_DATA.forEach((data, index) => {
+        const node = state.activeNodes.get(index);
+        if (node) {
+            // Stagger delay based on index for wave effect
+            const staggerDelay = (index / totalBooks) * maxStagger;
+
+            // Slower, smoother transition with stagger
+            node.style.transition = `all 1.5s cubic-bezier(0.25, 0.1, 0.25, 1) ${staggerDelay}s`;
+
+            // Update position
+            node.style.left = `${data.x}px`;
+            node.style.top = `${data.y}px`;
+            node.style.transform = `rotate(${data.rotation}deg)`;
+
+            // Update counter-rotation for hover card
+            const hoverInfo = node.querySelector('.book-hover-info');
+            if (hoverInfo) {
+                hoverInfo.style.setProperty('--counter-rotation', `${-data.rotation}deg`);
+            }
         }
     });
 }
@@ -569,6 +778,7 @@ function createBookNode(index) {
     scene.style.transform = `rotate(${layout.rotation}deg)`;
 
     // Data Attributes
+    scene.dataset.index = index; // Index in SCATTER_DATA for drag tracking
     scene.dataset.globalIndex = index;
     scene.dataset.id = book.id;
     scene.dataset.category = book.category;
@@ -627,10 +837,39 @@ function createBookNode(index) {
     bottom.className = 'face bottom bg-[url("pages.png")] bg-repeat-x bg-contain';
     wrap.appendChild(bottom);
 
-    // Interaction - only open if not dragging
+    // Add hover metadata overlay
+    const hoverInfo = document.createElement('div');
+    hoverInfo.className = 'book-hover-info';
+
+    // Category label mapping
+    const categoryLabels = {
+        'thought': 'מחשבה',
+        'prose': 'פרוזה',
+        'poetry': 'שירה',
+        'halacha': 'הלכה'
+    };
+
+    // Set counter-rotation to keep card straight
+    hoverInfo.style.setProperty('--counter-rotation', `${-layout.rotation}deg`);
+
+    hoverInfo.innerHTML = `
+        <div class="book-title">${book.title}</div>
+        <div class="book-author">${book.author || ''}</div>
+        <div class="book-meta">
+            <span>${book.year || ''}</span>
+            ${book.year && book.category ? '•' : ''}
+            <span>${categoryLabels[book.category] || 'כללי'}</span>
+        </div>
+    `;
+    scene.appendChild(hoverInfo);
     scene.addEventListener('click', (e) => {
         // Prevent opening if we just finished dragging
         if (state.wasDragging) {
+            e.stopPropagation();
+            return;
+        }
+        // Don't open reader panel in arrange mode
+        if (state.arrangeMode) {
             e.stopPropagation();
             return;
         }
@@ -676,18 +915,67 @@ function initWorld() {
     renderAllBooks();
 }
 
-// 2. Drag to Pan Logic
+// 2. Drag Logic (Canvas Pan + Book Arrangement)
 const DRAG_THRESHOLD = 5; // pixels
 
 DOM.canvas.addEventListener('mousedown', (e) => {
-    state.isDragging = true;
-    state.wasDragging = false; // Reset drag detection
-    state.dragStart = { x: e.clientX, y: e.clientY };
-    state.initialPan = { ...state.pan };
-    DOM.canvas.style.cursor = 'grabbing';
+    // Check if we're in arrange mode and clicked on a book
+    const bookScene = e.target.closest('.book-scene');
+
+    if (state.arrangeMode && bookScene) {
+        // Start Book Drag
+        e.preventDefault();
+        e.stopPropagation();
+
+        state.draggingBook = bookScene;
+        state.draggingBookIndex = parseInt(bookScene.dataset.index);
+        state.bookDragStart = {
+            x: e.clientX,
+            y: e.clientY,
+            bookX: parseFloat(bookScene.style.left) || 0,
+            bookY: parseFloat(bookScene.style.top) || 0
+        };
+
+        // Bring to front and scale up (picking up effect)
+        bookScene.style.zIndex = '100';
+        bookScene.style.transition = 'transform 0.3s ease-out'; // Smooth scale only
+        DOM.canvas.style.cursor = 'grabbing';
+
+        // Scale up the book-wrap inside
+        const bookWrap = bookScene.querySelector('.book-wrap');
+        if (bookWrap) {
+            bookWrap.style.transition = 'transform 0.3s ease-out, filter 0.3s ease-out';
+            bookWrap.style.transform = 'translateY(-20px) scale(1.15)';
+            bookWrap.style.filter = 'drop-shadow(0 30px 40px rgba(0, 0, 0, 0.4))';
+        }
+    } else {
+        // Start Canvas Pan (in normal mode, OR in arrange mode clicking on empty space)
+        state.isDragging = true;
+        state.wasDragging = false;
+        state.dragStart = { x: e.clientX, y: e.clientY };
+        state.initialPan = { ...state.pan };
+        state.clickedBook = bookScene; // Remember which book was clicked (if any)
+        DOM.canvas.style.cursor = 'grabbing';
+    }
 });
 
 window.addEventListener('mousemove', (e) => {
+    // Book Dragging
+    if (state.draggingBook) {
+        const dx = e.clientX - state.bookDragStart.x;
+        const dy = e.clientY - state.bookDragStart.y;
+
+        const newX = state.bookDragStart.bookX + dx;
+        const newY = state.bookDragStart.bookY + dy;
+
+        state.draggingBook.style.left = `${newX}px`;
+        state.draggingBook.style.top = `${newY}px`;
+
+        state.wasDragging = true; // Mark as dragged to prevent click
+        return;
+    }
+
+    // Canvas Panning
     if (!state.isDragging) return;
 
     const dx = e.clientX - state.dragStart.x;
@@ -714,7 +1002,38 @@ window.addEventListener('mousemove', (e) => {
 });
 
 window.addEventListener('mouseup', () => {
+    // Finalize Book Drag
+    if (state.draggingBook) {
+        const bookNode = state.draggingBook;
+        const index = state.draggingBookIndex;
+
+        // Update SCATTER_DATA with new position
+        if (SCATTER_DATA[index]) {
+            SCATTER_DATA[index].x = parseFloat(bookNode.style.left);
+            SCATTER_DATA[index].y = parseFloat(bookNode.style.top);
+        }
+
+        // Scale down the book-wrap (putting back down)
+        const bookWrap = bookNode.querySelector('.book-wrap');
+        if (bookWrap) {
+            bookWrap.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease';
+            bookWrap.style.transform = '';
+            bookWrap.style.filter = '';
+        }
+
+        // Keep book on top (increment z-index counter)
+        state.topZIndex++;
+        bookNode.style.zIndex = state.topZIndex;
+        bookNode.style.transition = '';
+
+        state.draggingBook = null;
+        state.draggingBookIndex = null;
+        DOM.canvas.style.cursor = state.arrangeMode ? 'grab' : 'grab';
+    }
+
+    // Finalize Canvas Pan
     state.isDragging = false;
+    state.clickedBook = null;
     DOM.canvas.style.cursor = 'grab';
 
     // Clear wasDragging flag after a delay to allow click events to check it
@@ -1493,30 +1812,38 @@ function openSidebar() {
 
 function closeSidebar() {
     state.sidebarOpen = false;
-    DOM.sidebarPanel.classList.remove('translate-x-0');
-    DOM.sidebarPanel.classList.add('translate-x-full');
+    if (DOM.sidebarPanel) {
+        DOM.sidebarPanel.classList.remove('translate-x-0');
+        DOM.sidebarPanel.classList.add('translate-x-full');
+    }
 }
 
-// Event Listeners for Sidebar
-DOM.navTrigger.addEventListener('mouseenter', () => {
-    openSidebar();
-});
+// Event Listeners for Legacy Overlay Sidebar (null checks for new layout)
+if (DOM.navTrigger) {
+    DOM.navTrigger.addEventListener('mouseenter', () => {
+        openSidebar();
+    });
+}
 
 // Auto-Close on Mouse Leave (Container includes Trigger + Panel)
-DOM.navDrawerContainer.addEventListener('mouseleave', () => {
-    closeSidebar();
-});
+if (DOM.navDrawerContainer) {
+    DOM.navDrawerContainer.addEventListener('mouseleave', () => {
+        closeSidebar();
+    });
+}
 
-DOM.navTrigger.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent immediate closing
-    openSidebar();
-});
+if (DOM.navTrigger) {
+    DOM.navTrigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent immediate closing
+        openSidebar();
+    });
+}
 
 // Close on Click Outside
 window.addEventListener('click', (e) => {
-    if (state.sidebarOpen) {
+    if (state.sidebarOpen && DOM.sidebarPanel) {
         // If click is NOT inside sidebar and NOT inside trigger
-        if (!DOM.sidebarPanel.contains(e.target) && !DOM.navTrigger.contains(e.target)) {
+        if (!DOM.sidebarPanel.contains(e.target) && (!DOM.navTrigger || !DOM.navTrigger.contains(e.target))) {
             closeSidebar();
         }
     }
@@ -1528,6 +1855,101 @@ window.addEventListener('keydown', (e) => {
         closeSidebar();
     }
 });
+
+// ===== NEW: Persistent Sidebar Event Listeners =====
+
+// Persistent Search Input
+if (DOM.sidebarSearchInput) {
+    DOM.sidebarSearchInput.addEventListener('input', (e) => {
+        state.searchQuery = e.target.value;
+        performSearch();
+        // Update reset button visibility
+        if (DOM.sidebarReset) {
+            if (state.searchQuery.length > 0 || state.activeFilterTag) {
+                DOM.sidebarReset.classList.remove('hidden');
+            } else {
+                DOM.sidebarReset.classList.add('hidden');
+            }
+        }
+    });
+}
+
+// Persistent Reset Button
+if (DOM.sidebarReset) {
+    DOM.sidebarReset.addEventListener('click', () => {
+        state.searchQuery = '';
+        state.activeFilterTag = null;
+        state.activeCategory = 'all';
+
+        if (DOM.sidebarSearchInput) {
+            DOM.sidebarSearchInput.value = '';
+        }
+
+        // Reset category buttons
+        DOM.categoryButtons?.forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.category-btn[data-category="all"]')?.classList.add('active');
+
+        performSearch();
+        DOM.sidebarReset.classList.add('hidden');
+    });
+}
+
+// Category Buttons
+DOM.categoryButtons?.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+        state.activeCategory = category;
+
+        // Update active state
+        DOM.categoryButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter by category
+        if (category === 'all') {
+            state.activeFilterTag = null;
+        } else {
+            // Map category to matching books
+            state.matchingIds = new Set();
+            BOOKS_DATA.forEach(book => {
+                if (book.category === category) {
+                    state.matchingIds.add(book.id);
+                }
+            });
+        }
+
+        // Update display
+        state.activeNodes.forEach((node, index) => {
+            const layout = SCATTER_DATA[index];
+            const book = layout ? BOOKS_DATA[layout.bookIndex] : null;
+            if (book) {
+                if (category === 'all' || book.category === category) {
+                    node.classList.remove('dimmed');
+                } else {
+                    node.classList.add('dimmed');
+                }
+            }
+        });
+    });
+});
+
+// Persistent About Link
+if (DOM.sidebarAboutLink) {
+    DOM.sidebarAboutLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (DOM.aboutPanel) {
+            DOM.aboutPanel.classList.add('visible');
+            state.aboutOpen = true;
+        }
+    });
+}
+
+// ===== Hero Shrink on Drag =====
+function shrinkHero() {
+    if (!state.heroShrunk && DOM.heroTitle) {
+        state.heroShrunk = true;
+        DOM.heroTitle.classList.add('shrunk');
+    }
+}
 
 // Splash Screen Logic
 const splashScreen = document.getElementById('splash-screen');
@@ -1747,46 +2169,29 @@ function preloadAllImages() {
     return Promise.all(loadPromises);
 }
 
-// Preloading state
-let imagesLoaded = false;
-let minimumTimeElapsed = false;
-const MINIMUM_SPLASH_TIME = 1500; // 1.5 seconds minimum
-
-// Start preloading immediately
-const preloadStart = Date.now();
+// Preloading state (Legacy - disabled for new landing page)
+// Images preload in background but don't control UI flow anymore
 preloadAllImages().then(() => {
-    imagesLoaded = true;
-    updateSplashState();
+    console.log('Images preloaded');
 });
 
-// Minimum time timer
-setTimeout(() => {
-    minimumTimeElapsed = true;
-    updateSplashState();
-}, MINIMUM_SPLASH_TIME);
-
-// Update splash screen based on loading state
-function updateSplashState() {
-    if (imagesLoaded && minimumTimeElapsed) {
-        // Ready - auto dismiss splash and show intro
-        dismissSplash();
-    }
-}
+// Note: Old splash/hero flow is disabled. 
+// The new #landing-page is immediately visible and user-scrollable.
 
 function dismissSplash() {
     // Don't dismiss until everything is ready
     if (!imagesLoaded || !minimumTimeElapsed) return;
     if (!splashScreen) return;
 
-    // Hide the main canvas until intro scene is dismissed
+    // Hide the main canvas until intro scene is dismissed (keep hidden for now)
     if (DOM.canvas) {
         DOM.canvas.style.visibility = 'hidden';
         DOM.canvas.style.opacity = '0';
         DOM.canvas.style.transition = 'opacity 0.5s ease-out';
     }
 
-    // 1. Show intro scene underneath splash (it will be revealed when splash fades)
-    showIntroScene();
+    // 1. Show Hero Section
+    showHeroSection();
 
     // 2. Fade out splash screen
     setTimeout(() => {
@@ -1797,6 +2202,75 @@ function dismissSplash() {
     setTimeout(() => {
         splashScreen.style.display = 'none';
     }, 1200);
+}
+
+// ===== NEW HERO FLOW =====
+function showHeroSection() {
+    if (!DOM.heroSection) {
+        // Fallback if hero section missing
+        showIntroScene();
+        return;
+    }
+
+    DOM.heroSection.classList.remove('hidden');
+
+    // Animate In elements
+    setTimeout(() => {
+        if (DOM.heroMainTitle) {
+            DOM.heroMainTitle.classList.remove('opacity-0', 'translate-y-8');
+        }
+    }, 100);
+
+    setTimeout(() => {
+        if (DOM.heroScrollIndicator) {
+            DOM.heroScrollIndicator.classList.remove('opacity-0');
+        }
+
+        // Add scroll listeners after delay
+        setupHeroDismissListeners();
+    }, 1000);
+}
+
+function setupHeroDismissListeners() {
+    let triggered = false;
+
+    const dismiss = () => {
+        if (triggered) return;
+        triggered = true;
+        dismissHeroSection();
+
+        // Cleanup
+        window.removeEventListener('wheel', dismiss);
+        window.removeEventListener('scroll', dismiss); // Mobile
+        window.removeEventListener('touchmove', dismiss);
+        window.removeEventListener('click', dismiss);
+    };
+
+    // Use a small threshold/delay to prevent accidental triggers
+    // But for responsiveness, essentially any interaction triggers it
+    window.addEventListener('wheel', dismiss, { passive: true });
+    window.addEventListener('touchmove', dismiss, { passive: true });
+    window.addEventListener('click', dismiss);
+    // Note: 'scroll' event might not fire if body isn't scrolling, which it isn't (fixed elements)
+    // So wheel/touchmove is better.
+}
+
+function dismissHeroSection() {
+    if (!DOM.heroSection) return;
+
+    // Fade out Hero content
+    DOM.heroSection.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+    DOM.heroSection.style.opacity = '0';
+    DOM.heroSection.style.transform = 'translateY(-20px)'; // Parallax feel
+
+    // Trigger Intro Scene Logic
+    // We want the Intro to appear as Hero fades out
+    showIntroScene();
+
+    // Hide Hero from DOM
+    setTimeout(() => {
+        DOM.heroSection.style.display = 'none';
+    }, 800);
 }
 
 // Click handler for intro scene continue button
@@ -1829,4 +2303,159 @@ window.addEventListener('resize', () => {
     updateCamera();
 });
 
+/* =========================================
+   Arrange Mode Toggle Logic
+   ========================================= */
+if (DOM.viewToggle) {
+    DOM.viewToggle.addEventListener('click', () => {
+        state.arrangeMode = !state.arrangeMode;
+
+        if (state.arrangeMode) {
+            // Enter Arrange Mode
+            document.body.classList.add('arrange-mode');
+            DOM.viewToggle.classList.add('active');
+        } else {
+            // Exit Arrange Mode
+            document.body.classList.remove('arrange-mode');
+            DOM.viewToggle.classList.remove('active');
+        }
+    });
+}
+
 initWorld();
+
+/* =========================================
+   Landing Page Scroll Logic
+   ========================================= */
+if (DOM.landingPage) {
+    // 1. Title Shrink on Scroll
+    DOM.landingPage.addEventListener('scroll', () => {
+        const scrollY = DOM.landingPage.scrollTop;
+        const maxScroll = window.innerHeight * 0.5; // Shrink over first half of screen
+
+        // Calculate scale: 1.0 at top, 0.4 at maxScroll
+        const progress = Math.min(scrollY / maxScroll, 1);
+        const scale = 1 - (progress * 0.6); // Goes from 1.0 to 0.4
+
+        if (DOM.landingTitle) {
+            DOM.landingTitle.style.transform = `scale(${scale})`;
+        }
+        if (DOM.landingSubtitle) {
+            DOM.landingSubtitle.style.opacity = 1 - progress;
+        }
+    });
+
+    // 2. IntersectionObserver for Reveal Animations
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, {
+        root: DOM.landingPage,
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all intro-paragraph and intro-reveal elements
+    document.querySelectorAll('.intro-paragraph, .intro-reveal').forEach(el => {
+        revealObserver.observe(el);
+    });
+}
+
+/* =========================================
+   Enter Library Button Handler
+   ========================================= */
+if (DOM.enterLibrary) {
+    DOM.enterLibrary.addEventListener('click', () => {
+        // Fade out landing page
+        if (DOM.landingPage) {
+            DOM.landingPage.style.transition = 'opacity 0.8s ease-out';
+            DOM.landingPage.style.opacity = '0';
+
+            setTimeout(() => {
+                DOM.landingPage.style.display = 'none';
+
+                // Show canvas
+                if (DOM.canvas) {
+                    DOM.canvas.style.visibility = 'visible';
+                    DOM.canvas.style.opacity = '1';
+                }
+
+                // Play tutorial
+                playTutorialAnimation();
+            }, 800);
+        }
+    });
+}
+
+/* =========================================
+   Night Mode System
+   ========================================= */
+const nightModeToggle = document.getElementById('night-mode-toggle');
+const candleLight = document.getElementById('candle-light');
+const dustContainer = document.getElementById('dust-particles');
+
+let nightModeEnabled = false;
+
+// Toggle Night Mode
+if (nightModeToggle) {
+    nightModeToggle.addEventListener('click', () => {
+        nightModeEnabled = !nightModeEnabled;
+
+        if (nightModeEnabled) {
+            document.body.classList.add('night-mode');
+            nightModeToggle.classList.add('active');
+        } else {
+            document.body.classList.remove('night-mode');
+            nightModeToggle.classList.remove('active');
+        }
+    });
+}
+
+// Candle Light follows cursor (only in night mode)
+document.addEventListener('mousemove', (e) => {
+    if (!nightModeEnabled || !candleLight) return;
+
+    candleLight.style.left = e.clientX + 'px';
+    candleLight.style.top = e.clientY + 'px';
+});
+
+// Create Dust Particles
+function createDustParticles() {
+    if (!dustContainer) return;
+
+    // Create 30 particles
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'dust-particle';
+
+        // Random position
+        particle.style.left = Math.random() * 100 + 'vw';
+
+        // Random size (2-5px)
+        const size = 2 + Math.random() * 3;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+
+        // Random animation duration (15-30s)
+        const duration = 15 + Math.random() * 15;
+        particle.style.animationDuration = duration + 's';
+
+        // Random delay so they don't all start at once
+        particle.style.animationDelay = Math.random() * 10 + 's';
+
+        // Random horizontal drift
+        const drift = (Math.random() - 0.5) * 100;
+        particle.style.setProperty('--drift', drift + 'px');
+
+        dustContainer.appendChild(particle);
+    }
+}
+
+// Clear Dust Particles
+function clearDustParticles() {
+    if (!dustContainer) return;
+    dustContainer.innerHTML = '';
+}
