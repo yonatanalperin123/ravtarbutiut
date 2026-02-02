@@ -925,9 +925,13 @@ function createBookNode(index) {
         // Create a tab for each quote (max 3)
         const maxTabs = Math.min(book.quotes.length, 3);
 
+        // Shuffle or Random start for variety so not all first tabs are pink
+        const startColorIndex = Math.floor(Math.random() * bookmarkColors.length);
+
         for (let i = 0; i < maxTabs; i++) {
             const quote = book.quotes[i];
-            const colorName = bookmarkColors[i % bookmarkColors.length];
+            // Use random start index + i to cycle through colors
+            const colorName = bookmarkColors[(startColorIndex + i) % bookmarkColors.length];
             const colorVar = colorVars[colorName];
 
             const tab = document.createElement('div');
