@@ -177,10 +177,10 @@ body.cursor-pressed #custom-cursor {
 /* Intro Paragraphs - Staggered Fade In */
 .intro-paragraph {
     margin-bottom: 1.5em;
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition: opacity 0.8s ease-out,
+        transform 0.8s ease-out;
     transform: translateY(20px);
-    text-align: justify;
-    text-align-last: right;
+    text-align: right;
 }
 
 .intro-paragraph.visible {
@@ -508,14 +508,22 @@ body.reader-active .book-scene.selected-book {
     justify-content: flex-start;
     padding: 40px 20px;
     background: linear-gradient(135deg, rgba(62, 39, 35, 0.03) 0%, transparent 100%);
-    /* No slide - just appear */
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease, width 0.5s ease, min-width 0.5s ease, padding 0.5s ease;
     overflow-y: auto;
 }
 
 #reader-panel.open #reader-cover-container {
     opacity: 1;
+}
+
+/* Cover hidden state - triggered by scroll */
+#reader-panel.cover-hidden #reader-cover-container {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    opacity: 0;
+    overflow: hidden;
 }
 
 #reader-cover {
@@ -529,12 +537,14 @@ body.reader-active .book-scene.selected-book {
 /* Right: Content Panel - BLUR TO FOCUS animation */
 #reader-content {
     flex: 1;
-    height: 100%;
-    overflow-y: auto;
-    padding: 60px 80px 100px 80px;
-    /* Extra bottom padding for infinite scroll */
+    height: 100vh;
+    overflow: hidden;
+    /* Prevent internal scroll - use wheel for page flip */
+    padding: 40px 60px;
     direction: rtl;
     text-align: right;
+    display: flex;
+    flex-direction: column;
     /* Blur-to-Focus animation */
     opacity: 0;
     filter: blur(20px);
@@ -713,6 +723,156 @@ body.reader-active .book-scene.selected-book {
 
 #reader-error.hidden {
     display: none;
+}
+
+/* ===== Page-Flip Book Styles ===== */
+#book-pages-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 160px);
+    /* Fit within viewport minus header */
+    max-height: calc(100vh - 160px);
+    margin: 0 auto;
+}
+
+#book-spread {
+    display: flex;
+    flex-direction: row;
+    /* In RTL container, 'row' starts from Right. Page-Right (first child) goes to Right. */
+    gap: 0;
+    flex: 1;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(62, 39, 35, 0.03) 0%,
+            transparent 2%,
+            transparent 98%,
+            rgba(62, 39, 35, 0.03) 100%);
+    border-radius: 4px;
+    position: relative;
+}
+
+/* Center spine shadow */
+#book-spread::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(62, 39, 35, 0.08) 40%,
+            rgba(62, 39, 35, 0.1) 50%,
+            rgba(62, 39, 35, 0.08) 60%,
+            transparent 100%);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.book-page {
+    flex: 1;
+    height: 100%;
+    padding: 60px 50px;
+    overflow: hidden;
+    /* Prevent internal scroll */
+    position: relative;
+    /* Typography - Reduced by 15% and Justified */
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    /* Adjusted line height for smaller font */
+    color: var(--reader-text);
+    text-align: justify;
+    text-align-last: right;
+    /* Ensure last line aligns right (typical for RTL) or auto */
+    direction: rtl;
+}
+
+.book-page h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 1.5em 0 0.8em 0;
+    color: var(--reader-text);
+    line-height: 1.3;
+}
+
+.book-page p {
+    margin-bottom: 0px;
+    /* Reduced margin since we are managing paragraphs */
+    text-indent: 1.5em;
+    /* Classic book indent */
+}
+
+#page-right {
+    border-radius: 0 4px 4px 0;
+    border-left: 1px solid rgba(62, 39, 35, 0.05);
+}
+
+#page-left {
+    border-radius: 4px 0 0 4px;
+    border-right: 1px solid rgba(62, 39, 35, 0.05);
+}
+
+.book-page p {
+    margin-bottom: 1.2em;
+    text-indent: 1.5em;
+}
+
+.book-page p:first-child {
+    text-indent: 0;
+}
+
+/* Fullscreen mode when cover is hidden */
+#reader-panel.cover-hidden #book-pages-container {
+    max-width: 100%;
+    height: calc(100vh - 120px);
+}
+
+#reader-panel.cover-hidden .book-page {
+    padding: 40px 100px;
+}
+
+/* Page Navigation - Hidden by default, controlled by scroll */
+#page-navigation {
+    display: none;
+    /* Hidden - using scroll instead */
+}
+
+/* Page indicator only - fixed at bottom */
+#page-indicator {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--reader-text-muted);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+#page-indicator:hover {
+    opacity: 1;
+}
+
+/* Page flip transition */
+.book-page {
+    transition: opacity 0.3s ease;
+}
+
+.book-page.flipping {
+    opacity: 0;
 }
 
 /* ===== Chapter Navigation (Below Cover) ===== */
@@ -1249,4 +1409,310 @@ body.night-mode #dust-particles {
 
 body.night-mode #candle-light {
     animation: candle-flicker 3s ease-in-out infinite;
+}
+
+/* ===== Floating Quote Notes ===== */
+.floating-quote-note {
+    position: absolute;
+    width: 180px;
+    min-height: 120px;
+    padding: 16px 14px;
+    background: linear-gradient(145deg, #FFFEF8 0%, #F5F0E6 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 4px 15px rgba(62, 39, 35, 0.08),
+        0 1px 3px rgba(62, 39, 35, 0.05);
+    font-family: 'Noto Serif Hebrew', serif;
+    font-size: 11px;
+    line-height: 1.7;
+    color: #3E2723;
+    text-align: right;
+    direction: rtl;
+    opacity: 0;
+    /* Animation removed for static display */
+    transform: rotate(var(--rotation, 0deg));
+    transition: opacity 1s ease-in;
+}
+
+.floating-quote-note.visible {
+    opacity: 0.5;
+}
+
+.floating-quote-note::before {
+    content: '"';
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    font-size: 28px;
+    color: #3E2723;
+    opacity: 0.15;
+    font-family: serif;
+}
+
+.floating-quote-note .quote-text {
+    margin-top: 12px;
+    margin-bottom: 10px;
+}
+
+.floating-quote-note .quote-source {
+    font-size: 9px;
+    color: #3E2723;
+    opacity: 0.5;
+    border-top: 1px solid rgba(62, 39, 35, 0.1);
+    padding-top: 8px;
+    margin-top: 8px;
+}
+
+/* ===== Book Hover Quote Note ===== */
+.book-hover-quote {
+    position: fixed;
+    /* Global fixed positioning */
+    top: 0;
+    left: 0;
+    width: 185px;
+    padding: 12px 10px;
+    background: linear-gradient(145deg, #FFFEF8 0%, #F5F0E6 100%);
+    border-radius: 2px;
+    box-shadow:
+        0 4px 15px rgba(62, 39, 35, 0.15),
+        0 1px 3px rgba(62, 39, 35, 0.1);
+    font-family: 'Noto Serif Hebrew', serif;
+    font-size: 10px;
+    line-height: 1.6;
+    color: #3E2723;
+    text-align: right;
+    direction: rtl;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.book-hover-quote::before {
+    content: '"';
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 20px;
+    color: #3E2723;
+    opacity: 0.15;
+    font-family: serif;
+}
+
+.book-hover-quote::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #F5F0E6;
+}
+
+/* Visible state controlled by JS */
+.book-hover-quote.visible {
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
+.book-hover-quote .quote-text {
+    margin-top: 8px;
+}
+
+.book-hover-quote .quote-source {
+    font-size: 8px;
+    color: #3E2723;
+    opacity: 0.4;
+    margin-top: 6px;
+    border-top: 1px solid rgba(62, 39, 35, 0.1);
+    padding-top: 4px;
+}
+
+/* ===== Bookmark Tabs (Physical Sticky Notes from Book) ===== */
+.bookmark-tabs-container {
+    position: absolute;
+    left: -8px;
+    top: 25%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 20px;
+    z-index: 50;
+    pointer-events: auto;
+}
+
+.bookmark-tab {
+    width: 22px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.25s ease-out;
+    transform-origin: right center;
+    /* 3D paper effect with depth */
+    transform: perspective(100px) rotateY(-8deg);
+    box-shadow:
+        -2px 2px 3px rgba(0, 0, 0, 0.2),
+        -1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Muted, realistic highlighter marker colors */
+.bookmark-tab.color-pink {
+    background: #FFB6C1;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bookmark-tab.color-yellow {
+    background: #FFFF99;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bookmark-tab.color-green {
+    background: #98FB98;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bookmark-tab.color-blue {
+    background: #ADD8E6;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.bookmark-tab.color-orange {
+    background: #FFDAB9;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Hover state - pull out and flatten */
+.bookmark-tab:hover {
+    width: 28px;
+    transform: perspective(100px) rotateY(-3deg) translateX(-6px);
+    box-shadow:
+        -3px 3px 6px rgba(0, 0, 0, 0.25),
+        -1px 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* Subtle opacity increase on hover */
+.bookmark-tab.color-pink:hover {
+    background: #FFC0CB;
+}
+
+.bookmark-tab.color-yellow:hover {
+    background: #FFFFA0;
+}
+
+.bookmark-tab.color-green:hover {
+    background: #90EE90;
+}
+
+.bookmark-tab.color-blue:hover {
+    background: #B0E0E6;
+}
+
+.bookmark-tab.color-orange:hover {
+    background: #FFE4C4;
+}
+
+/* ===== Bookmark Quote Popup ===== */
+.bookmark-quote-popup {
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(10px) scale(0.95);
+    width: 180px;
+    padding: 14px 12px;
+    background: linear-gradient(145deg, #FFFEF8 0%, #F5F0E6 100%);
+    border-radius: 6px;
+    box-shadow:
+        0 8px 25px rgba(62, 39, 35, 0.15),
+        0 3px 8px rgba(62, 39, 35, 0.1);
+    font-family: 'Noto Serif Hebrew', serif;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #3E2723;
+    text-align: right;
+    direction: rtl;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 200;
+}
+
+/* Triangle pointer on the right */
+.bookmark-quote-popup::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #F5F0E6;
+}
+
+/* Color accent bar on top matching the bookmark */
+.bookmark-quote-popup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 3px;
+    border-radius: 0 0 3px 3px;
+    background: var(--bookmark-color);
+}
+
+/* Visible state */
+.bookmark-tab:hover .bookmark-quote-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.bookmark-quote-popup .quote-mark {
+    position: absolute;
+    top: 10px;
+    right: 8px;
+    font-size: 24px;
+    color: var(--bookmark-color);
+    opacity: 0.4;
+    font-family: serif;
+    line-height: 1;
+}
+
+.bookmark-quote-popup .quote-text {
+    margin-top: 8px;
+    font-style: italic;
+}
+
+.bookmark-quote-popup .quote-source {
+    font-size: 9px;
+    color: #3E2723;
+    opacity: 0.5;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(62, 39, 35, 0.1);
+    font-style: normal;
+}
+
+/* Night mode adjustments for bookmarks */
+body.night-mode .bookmark-tab {
+    filter: brightness(1.1);
+}
+
+body.night-mode .bookmark-quote-popup {
+    background: linear-gradient(145deg, #2d2d44 0%, #1a1a2e 100%);
+    color: #F9F5F0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+body.night-mode .bookmark-quote-popup::after {
+    border-left-color: #1a1a2e;
+}
+
+body.night-mode .bookmark-quote-popup .quote-source {
+    color: #F9F5F0;
+    border-top-color: rgba(249, 245, 240, 0.1);
 }

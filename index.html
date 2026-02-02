@@ -89,74 +89,88 @@
 
     <!-- Scrollable Landing Page (Combines Splash + Intro) -->
     <div id="landing-page" class="fixed inset-0 z-[95] bg-cream overflow-y-auto">
+        <div id="landing-content" class="relative min-h-full w-full">
 
-        <!-- Section 1: Hero Title (Full Screen) -->
-        <section id="landing-hero" class="min-h-screen flex flex-col items-center justify-center relative">
-            <h1 id="landing-title"
-                class="font-serif text-7xl md:text-[10rem] text-maroon font-bold tracking-tight text-center leading-none">
-                הספרייה
-            </h1>
-            <p id="landing-subtitle" class="font-sans text-lg md:text-2xl text-maroon/50 tracking-wide mt-4">
-                מדפים לדור חדש
-            </p>
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 flex flex-col items-center animate-bounce">
-                <p class="text-maroon/40 text-xs mb-2 font-medium">גלול להמשך</p>
-                <div class="w-[1px] h-8 bg-maroon/20"></div>
-            </div>
-        </section>
-
-        <!-- Section 2: Images & Story -->
-        <section id="landing-story" class="min-h-screen flex flex-col items-center justify-start py-24 px-8">
-
-            <!-- Images Section -->
-            <div
-                class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl intro-reveal">
-                <div class="intro-image-container">
-                    <img src="library1.png" alt="הספרייה בבית הוריי" class="intro-image">
-                </div>
-                <div class="intro-image-container">
-                    <img src="library2.jpg" alt="הספרייה בבית הוריי" class="intro-image">
-                </div>
+            <!-- Floating Quote Notes (Background - Scrolls with content) -->
+            <div id="floating-quotes" class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                <!-- Quote notes will be injected by JS -->
             </div>
 
-            <!-- Image Caption -->
-            <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide intro-reveal">הספרייה בבית הוריי</p>
+            <!-- Section 1: Hero Title (Full Screen) -->
+            <section id="landing-hero"
+                class="min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
 
-            <!-- Running Text -->
-            <div id="intro-text" dir="rtl"
-                class="max-w-2xl text-right font-sans text-maroon/80 leading-loose text-base md:text-lg px-4">
-                <p class="intro-paragraph">הספרייה היא מרכז הבית היהודי.</p>
-                <p class="intro-paragraph">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
-                    מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
-                <p class="intro-paragraph">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
-                    הספרייה בסלון שמהווה את מרכז הבית. גם בשאר החדרים בבית בכל חדר ישנה <span
-                        class="whitespace-nowrap">ספרייה קטנה.</span></p>
-                <p class="intro-paragraph">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
-                    חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים והספרים שמכילים אותם הם חלק אינטגרלי
-                    מחיי היום יום של <span class="whitespace-nowrap">היהודי המאמין.</span></p>
-                <p class="intro-paragraph">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
-                    <span class="whitespace-nowrap">דתיים לאומיים.</span>
+
+
+                <h1 id="landing-title"
+                    class="font-serif text-7xl md:text-[10rem] text-maroon font-bold tracking-tight text-center leading-none relative z-10">
+                    הספרייה
+                </h1>
+                <p id="landing-subtitle"
+                    class="font-sans text-lg md:text-2xl text-maroon/50 tracking-wide mt-4 relative z-10">
+                    מדפים לדור חדש
                 </p>
-                <p class="intro-paragraph">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
-                        class="whitespace-nowrap">הערכיים התורניים.</span></p>
-                <p class="intro-paragraph font-medium">כאלה ששמים דגש גם על התורה <span class="whitespace-nowrap">וגם על
-                        האדם.</span></p>
-            </div>
-
-            <!-- Enter Button -->
-            <button id="enter-library" class="mt-20 mb-16 cursor-pointer flex flex-col items-center group intro-reveal">
-                <div
-                    class="w-14 h-14 bg-maroon text-cream rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
+                <!-- Scroll Indicator -->
+                <div class="absolute bottom-10 flex flex-col items-center animate-bounce z-10">
+                    <p class="text-maroon/40 text-xs mb-2 font-medium">גלול להמשך</p>
+                    <div class="w-[1px] h-8 bg-maroon/20"></div>
                 </div>
-                <span class="text-sm text-maroon/60 group-hover:text-maroon transition-colors font-medium">להיכנס
-                    לספרייה</span>
-            </button>
-        </section>
+            </section>
+
+            <!-- Section 2: Images & Story -->
+            <section id="landing-story" class="min-h-screen flex flex-col items-center justify-start py-24 px-8">
+
+                <!-- Images Section -->
+                <div
+                    class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl intro-reveal">
+                    <div class="intro-image-container">
+                        <img src="library1.png" alt="הספרייה בבית הוריי" class="intro-image">
+                    </div>
+                    <div class="intro-image-container">
+                        <img src="library2.jpg" alt="הספרייה בבית הוריי" class="intro-image">
+                    </div>
+                </div>
+
+                <!-- Image Caption -->
+                <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide intro-reveal">הספרייה בבית הוריי</p>
+
+                <!-- Running Text -->
+                <div id="intro-text" dir="rtl"
+                    class="max-w-4xl text-right font-sans text-maroon/80 leading-loose text-base md:text-lg px-4 relative z-10">
+                    <p class="intro-paragraph">הספרייה היא מרכז הבית היהודי.</p>
+                    <p class="intro-paragraph">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
+                        מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
+                    <p class="intro-paragraph">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
+                        הספרייה בסלון שמהווה את מרכז הבית. גם בשאר החדרים בבית בכל חדר ישנה <span
+                            class="whitespace-nowrap">ספרייה קטנה.</span></p>
+                    <p class="intro-paragraph">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
+                        חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים והספרים שמכילים אותם הם חלק אינטגרלי
+                        מחיי היום יום של <span class="whitespace-nowrap">היהודי המאמין.</span></p>
+                    <p class="intro-paragraph">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
+                        <span class="whitespace-nowrap">דתיים לאומיים.</span>
+                    </p>
+                    <p class="intro-paragraph">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
+                            class="whitespace-nowrap">הערכיים התורניים.</span></p>
+                    <p class="intro-paragraph font-medium">כאלה ששמים דגש גם על התורה <span
+                            class="whitespace-nowrap">וגם על
+                            האדם.</span></p>
+                </div>
+
+                <!-- Enter Button -->
+                <button id="enter-library"
+                    class="mt-20 mb-16 cursor-pointer flex flex-col items-center group intro-reveal">
+                    <div
+                        class="w-14 h-14 bg-maroon text-cream rounded-full flex items-center justify-center group-hover:scale-110 group-hover:shadow-xl transition-all duration-300 mb-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </div>
+                    <span class="text-sm text-maroon/60 group-hover:text-maroon transition-colors font-medium">להיכנס
+                        לספרייה</span>
+                </button>
+            </section>
+        </div>
     </div>
 
     <!-- Tutorial Overlay (Shows after splash) -->
@@ -216,7 +230,8 @@
                 <!-- Tag Cloud -->
                 <div id="tag-cloud-wrapper"
                     class="text-right overflow-hidden h-0 opacity-0 transition-all duration-500 ease-out">
-                    <h3 class="text-[10px] font-bold text-maroon/60 mb-2 tracking-wide text-right">סינון לפי נושא:</h3>
+                    <h3 class="text-[10px] font-bold text-maroon/60 mb-2 tracking-wide text-right">סינון לפי נושא:
+                    </h3>
                     <div id="tag-cloud" class="flex flex-wrap justify-start gap-x-2 gap-y-2">
                         <!-- Tags injected here -->
                     </div>
@@ -226,9 +241,16 @@
             <!-- Removed Category Navigation -->
 
             <div class="mt-16 border-t border-maroon/10 pt-6 text-right">
-                <a href="#" id="about-link"
-                    class="block text-xs text-maroon/40 hover:text-maroon mb-1 transition-colors">אודות</a>
-                <!-- Link Removed -->
+                <a href="#" id="intro-link"
+                    class="block text-xs text-maroon/40 hover:text-maroon mb-4 transition-colors">הקדמה</a>
+
+                <!-- Credits Section -->
+                <div class="text-[9px] text-maroon/30 leading-relaxed mt-4 border-t border-maroon/10 pt-4">
+                    <p class="mb-2">נוצר על ידי <span class="text-maroon/50">יונתן אלפרין</span></p>
+                    <p class="mb-2">במסגרת קורס "מעבדת מחקר - רב תרבותיות"</p>
+                    <p class="mb-2">מנחה: <span class="text-maroon/50">נסטיה פייביש</span></p>
+                    <p class="mt-3 text-[8px]">כל הזכויות שמורות ליוצרים והוצאות הספרים.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -245,11 +267,14 @@
             <div id="about-text">
                 <p>הציונות הדתית נמצאת כרגע על ציר שצד אחד שלו שמרני והצד השני ליברלי.</p>
 
-                <p>רבים מהדור הצעיר נוטים יותר לצד הליברלי מאשר לצד השמרני בעוד רוב המערכות הקיימות כיום (הרבנות הראשית,
-                    רבני הישיבות הגדולות והייצוג הפוליטי) נוטים לכיוון השמרני כך שהצד הליברלי של המפה נעלם בתוך הציבור
+                <p>רבים מהדור הצעיר נוטים יותר לצד הליברלי מאשר לצד השמרני בעוד רוב המערכות הקיימות כיום (הרבנות
+                    הראשית,
+                    רבני הישיבות הגדולות והייצוג הפוליטי) נוטים לכיוון השמרני כך שהצד הליברלי של המפה נעלם בתוך
+                    הציבור
                     הכללי בלי ייצוג כתת מגזר בפני עצמו.</p>
 
-                <p>לכן נוצרה הפלטפורמה הזו בה כל אחד יכול לגשת לספרייה של ספרים שבעיני מייצגים את הקאנון התרבותי החדש של
+                <p>לכן נוצרה הפלטפורמה הזו בה כל אחד יכול לגשת לספרייה של ספרים שבעיני מייצגים את הקאנון התרבותי
+                    החדש של
                     בני הציונות הדתית שאוחזים בשני קצוות התרבות - דתית וישראלית כאחד.</p>
             </div>
         </div>
@@ -342,8 +367,36 @@
             <!-- Loading Spinner (Initial) -->
             <div id="reader-spinner">טוען תוכן...</div>
 
-            <!-- Content Area -->
-            <div id="reader-text"></div>
+            <!-- Page-Flip Book Container -->
+            <div id="book-pages-container">
+                <!-- Two-Page Spread -->
+                <div id="book-spread">
+                    <div id="page-right" class="book-page">
+                        <!-- Right page content (first in RTL) -->
+                    </div>
+                    <div id="page-left" class="book-page">
+                        <!-- Left page content -->
+                    </div>
+                </div>
+
+                <!-- Page Navigation -->
+                <div id="page-navigation">
+                    <button id="prev-page" class="page-nav-btn" aria-label="עמוד קודם">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-12M9 6l6 12" />
+                        </svg>
+                    </button>
+                    <span id="page-indicator">עמוד 1</span>
+                    <button id="next-page" class="page-nav-btn" aria-label="עמוד הבא">
+                        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-12M15 6l-6 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Legacy reader-text (hidden, used for content processing) -->
+            <div id="reader-text" style="display: none;"></div>
 
             <!-- Bottom Spinner for Infinite Scroll -->
             <div id="reader-bottom-spinner"></div>
@@ -370,6 +423,10 @@
     </div>
 
     <div id="custom-cursor"></div>
+    <!-- Global Hover Quote (Fixed Position) -->
+    <div id="global-book-quote" class="book-hover-quote"></div>
+
+    <script src="book1_content.js"></script>
     <script src="script.js"></script>
 </body>
 

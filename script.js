@@ -14,7 +14,8 @@ const BOOKS_DATA = [
         tags: ["פנטזיה", "פרוזה", "נוער", "הרפתקאות"],
         category: "prose",
         color: "bg-book-navy",
-        textColor: "text-white"
+        textColor: "text-white",
+        bookContent: (typeof book1Content !== 'undefined' ? book1Content : '')
     },
     {
         id: 2,
@@ -142,7 +143,25 @@ const BOOKS_DATA = [
         tags: ["נוער", "פרוזה", "פנטזיה", "קלאסיקה"],
         category: "prose",
         color: "bg-book-stone",
-        textColor: "text-maroon"
+        textColor: "text-maroon",
+        bookContent: `
+            <h2>פרק א׳ - הילד שנשאר בחיים</h2>
+            <p>אדון וגברת דרסלי, דיירי דרך פריווט מספר ארבע, ידעו לדווח בגאווה שהם נורמליים לגמרי - ותודה ששאלתם. לא יעלה על הדעת כי מכל האנשים בעולם דווקא הם יסתבכו בפרשיות מוזרות או מסתוריות, והרי הם פשוט לא סובלים שטויות מסוג זה.</p>
+            <p>מר דרסלי היה מנכ״ל של חברה בשם גראנינגס לייצור מקדחות. הוא היה איש גדל־ממדים, בשרני, וכמעט נטול צוואר - למרות שדווקא היה לו שפם שמן למדי. גברת דרסלי היתה רזה ובלונדינית, ולה היה צוואר ארוך פי־שניים מהאורך המקובל, מה שהיה שימושי מאוד, כי רוב זמנה עבר עליה בהצצה מעל גדרות כדי לרגל אחר השכנים שלה. לדרסלים היה תינוק ששמו דאדלי, ובעיניהם לא היה בעולם ילד מוצלח ממנו.</p>
+            <p>דבר לא היה חסר לדרסלים. אולם היה להם סוד, והם חיו בפחד שמישהו יגלה אותו. הם חשבו שחייהם לא יהיו חיים ברגע שמישהו ישמע על משפחת פוטר. גברת פוטר היתה אחותה של גברת דרסלי, אבל עברו שנים רבות מאז נפגשו לאחרונה.</p>
+            <p>כשדרסלי ואשתו התעוררו בבוקר יום שלישי האפלולי והאפור שבו מתחיל סיפורנו, לא היה זכר בשמים המעוננים לכך שדברים מוזרים ומסתוריים עומדים להתרחש ברחבי המדינה. מר דרסלי פיזם לעצמו בשעה שבחר עניבה משעממת במיוחד ללבוש לעבודה, וגברת דרסלי ריכלה בעליצות וניסתה להכריח את דאדלי המצווח להיכנס לכיסא התינוקות שלו.</p>
+            <p>שניהם לא הבחינו בינשוף הזהוב שחלף בתעופה על פני חלונם.</p>
+            <p>בשעה שמונה וחצי מר דרסלי נטל את התיק שלו, הדביק נשיקה חפוזה על לחייה של גברת דרסלי וניסה לנשק לפרידה גם את דאדלי, אבל לא הצליח, מפני שדאדלי היה עסוק בלצרוח ולהעיף את ארוחת הבוקר שלו לכל הכיוונים. "איזה מתוק," התמוגג מר דרסלי ויצא מהבית.</p>
+            <p>רק בקרן הרחוב הוא הבחין בסימן הראשון למשהו מוזר - חתולה שעיינה במפה. לרגע אחד מר דרסלי לא עיכל את מה שעיניו הראו לו - אך מייד הוא הסב את ראשו להביט שנית. בפינת דרך פריווט אכן עמדה חתולה מנומרת, אבל שום זכר למפה לא נראה.</p>
+            <p>מר דרסלי התנער קלות וחדל לחשוב על החתולה. בדרכו העירה הוא לא חשב על דבר מלבד על משלוח גדול של מקדחות שקיווה לקבל מאוחר יותר באותו יום. אבל בכניסה לעיר המקדחות פרחו ממוחו. בזמן שעמד בפקקים של הבוקר, הוא לא היה יכול שלא להבחין במספר הגדול של אנשים שהיו לבושים באופן מוזר ביותר. אנשים עטויי גלימות.</p>
+
+            <h2>פרק ב׳ - הזכוכית הנעלמת</h2>
+            <p>כמעט עשר שנים עברו מהיום שבו התעוררו הדרסלים לגלות את אחיינם הפעוט על סף ביתם, אבל דרך פריווט כמעט שלא השתנתה. השמש זרחה על אותם הגנים המטופחים, והאירה את לוחית המספר ארבע על דלת הכניסה של בית משפחת דרסלי.</p>
+            <p>אולם הארי פוטר עדיין היה שם. הוא אומנם ישן ברגע זה, אבל לא לאורך זמן. דודתו פטומה כבר היתה ערה, וקולה המצווה היה הצליל הראשון ששמע אותו יום.</p>
+            <p>"קום! צא מהמיטה! מייד!"</p>
+            <p>הארי התעורר בבהלה. דודתו דפקה שוב על הדלת. הארי שמע אותה הולכת לכיוון המטבח, ואז שמע את הרעש שמשמיע מחבת הטיגון כששמים אותו על האש. הוא התגלגל אל גבו וניסה להיזכר בחלום שחלם. זה היה חלום טוב. היה בו אופנוע מעופף.</p>
+            <p>יום־ההולדת של דאדלי - איך היה יכול לשכוח? הארי קם באיטיות מהמיטה והחל לחפש את הגרביים שלו. הוא מצא זוג מתחת למיטה שלו, ואחרי ששלף מתוך אחד מהם עכביש הוא גרב אותם. הארי היה רגיל לעכבישים, מפני שהארון שמתחת לגרם המדרגות היה מלא בהם, ושם הוא ישן.</p>
+        `
     },
     {
         id: 11,
@@ -490,7 +509,12 @@ let state = {
     heroShrunk: false,
     heroDismissed: false,
     // Z-Index Counter for book stacking
-    topZIndex: 10 // Starts at 10, increments each time a book is picked up
+    topZIndex: 10, // Starts at 10, increments each time a book is picked up
+    // Page-Flip Reader State
+    pages: [], // Array of page content
+    currentPageIndex: 0, // Current page being displayed (0-indexed)
+    totalPages: 0, // Total number of pages
+    rawContent: '' // Raw HTML content before pagination
 };
 
 
@@ -752,10 +776,8 @@ function updateLayout() {
             node.style.transform = `rotate(${data.rotation}deg)`;
 
             // Update counter-rotation for hover card
-            const hoverInfo = node.querySelector('.book-hover-info');
-            if (hoverInfo) {
-                hoverInfo.style.setProperty('--counter-rotation', `${-data.rotation}deg`);
-            }
+            // Update counter-rotation for all children (hover info & hover quote)
+            node.style.setProperty('--counter-rotation', `${-data.rotation}deg`);
         }
     });
 }
@@ -837,7 +859,29 @@ function createBookNode(index) {
     bottom.className = 'face bottom bg-[url("pages.png")] bg-repeat-x bg-contain';
     wrap.appendChild(bottom);
 
-    // Add hover metadata overlay
+    // Global Hover Quote Logic - REMOVED (using bookmark tabs instead)
+
+    // Add normal hover info (Category/Title overlay) if needed?
+    // The original code had a 'book-hover-info' div. 
+    // If we want to KEEP the bottom info card (Title/Category), we should keep it.
+    // The USER complained about the TOP quote bubble being crooked.
+    // The previous code had `hoverInfo` which was the BOTTOM card.
+    // Wait, let's look at style.css again. 
+    // .book-hover- info is the bottom card? No.
+    // .book-hover-quote was the top bubble.
+    // .book-hover-info was likely the bottom card.
+    // The prompt asked to fix the top bubble.
+    // So I should KEEP the bottom card logic but REMOVE the old top bubble creation if it was there.
+    // Reviewing previous view_file: I don't see .book-hover-quote creation in createBookNode yet. 
+    // It was in initBookHoverQuote.
+    // But I DO see `book-hover-info` creation here.
+    // So I should KEEP `book-hover-info` as it handles the bottom card.
+    // And ADD the listeners for the TOP GLOBAL BUBBLE.
+
+    // So I will just INSERT the listeners and optionally remove any old bubble code if present.
+    // The old bubble code was in `initBookHoverQuote` which I am deprecating.
+    // So here I just ADD the listeners.
+
     const hoverInfo = document.createElement('div');
     hoverInfo.className = 'book-hover-info';
 
@@ -862,6 +906,56 @@ function createBookNode(index) {
         </div>
     `;
     scene.appendChild(hoverInfo);
+
+    // === BOOKMARK TABS (Paper Strips) ===
+    // Create bookmark tabs for books with quotes
+    if (book.quotes && book.quotes.length > 0) {
+        const bookmarkColors = ['pink', 'yellow', 'green', 'blue', 'orange'];
+        const colorVars = {
+            'pink': 'rgba(255, 182, 193, 0.9)',
+            'yellow': 'rgba(255, 255, 150, 0.9)',
+            'green': 'rgba(180, 255, 180, 0.9)',
+            'blue': 'rgba(173, 216, 255, 0.9)',
+            'orange': 'rgba(255, 200, 150, 0.9)'
+        };
+
+        const tabsContainer = document.createElement('div');
+        tabsContainer.className = 'bookmark-tabs-container';
+
+        // Create a tab for each quote (max 3)
+        const maxTabs = Math.min(book.quotes.length, 3);
+
+        for (let i = 0; i < maxTabs; i++) {
+            const quote = book.quotes[i];
+            const colorName = bookmarkColors[i % bookmarkColors.length];
+            const colorVar = colorVars[colorName];
+
+            const tab = document.createElement('div');
+            tab.className = `bookmark-tab color-${colorName}`;
+            tab.style.setProperty('--bookmark-color', colorVar);
+
+            // Create the popup
+            const popup = document.createElement('div');
+            popup.className = 'bookmark-quote-popup';
+            popup.style.setProperty('--bookmark-color', colorVar);
+            popup.innerHTML = `
+                <span class="quote-mark">"</span>
+                <div class="quote-text">${quote}</div>
+                <div class="quote-source">${book.author || book.title}</div>
+            `;
+
+            tab.appendChild(popup);
+
+            // Prevent tab hover from triggering book click
+            tab.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            tabsContainer.appendChild(tab);
+        }
+
+        scene.appendChild(tabsContainer);
+    }
     scene.addEventListener('click', (e) => {
         // Prevent opening if we just finished dragging
         if (state.wasDragging) {
@@ -1222,6 +1316,59 @@ async function loadBookContent(sefariaRef) {
     }
 }
 
+
+/**
+ * Fetch initial chapters (Current + Next 2) for smooth reading start
+ * @param {string} startRef - The starting Sefaria reference
+ * @returns {Promise<Object>} Combined content and next ref
+ */
+async function loadInitialChapters(startRef) {
+    let combinedHtml = '';
+    let currentRef = startRef;
+    let finalNextRef = null;
+    let loadedCount = 0;
+    const TARGET_CHAPTERS = 3; // Load 3 chapters initially
+
+    DOM.readerSpinner.classList.remove('hidden');
+
+    try {
+        while (currentRef && loadedCount < TARGET_CHAPTERS) {
+            console.log(`Loading chapter ${loadedCount + 1}: ${currentRef}`);
+            const result = await loadBookContent(currentRef);
+
+            if (!result || !result.htmlContent) break;
+
+            combinedHtml += result.htmlContent;
+
+            // Prepare for next iteration
+            currentRef = result.nextRef;
+            finalNextRef = result.nextRef; // Store the ref for infinite scroll to continue from
+            loadedCount++;
+
+            // Small delay to be nice to API
+            await new Promise(r => setTimeout(r, 100));
+        }
+    } catch (e) {
+        console.error('Error in initial chapter load:', e);
+        if (!combinedHtml) {
+            combinedHtml = `<p class="error-message">Error loading chapters: ${e.message}</p>`;
+        }
+    }
+
+    DOM.readerSpinner.classList.add('hidden');
+
+    // If absolutely no content was loaded
+    if (!combinedHtml) {
+        combinedHtml = '<p class="error-message">לא התקבל תוכן מהשרת (No Content)</p>';
+    }
+
+    return {
+        htmlContent: combinedHtml,
+        nextRef: finalNextRef,
+        startRef: startRef
+    };
+}
+
 /**
  * Fetch book index/structure from Sefaria API
  * @param {string} bookRef - The Sefaria book reference
@@ -1446,11 +1593,18 @@ async function openReaderPanel(book, bookNode = null) {
         }
 
         // Use Sefaria API
-        const result = await loadBookContent(book.sefariaRef);
+        // Use Sefaria API - Fetch Initial Chapters (Current + Next 2)
+        const result = await loadInitialChapters(book.sefariaRef);
         DOM.readerSpinner.classList.add('hidden');
-        DOM.readerText.innerHTML = result.htmlContent;
 
-        // Store nextRef for infinite scroll
+        // === PAGE-FLIP: Paginate and display content ===
+        state.rawContent = result.htmlContent;
+        state.pages = paginateContent(result.htmlContent);
+        state.currentPageIndex = 0;
+        state.totalPages = state.pages.length;
+        displayCurrentPages();
+
+        // Store nextRef for loading more pages later
         state.nextRef = result.nextRef;
 
         // Check if it was an error message
@@ -1458,8 +1612,6 @@ async function openReaderPanel(book, bookNode = null) {
             DOM.readerError.classList.remove('hidden');
         } else {
             DOM.readerError.classList.add('hidden');
-            // Setup infinite scroll observer
-            setupInfiniteScrollObserver();
         }
 
         // Fetch and render chapter navigation (async, non-blocking)
@@ -1475,25 +1627,45 @@ async function openReaderPanel(book, bookNode = null) {
             DOM.readerNav.classList.add('hidden');
         }
 
-        // Fallback to WikiSource (no infinite scroll)
+        // Fallback to WikiSource
         const content = await fetchBookContent(book.wikisourcePage);
         DOM.readerSpinner.classList.add('hidden');
 
         if (content) {
-            DOM.readerText.innerHTML = content;
+            // === PAGE-FLIP: Paginate and display content ===
+            state.rawContent = content;
+            state.pages = paginateContent(content);
+            state.currentPageIndex = 0;
+            state.totalPages = state.pages.length;
+            displayCurrentPages();
             DOM.readerError.classList.add('hidden');
         } else {
             DOM.readerError.classList.remove('hidden');
         }
+    } else if (book.bookContent) {
+        // Book has embedded content
+        if (DOM.readerNav) {
+            DOM.readerNav.classList.add('hidden');
+        }
+
+        DOM.readerSpinner.classList.add('hidden');
+
+        // === PAGE-FLIP: Paginate and display book content ===
+        state.rawContent = book.bookContent;
+        state.pages = paginateContent(book.bookContent);
+        state.currentPageIndex = 0;
+        state.totalPages = state.pages.length;
+        displayCurrentPages();
     } else {
         // Hide navigation for no-source books
         if (DOM.readerNav) {
             DOM.readerNav.classList.add('hidden');
         }
 
-        // No external source - show summary instead
+        // No external source - show summary
         DOM.readerSpinner.classList.add('hidden');
-        DOM.readerText.innerHTML = `
+
+        const summaryContent = `
             <div style="padding: 20px 0;">
                 <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 16px;">תקציר</h2>
                 <p>${book.summary}</p>
@@ -1505,6 +1677,13 @@ async function openReaderPanel(book, bookNode = null) {
                 ` : ''}
             </div>
         `;
+
+        // === PAGE-FLIP: Paginate and display content ===
+        state.rawContent = summaryContent;
+        state.pages = paginateContent(summaryContent);
+        state.currentPageIndex = 0;
+        state.totalPages = state.pages.length;
+        displayCurrentPages();
     }
 }
 
@@ -1518,28 +1697,42 @@ async function loadMoreContent() {
     DOM.readerBottomSpinner.classList.add('loading');
 
     try {
-        const result = await loadBookContent(state.nextRef);
+        console.log('Lazy loading next chapter:', state.nextRef);
+        const result = await loadBookContent(state.nextRef); // Fetch single next chapter
 
-        // Create a chapter divider
-        const divider = document.createElement('div');
-        divider.className = 'chapter-divider';
-        divider.innerHTML = `<span class="chapter-divider-text">${result.heRef || state.nextRef}</span>`;
+        if (result && result.htmlContent) {
+            // Create a chapter title page or marker if needed
+            // For now, just paginate the new content
 
-        // Append divider and new content
-        DOM.readerText.appendChild(divider);
+            // Add a visual divider in the content itself (optional, maybe a header)
+            let contentToPaginate = result.htmlContent;
+            if (result.heRef) {
+                contentToPaginate = `<h2>${result.heRef}</h2>` + contentToPaginate;
+            }
 
-        const contentFragment = document.createElement('div');
-        contentFragment.innerHTML = result.htmlContent;
-        while (contentFragment.firstChild) {
-            DOM.readerText.appendChild(contentFragment.firstChild);
+            // Paginate the NEW content
+            const newPages = paginateContent(contentToPaginate);
+
+            if (newPages.length > 0) {
+                // Append new pages to the existing array
+                state.pages = [...state.pages, ...newPages];
+                state.totalPages = state.pages.length;
+
+                // Update raw content just in case
+                state.rawContent += contentToPaginate;
+
+                console.log(`Added ${newPages.length} new pages. Total: ${state.totalPages}`);
+
+                // Update UI
+                updatePageIndicator();
+                updateNavButtons();
+            }
+
+            // Update next ref
+            state.nextRef = result.nextRef;
         }
-
-        // Update state
-        state.currentRef = state.nextRef;
-        state.nextRef = result.nextRef;
-
     } catch (error) {
-        console.error('Failed to load more content:', error);
+        console.error('Error loading more content:', error);
     } finally {
         state.isLoadingMore = false;
         DOM.readerBottomSpinner.classList.remove('loading');
@@ -1950,6 +2143,9 @@ function shrinkHero() {
         DOM.heroTitle.classList.add('shrunk');
     }
 }
+
+// Function to create a single book node (scene)
+
 
 // Splash Screen Logic
 const splashScreen = document.getElementById('splash-screen');
@@ -2459,3 +2655,734 @@ function clearDustParticles() {
     if (!dustContainer) return;
     dustContainer.innerHTML = '';
 }
+
+/* =========================================
+   Intro Link - Return to Landing Page
+   ========================================= */
+const introLink = document.getElementById('intro-link');
+const landingPageForReturn = document.getElementById('landing-page');
+
+if (introLink) {
+    introLink.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Show landing page again
+        if (landingPageForReturn) {
+            landingPageForReturn.style.display = 'block';
+            landingPageForReturn.style.opacity = '0';
+
+            // Scroll to top of landing page
+            landingPageForReturn.scrollTop = 0;
+
+            // Fade in
+            setTimeout(() => {
+                landingPageForReturn.style.transition = 'opacity 0.5s ease-in';
+                landingPageForReturn.style.opacity = '1';
+            }, 50);
+        }
+
+        // Close sidebar if open
+        const sidebarPanel = document.getElementById('sidebar-panel');
+        if (sidebarPanel) {
+            sidebarPanel.classList.remove('translate-x-0');
+            sidebarPanel.classList.add('translate-x-full');
+        }
+    });
+}
+
+/* =========================================
+   Floating Quote Notes - Landing Page
+   ========================================= */
+const floatingQuotesContainer = document.getElementById('floating-quotes');
+
+// Hebrew texts to fetch quotes from (using Sefaria API)
+const QUOTE_SOURCES = [
+    { ref: 'Pirkei Avot 1:1', name: 'פרקי אבות א׳:א׳' },
+    { ref: 'Pirkei Avot 2:5', name: 'פרקי אבות ב׳:ה׳' },
+    { ref: 'Ecclesiastes 1:2', name: 'קהלת א׳:ב׳' },
+    { ref: 'Ecclesiastes 3:1', name: 'קהלת ג׳:א׳' },
+    { ref: 'Psalms 23:1', name: 'תהלים כ״ג:א׳' },
+    { ref: 'Psalms 121:1', name: 'תהלים קכ״א:א׳' },
+    { ref: 'Proverbs 1:7', name: 'משלי א׳:ז׳' },
+    { ref: 'Genesis 1:1', name: 'בראשית א׳:א׳' }
+];
+
+// Fallback quotes if API fails
+const FALLBACK_QUOTES = [
+    { text: 'עשה לך רב, וקנה לך חבר', source: 'פרקי אבות א׳:ו׳' },
+    { text: 'אם אין אני לי מי לי, וכשאני לעצמי מה אני', source: 'פרקי אבות א׳:י״ד' },
+    { text: 'הכל צפוי והרשות נתונה', source: 'פרקי אבות ג׳:ט״ו' },
+    { text: 'לא עליך המלאכה לגמור', source: 'פרקי אבות ב׳:ט״ז' },
+    { text: 'הבל הבלים הכל הבל', source: 'קהלת א׳:ב׳' },
+    { text: 'ה׳ רועי לא אחסר', source: 'תהלים כ״ג:א׳' },
+    { text: 'והיו הדברים האלה אשר אנכי מצוך היום', source: 'דברים ו׳:ו׳' },
+    { text: 'בראשית ברא אלהים את השמים ואת הארץ', source: 'בראשית א׳:א׳' },
+    { text: 'שמע ישראל ה׳ אלהינו ה׳ אחד', source: 'דברים ו׳:ד׳' },
+    { text: 'ואהבת לרעך כמוך', source: 'ויקרא י״ט:י״ח' },
+    { text: 'צדק צדק תרדוף', source: 'דברים ט״ז:כ׳' },
+    { text: 'דע מאין באת ולאן אתה הולך', source: 'פרקי אבות ג׳:א׳' },
+    { text: 'איזהו חכם הלומד מכל אדם', source: 'פרקי אבות ד׳:א׳' },
+    { text: 'הסתכל בשלושה דברים', source: 'פרקי אבות ג׳:א׳' },
+    { text: 'אל תסתכל בקנקן אלא במה שיש בו', source: 'פרקי אבות ד׳:כ׳' },
+    { text: 'יפה שעה אחת בתשובה ומעשים טובים', source: 'פרקי אבות ד׳:י״ז' }
+];
+
+// Positions grid covering the entire screen (avoiding center)
+const NOTE_POSITIONS = [
+    // Top row
+    { top: '3vh', left: '2%' },
+    { top: '5vh', left: '18%' },
+    { top: '8vh', right: '20%' },
+    { top: '4vh', right: '3%' },
+    // Upper middle
+    { top: '20vh', left: '5%' },
+    { top: '25vh', right: '8%' },
+    { top: '22vh', left: '25%' },
+    { top: '18vh', right: '25%' },
+    // Middle edges (avoiding center title area)
+    { top: '40vh', left: '1%' },
+    { top: '45vh', right: '1%' },
+    { top: '50vh', left: '8%' },
+    { top: '48vh', right: '10%' },
+    // Lower middle
+    { top: '60vh', left: '3%' },
+    { top: '62vh', right: '5%' },
+    { top: '58vh', left: '22%' },
+    { top: '65vh', right: '22%' },
+    // Bottom row (Hero)
+    { top: '78vh', left: '5%' },
+    { top: '80vh', left: '25%' },
+    { top: '75vh', right: '25%' },
+    { top: '82vh', right: '5%' },
+
+    // --- Introduction Section (100vh - 200vh) ---
+    // Reduced count, slightly closer to text
+    { top: '110vh', left: '6%' },
+    { top: '130vh', right: '5%' },
+    { top: '150vh', left: '8%' },
+    { top: '170vh', right: '7%' },
+    { top: '185vh', left: '5%' }
+];
+
+// Create a floating quote note element
+function createQuoteNote(quote, index) {
+    const note = document.createElement('div');
+    note.className = 'floating-quote-note';
+
+    // Position from grid
+    const pos = NOTE_POSITIONS[index]; // Use exact index since we iterate positions
+    if (pos.left) note.style.left = pos.left;
+    if (pos.right) note.style.right = pos.right;
+    note.style.top = pos.top;
+
+    // Random rotation (-6 to +6 degrees)
+    const rotation = (Math.random() - 0.5) * 12;
+    note.style.setProperty('--rotation', `${rotation}deg`);
+
+    // Random animation delay
+    note.style.animationDelay = `${Math.random() * 10}s`;
+
+    // Vary sizes slightly
+    const sizeVariation = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
+    note.style.transform = `scale(${sizeVariation})`;
+
+    note.innerHTML = `
+        <div class="quote-text">${quote.text}</div>
+        <div class="quote-source">${quote.source}</div>
+    `;
+
+    return note;
+}
+
+// Fetch quote from Sefaria API
+async function fetchSefariaQuote(ref) {
+    try {
+        const response = await fetch(`https://www.sefaria.org/api/texts/${encodeURIComponent(ref)}?context=0&pad=0`);
+        if (!response.ok) throw new Error('API error');
+        const data = await response.json();
+
+        // Get Hebrew text
+        let hebrewText = data.he;
+        if (Array.isArray(hebrewText)) {
+            hebrewText = hebrewText[0];
+        }
+
+        // Clean HTML tags and limit length
+        hebrewText = hebrewText.replace(/<[^>]*>/g, '');
+        if (hebrewText.length > 100) {
+            hebrewText = hebrewText.substring(0, 100) + '...';
+        }
+
+        return hebrewText;
+    } catch (error) {
+        console.log('Sefaria API error:', error);
+        return null;
+    }
+}
+
+// Initialize floating quotes
+async function initFloatingQuotes() {
+    if (!floatingQuotesContainer) return;
+
+    // Use more quotes to fill the screen
+    const quotes = FALLBACK_QUOTES;
+
+    // Iterate over POSITIONS instead of quotes to ensure we fill all spots
+    NOTE_POSITIONS.forEach((pos, index) => {
+        // Cycle through quotes if we have more positions than quotes
+        const quote = quotes[index % quotes.length];
+
+        const note = createQuoteNote(quote, index);
+        floatingQuotesContainer.appendChild(note);
+
+        // Fade in with staggered delay
+        setTimeout(() => {
+            note.classList.add('visible');
+        }, 300 + index * 150);
+    });
+}
+
+// Start loading quotes when page loads
+initFloatingQuotes();
+
+/* =========================================
+   Book Hover Quotes - Floating Notes on Hover
+   ========================================= */
+
+// Cache for book quotes
+const bookQuotesCache = new Map();
+
+// Fetch random text from a book using Sefaria API
+async function fetchRandomBookQuote(sefariaRef) {
+    if (!sefariaRef) return null;
+
+    try {
+        // Get a random section
+        const response = await fetch(`https://www.sefaria.org/api/texts/${encodeURIComponent(sefariaRef)}?context=0&pad=0`);
+        if (!response.ok) throw new Error('API error');
+        const data = await response.json();
+
+        // Get Hebrew text
+        let hebrewText = data.he;
+        if (Array.isArray(hebrewText)) {
+            // Pick a random one
+            hebrewText = hebrewText[Math.floor(Math.random() * hebrewText.length)];
+        }
+
+        if (!hebrewText) return null;
+
+        // Clean HTML tags
+        hebrewText = hebrewText.replace(/<[^>]*>/g, '');
+
+        // Limit length
+        if (hebrewText.length > 80) {
+            hebrewText = hebrewText.substring(0, 80) + '...';
+        }
+
+        return {
+            text: hebrewText,
+            source: data.heRef || sefariaRef
+        };
+    } catch (error) {
+        console.log('Quote fetch error:', error);
+        return null;
+    }
+}
+
+// Create hover quote note for a book
+function createBookHoverQuote(bookScene, book) {
+    const quoteNote = document.createElement('div');
+    quoteNote.className = 'book-hover-quote';
+
+    // Initial content from book's own quotes if available
+    const initialQuote = book.quotes && book.quotes[0]
+        ? book.quotes[0]
+        : 'לחץ לקריאה...';
+
+    quoteNote.innerHTML = `
+        <div class="quote-text">${initialQuote}</div>
+        <div class="quote-source">${book.title}</div>
+    `;
+
+    // Add to book scene (not inside faces to avoid 3D issues)
+    bookScene.appendChild(quoteNote);
+
+    return quoteNote;
+}
+
+// Rotate quotes for a book
+async function rotateBookQuote(quoteNote, book) {
+    if (!book.quotes || book.quotes.length === 0) return;
+
+    // Pick a random quote from the book's quotes
+    const randomIndex = Math.floor(Math.random() * book.quotes.length);
+    const quote = book.quotes[randomIndex];
+
+    // Update with fade effect
+    const textEl = quoteNote.querySelector('.quote-text');
+    if (textEl) {
+        quoteNote.style.opacity = '0';
+        setTimeout(() => {
+            textEl.textContent = quote;
+            quoteNote.style.opacity = '';
+        }, 150);
+    }
+}
+
+// Initialize hover quotes for a book
+function initBookHoverQuote(bookScene, book) {
+    // Only for books with quotes
+    if (!book.quotes || book.quotes.length === 0) return;
+
+    // Create quote note
+    const quoteNote = createBookHoverQuote(bookScene, book);
+
+    // Set up rotation interval (every 10 seconds)
+    let rotationInterval = null;
+
+    bookScene.addEventListener('mouseenter', () => {
+        // Start rotating quotes
+        rotateBookQuote(quoteNote, book);
+        rotationInterval = setInterval(() => {
+            rotateBookQuote(quoteNote, book);
+        }, 5000);
+    });
+
+    bookScene.addEventListener('mouseleave', () => {
+        // Stop rotating
+        if (rotationInterval) {
+            clearInterval(rotationInterval);
+            rotationInterval = null;
+        }
+    });
+}
+
+// Initialize for all books after they're rendered
+function initAllBookHoverQuotes() {
+    // Wait for books to be rendered
+    setTimeout(() => {
+        const bookScenes = document.querySelectorAll('.book-scene');
+        bookScenes.forEach((scene) => {
+            const bookId = scene.dataset.id;
+            const book = BOOKS_DATA.find(b => b.id === parseInt(bookId));
+            if (book) {
+                initBookHoverQuote(scene, book);
+            }
+        });
+    }, 2000); // Wait for books to load
+}
+
+// Start initialization
+initAllBookHoverQuotes();
+
+// ===== PAGE-FLIP READER FUNCTIONS =====
+
+/**
+ * Paginate content into pages based on actual rendered height
+ * Creates pages that fill the available space
+ * @param {string} htmlContent - The raw HTML content to paginate
+ * @returns {Array} Array of page content strings
+ */
+function paginateContent(htmlContent) {
+    // Create temporary container to parse HTML
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlContent;
+
+    // Handle plain text: smart parsing for headings and paragraphs
+    if (temp.children.length === 0 && temp.textContent.trim().length > 0) {
+        const rawText = temp.textContent;
+        const lines = rawText.split('\n');
+        let processedHTML = '';
+        let currentParagraph = '';
+
+        for (let i = 0; i < lines.length; i++) {
+            let line = lines[i].trim();
+
+            // Skip empty lines or page markers (digits only or ^L)
+            if (!line || /^\d+$/.test(line) || line.includes('\f')) {
+                if (currentParagraph) {
+                    processedHTML += `<p>${currentParagraph}</p>`;
+                    currentParagraph = '';
+                }
+                continue;
+            }
+
+            // Heuristic for Headings:
+            // 1. Short line (< 50 chars)
+            // 2. Starts with "Chapter", "פרק", or looks like a title
+            // 3. Or just isolated short lines that aren't part of a sentence flow
+            const isShort = line.length < 50;
+            const isTitleKeyword = /^(פרק|חלק|chapter|part|\d+\.?\s)/i.test(line);
+
+            if (isShort && (isTitleKeyword || !currentParagraph)) {
+                // If we have a pending paragraph, close it
+                if (currentParagraph) {
+                    processedHTML += `<p>${currentParagraph}</p>`;
+                    currentParagraph = '';
+                }
+                processedHTML += `<h2>${line}</h2>`;
+            } else {
+                // It's part of a paragraph
+                if (currentParagraph) {
+                    currentParagraph += ' ' + line;
+                } else {
+                    currentParagraph = line;
+                }
+            }
+        }
+
+        if (currentParagraph) {
+            processedHTML += `<p>${currentParagraph}</p>`;
+        }
+
+        temp.innerHTML = processedHTML;
+    }
+
+    const pages = [];
+
+    // Get all text nodes and block elements
+    const allElements = [];
+
+    function collectElements(parent) {
+        const children = parent.children;
+        for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const tagName = child.tagName.toLowerCase();
+            if (['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'].includes(tagName)) {
+                allElements.push(child);
+            } else if (tagName === 'div') {
+                collectElements(child);
+            }
+        }
+    }
+
+    collectElements(temp);
+    console.log('Pagination: found', allElements.length, 'elements');
+
+    if (allElements.length === 0) {
+        // No block elements - split raw text by estimated line count
+        const text = temp.textContent || '';
+        const charsPerPage = 600; // More aggressive split
+        const chunks = [];
+        for (let i = 0; i < text.length; i += charsPerPage) {
+            chunks.push(`<p>${text.slice(i, i + charsPerPage)}</p>`);
+        }
+        return chunks.length > 0 ? chunks : ['<p>אין תוכן להצגה</p>'];
+    }
+
+    // Get page container height for measurement
+    const pageContainer = document.getElementById('page-right');
+    const maxHeight = pageContainer ? pageContainer.clientHeight - 120 : 400; // minus padding (60px top + 60px bottom)
+
+    // Create hidden measurement div
+    const measureDiv = document.createElement('div');
+    measureDiv.className = 'book-page'; // Inherit exact styles
+    measureDiv.style.cssText = `
+        position: absolute;
+        visibility: hidden;
+        height: auto; /* Allow height to grow for measurement */
+        width: ${pageContainer ? pageContainer.clientWidth : 500}px;
+        padding: 0 !important; /* Override class padding to measure content only */
+        left: -9999px;
+        top: -9999px;
+    `;
+    document.body.appendChild(measureDiv);
+
+    let currentPage = '';
+    let currentHeight = 0;
+
+    allElements.forEach((child, index) => {
+        const childHTML = child.outerHTML;
+
+        // Measure this element
+        measureDiv.innerHTML = childHTML;
+        const childHeight = measureDiv.offsetHeight;
+
+        // Check for Chapter Heading (H2) - Start new page
+        const isChapterHeading = child.tagName === 'H2';
+
+        if ((currentHeight + childHeight > maxHeight && currentPage) || (isChapterHeading && currentPage)) {
+            // Start new page
+            pages.push(currentPage);
+            currentPage = childHTML;
+            currentHeight = childHeight;
+        } else {
+            currentPage += childHTML;
+            currentHeight += childHeight;
+        }
+    });
+
+    // Add remaining content
+    if (currentPage) {
+        pages.push(currentPage);
+    }
+
+    // Cleanup
+    document.body.removeChild(measureDiv);
+
+    console.log('Pagination complete: created', pages.length, 'pages, maxHeight:', maxHeight);
+
+    return pages.length > 0 ? pages : ['<p>אין תוכן להצגה</p>'];
+}
+
+/**
+ * Display the current page spread (two pages)
+ */
+function displayCurrentPages() {
+    const pageRight = document.getElementById('page-right');
+    const pageLeft = document.getElementById('page-left');
+
+    console.log('displayCurrentPages called, pageRight:', !!pageRight, 'pageLeft:', !!pageLeft);
+    console.log('state.pages:', state.pages.length, 'currentIndex:', state.currentPageIndex);
+
+    if (!pageRight || !pageLeft) {
+        console.log('ERROR: page elements not found!');
+        return;
+    }
+
+    // RTL: Right page is shown first (lower index)
+    const rightPageIndex = state.currentPageIndex * 2;
+    const leftPageIndex = rightPageIndex + 1;
+
+    console.log('Displaying pages:', rightPageIndex, leftPageIndex);
+
+    // Add flip animation
+    pageRight.classList.add('flipping');
+    pageLeft.classList.add('flipping');
+
+    setTimeout(() => {
+        // Update content
+        const rightContent = state.pages[rightPageIndex] || '';
+        const leftContent = state.pages[leftPageIndex] || '<p class="empty-page"></p>';
+
+        console.log('Right page content length:', rightContent.length);
+        console.log('Left page content length:', leftContent.length);
+
+        pageRight.innerHTML = rightContent;
+        pageLeft.innerHTML = leftContent;
+
+        // Remove flip animation
+        pageRight.classList.remove('flipping');
+        pageLeft.classList.remove('flipping');
+    }, 150);
+
+    // Update navigation state
+    updatePageIndicator();
+    updateNavButtons();
+}
+
+/**
+ * Update the page indicator text
+ */
+function updatePageIndicator() {
+    const indicator = document.getElementById('page-indicator');
+    if (!indicator) return;
+
+    const currentSpread = state.currentPageIndex + 1;
+    const totalSpreads = Math.ceil(state.pages.length / 2);
+
+    indicator.textContent = `עמוד ${currentSpread} מתוך ${totalSpreads}`;
+}
+
+/**
+ * Update navigation button states
+ */
+function updateNavButtons() {
+    const prevBtn = document.getElementById('prev-page');
+    const nextBtn = document.getElementById('next-page');
+
+    if (prevBtn) {
+        prevBtn.disabled = state.currentPageIndex <= 0;
+    }
+
+    if (nextBtn) {
+        const totalSpreads = Math.ceil(state.pages.length / 2);
+        nextBtn.disabled = state.currentPageIndex >= totalSpreads - 1;
+    }
+}
+
+/**
+ * Go to next page spread
+ */
+function nextPage() {
+    console.log('nextPage called, pages:', state.pages.length, 'current:', state.currentPageIndex);
+    const totalSpreads = Math.ceil(state.pages.length / 2);
+    if (state.currentPageIndex < totalSpreads - 1) {
+        state.currentPageIndex++;
+        console.log('Moving to page:', state.currentPageIndex);
+        displayCurrentPages();
+
+        // Check if we need to load more content (Trigger when 2 spreads from end)
+        if (state.currentPageIndex >= totalSpreads - 2) {
+            console.log('Near end of content, triggering loadMoreContent');
+            loadMoreContent();
+        }
+    } else {
+        console.log('Already at last page');
+    }
+}
+
+/**
+ * Go to previous page spread
+ */
+function prevPage() {
+    console.log('prevPage called, current:', state.currentPageIndex);
+    if (state.currentPageIndex > 0) {
+        state.currentPageIndex--;
+        console.log('Moving to page:', state.currentPageIndex);
+        displayCurrentPages();
+    } else {
+        console.log('Already at first page');
+    }
+}
+
+/**
+ * Initialize page navigation event listeners
+ * Uses scroll/wheel for page navigation
+ */
+function initPageNavigation() {
+    const readerContent = document.getElementById('reader-content');
+    const readerPanel = document.getElementById('reader-panel');
+
+    if (!readerPanel) return;
+
+    console.log('initPageNavigation: Initializing page navigation...');
+
+    // Track scroll debounce
+    let scrollDebounce = false;
+
+    // Helper function for wheel handling
+    function handleWheel(e) {
+        // Only handle when reader is open
+        if (!readerPanel.classList.contains('open')) {
+            return;
+        }
+
+        console.log('Wheel event on reader panel. DeltaY:', e.deltaY);
+
+        // Prevent default scrolling
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Debounce to prevent rapid page flipping
+        if (scrollDebounce) {
+            return;
+        }
+        scrollDebounce = true;
+        setTimeout(() => scrollDebounce = false, 400);
+
+        // Check if cover is still visible
+        const coverHidden = readerPanel.classList.contains('cover-hidden');
+
+        if (!coverHidden) {
+            // First scroll: hide cover
+            console.log('Hiding cover');
+            readerPanel.classList.add('cover-hidden');
+            return;
+        }
+
+        // Subsequent scrolls: change pages
+        // Scroll down = advance in book, scroll up = go back
+        if (e.deltaY > 0) {
+            // Scroll down = next page (advance)
+            nextPage();
+        } else if (e.deltaY < 0) {
+            // Scroll up = previous page (go back)
+            prevPage();
+        }
+    }
+
+    // Listen on the entire reader panel
+    // Use capture: true to ensure we get the event before children consume it if necessary,
+    // though bubbling usually works unless stopped.
+    readerPanel.addEventListener('wheel', handleWheel, { passive: false });
+    console.log('initPageNavigation: Event listener attached to reader-panel');
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!readerPanel.classList.contains('open')) return;
+
+        if (e.key === 'ArrowLeft') {
+            nextPage(); // RTL: left arrow = next
+        } else if (e.key === 'ArrowRight') {
+            prevPage(); // RTL: right arrow = prev
+        } else if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+            nextPage();
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+            prevPage();
+        }
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    readerContent.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    readerContent.addEventListener('touchend', (e) => {
+        if (!state.readerOpen) return;
+
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = touchEndY - touchStartY;
+
+        // Vertical swipe
+        if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
+            const coverHidden = readerPanel.classList.contains('cover-hidden');
+
+            if (!coverHidden) {
+                readerPanel.classList.add('cover-hidden');
+                return;
+            }
+
+            if (deltaY < 0) {
+                nextPage(); // Swipe up = next
+            } else {
+                prevPage(); // Swipe down = prev
+            }
+        }
+        // Horizontal swipe (RTL)
+        else if (Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                nextPage(); // Swipe right = next (RTL)
+            } else {
+                prevPage(); // Swipe left = prev (RTL)
+            }
+        }
+    }, { passive: true });
+}
+
+// Reset cover visibility when closing reader
+function resetReaderState() {
+    const readerPanel = document.getElementById('reader-panel');
+    if (readerPanel) {
+        readerPanel.classList.remove('cover-hidden');
+        readerPanel.classList.remove('open');
+    }
+    state.currentPageIndex = 0;
+    state.pages = [];
+    state.totalPages = 0;
+    state.readerOpen = false;
+}
+
+// Initialize close button
+function initCloseButton() {
+    const closeBtn = document.getElementById('reader-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            resetReaderState();
+        });
+    }
+}
+
+// Initialize page navigation when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initPageNavigation();
+    initCloseButton();
+});
+
