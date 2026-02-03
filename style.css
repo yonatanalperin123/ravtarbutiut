@@ -19,6 +19,16 @@ body {
     background-color: #F9F5F0;
 }
 
+/* Grain / Noise Texture */
+.bg-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
+    opacity: 0.22;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 9998;
+}
+
 /* Custom Cursor */
 #custom-cursor {
     position: fixed;
@@ -41,6 +51,10 @@ body.cursor-pressed #custom-cursor {
     /* Solid Fill */
     transform: translate(-50%, -50%) scale(0.8);
     /* Slight shrink on click */
+}
+
+#hero-scroll-indicator {
+    display: none !important;
 }
 
 /* ===== Splash Screen ===== */
@@ -176,7 +190,10 @@ body.cursor-pressed #custom-cursor {
 
 /* Intro Paragraphs - Staggered Fade In */
 .intro-paragraph {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.25em;
+    /* Tighter spacing */
+    line-height: 1.8;
+    /* Better readability */
     transition: opacity 0.8s ease-out,
         transform 0.8s ease-out;
     transform: translateY(20px);
@@ -188,6 +205,19 @@ body.cursor-pressed #custom-cursor {
     transform: translateY(0);
 }
 
+/* Intro Text Container - Improved Typography */
+#intro-text {
+    max-width: 700px !important;
+    line-height: 1.8 !important;
+    letter-spacing: 0.01em;
+}
+
+/* Landing Story Section - Tighter Layout */
+#landing-story {
+    padding-top: 6rem !important;
+    padding-bottom: 8rem !important;
+}
+
 /* Continue Button Animation */
 #intro-continue {
     transition: opacity 0.6s ease-out;
@@ -197,6 +227,85 @@ body.cursor-pressed #custom-cursor {
     opacity: 1;
 }
 
+/* ===== Book Shelf Silhouettes (Landing Page Background) ===== */
+#shelf-silhouettes {
+    z-index: 0;
+    opacity: 0.08;
+}
+
+.shelf-left,
+.shelf-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(62, 39, 35, 0.05) 20%, rgba(62, 39, 35, 0.05) 80%, transparent 100%);
+}
+
+.shelf-left {
+    left: 0;
+}
+
+.shelf-right {
+    right: 0;
+}
+
+/* Vertical shadow/depth for the shelves - Soft gradients instead of lines */
+.shelf-left::before,
+.shelf-right::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80vh;
+    /* Soft vertical shadow to suggest depth behind the shelves */
+    background: linear-gradient(to right,
+            rgba(62, 39, 35, 0.05) 0%,
+            rgba(62, 39, 35, 0.15) 20%,
+            rgba(62, 39, 35, 0.15) 80%,
+            rgba(62, 39, 35, 0.05) 100%);
+    filter: blur(4px);
+    opacity: 0.6;
+}
+
+/* Add shelf depth shadows and light gradients */
+.shelf-left::after,
+.shelf-right::after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background-image:
+        /* Repeating shelf depth pattern */
+        repeating-linear-gradient(to bottom,
+            /* Shadow under shelf (darker) */
+            transparent 0,
+            transparent calc(20vh - 35px),
+            rgba(62, 39, 35, 0.25) calc(20vh - 35px),
+            rgba(62, 39, 35, 0.18) calc(20vh - 25px),
+            rgba(62, 39, 35, 0.08) calc(20vh - 15px),
+            /* Light on top of shelf (lighter) */
+            rgba(255, 248, 240, 0.12) calc(20vh - 10px),
+            rgba(255, 248, 240, 0.06) calc(20vh - 5px),
+            transparent calc(20vh),
+            transparent calc(20vh));
+    /* Side fade for realism */
+    mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 15%,
+            black 85%,
+            transparent 100%);
+    -webkit-mask-image: linear-gradient(to right,
+            transparent 0%,
+            black 15%,
+            black 85%,
+            transparent 100%);
+}
+
 /* ===== Tutorial Animation ===== */
 #tutorial-overlay {
     background: transparent;
@@ -204,12 +313,23 @@ body.cursor-pressed #custom-cursor {
 
 #tutorial-cursor {
     opacity: 0;
+    position: fixed;
+    /* Ensure fixed */
+    width: 30px;
+    /* Slightly larger for tutorial */
+    height: 30px;
+    border: 1.5px solid #3E2723;
+    border-radius: 50%;
+    z-index: 9999;
+    /* Above reader */
+    pointer-events: none;
     transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
 }
 
 #tutorial-cursor.active {
     opacity: 1;
-    animation: tutorialSequence 3.5s ease-in-out forwards;
+    /* animation handled in JS for flexible re-use or kept here if simple */
 }
 
 #tutorial-cursor.pressed {
@@ -359,9 +479,12 @@ body.cursor-pressed #custom-cursor {
 /* STEP 2: The CSS Geometry (Overwrite completely) */
 
 :root {
-    --book-width: 240px;
-    --book-height: 360px;
-    --book-depth: 50px;
+    --book-width: 204px;
+    /* 240px * 0.85 */
+    --book-height: 306px;
+    /* 360px * 0.85 */
+    --book-depth: 42px;
+    /* 50px * 0.85 */
     /* Thicker for better visibility */
 
     /* Typography Variables (using existing fonts) */
@@ -731,7 +854,7 @@ body.reader-active .book-scene.selected-book {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 100%;
+    max-width: 65vw;
     height: calc(100vh - 160px);
     /* Fit within viewport minus header */
     max-height: calc(100vh - 160px);
@@ -1068,8 +1191,13 @@ body.reader-active .book-scene.selected-book {
     transform-style: preserve-3d !important;
     /* CRITICAL: Forces 3D children */
     transform-origin: center center;
-    transition: transform 0.1s linear;
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     will-change: transform;
+}
+
+.book-scene:hover .book-wrap {
+    /* Lift effect on hover */
+    transform: translateY(-8px) scale(1.02);
 }
 
 /* 2. GENERIC FACE RULES */
@@ -1098,6 +1226,15 @@ body.reader-active .book-scene.selected-book {
     z-index: 2;
     background-size: cover;
     background-position: center;
+
+    /* Robust Shadow on the cover itself */
+    box-shadow: 0 20px 30px rgba(62, 39, 35, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Hover Shadow enhancement */
+.book-scene:hover .face.front {
+    box-shadow: 0 40px 60px rgba(62, 39, 35, 0.45);
 }
 
 /* Hide all other faces to show only the flat cover - no borders */
@@ -1527,192 +1664,4 @@ body.night-mode #candle-light {
     margin-top: 6px;
     border-top: 1px solid rgba(62, 39, 35, 0.1);
     padding-top: 4px;
-}
-
-/* ===== Bookmark Tabs (Physical Sticky Notes from Book) ===== */
-.bookmark-tabs-container {
-    position: absolute;
-    left: -8px;
-    top: 25%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 20px;
-    z-index: 50;
-    pointer-events: auto;
-}
-
-.bookmark-tab {
-    width: 22px;
-    height: 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    transition: all 0.25s ease-out;
-    transform-origin: right center;
-    /* 3D paper effect with depth */
-    transform: perspective(100px) rotateY(-8deg);
-    box-shadow:
-        -2px 2px 3px rgba(0, 0, 0, 0.2),
-        -1px 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* Muted, realistic highlighter marker colors */
-.bookmark-tab.color-pink {
-    background: #FFB6C1;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.bookmark-tab.color-yellow {
-    background: #FFFF99;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.bookmark-tab.color-green {
-    background: #98FB98;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.bookmark-tab.color-blue {
-    background: #ADD8E6;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.bookmark-tab.color-orange {
-    background: #FFDAB9;
-    border: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Hover state - pull out and flatten */
-.bookmark-tab:hover {
-    width: 28px;
-    transform: perspective(100px) rotateY(-3deg) translateX(-6px);
-    box-shadow:
-        -3px 3px 6px rgba(0, 0, 0, 0.25),
-        -1px 1px 2px rgba(0, 0, 0, 0.15);
-}
-
-/* Subtle opacity increase on hover */
-.bookmark-tab.color-pink:hover {
-    background: #FFC0CB;
-}
-
-.bookmark-tab.color-yellow:hover {
-    background: #FFFFA0;
-}
-
-.bookmark-tab.color-green:hover {
-    background: #90EE90;
-}
-
-.bookmark-tab.color-blue:hover {
-    background: #B0E0E6;
-}
-
-.bookmark-tab.color-orange:hover {
-    background: #FFE4C4;
-}
-
-/* ===== Bookmark Quote Popup ===== */
-.bookmark-quote-popup {
-    position: absolute;
-    right: calc(100% + 12px);
-    top: 50%;
-    transform: translateY(-50%) translateX(10px) scale(0.95);
-    width: 180px;
-    padding: 14px 12px;
-    background: linear-gradient(145deg, #FFFEF8 0%, #F5F0E6 100%);
-    border-radius: 6px;
-    box-shadow:
-        0 8px 25px rgba(62, 39, 35, 0.15),
-        0 3px 8px rgba(62, 39, 35, 0.1);
-    font-family: 'Noto Serif Hebrew', serif;
-    font-size: 11px;
-    line-height: 1.6;
-    color: #3E2723;
-    text-align: right;
-    direction: rtl;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: none;
-    z-index: 200;
-}
-
-/* Triangle pointer on the right */
-.bookmark-quote-popup::after {
-    content: '';
-    position: absolute;
-    right: -8px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 8px solid #F5F0E6;
-}
-
-/* Color accent bar on top matching the bookmark */
-.bookmark-quote-popup::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 10%;
-    right: 10%;
-    height: 3px;
-    border-radius: 0 0 3px 3px;
-    background: var(--bookmark-color);
-}
-
-/* Visible state */
-.bookmark-tab:hover .bookmark-quote-popup {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(-50%) translateX(0) scale(1);
-}
-
-.bookmark-quote-popup .quote-mark {
-    position: absolute;
-    top: 10px;
-    right: 8px;
-    font-size: 24px;
-    color: var(--bookmark-color);
-    opacity: 0.4;
-    font-family: serif;
-    line-height: 1;
-}
-
-.bookmark-quote-popup .quote-text {
-    margin-top: 8px;
-    font-style: italic;
-}
-
-.bookmark-quote-popup .quote-source {
-    font-size: 9px;
-    color: #3E2723;
-    opacity: 0.5;
-    margin-top: 10px;
-    padding-top: 8px;
-    border-top: 1px solid rgba(62, 39, 35, 0.1);
-    font-style: normal;
-}
-
-/* Night mode adjustments for bookmarks */
-body.night-mode .bookmark-tab {
-    filter: brightness(1.1);
-}
-
-body.night-mode .bookmark-quote-popup {
-    background: linear-gradient(145deg, #2d2d44 0%, #1a1a2e 100%);
-    color: #F9F5F0;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-body.night-mode .bookmark-quote-popup::after {
-    border-left-color: #1a1a2e;
-}
-
-body.night-mode .bookmark-quote-popup .quote-source {
-    color: #F9F5F0;
-    border-top-color: rgba(249, 245, 240, 0.1);
 }

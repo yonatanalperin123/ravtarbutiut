@@ -1,395 +1,7 @@
 // Data - Overriding covers with the 2 patterns
 const PATTERNS = ["cover_pattern_1.png", "cover_pattern_2.png"];
 
-const BOOKS_DATA = [
-    {
-        id: 1,
-        title: "פרסי ג'קסון וגנב הברק",
-        author: "ריק ריירדן",
-        year: 2005,
-        publisher: "זמורה דביר ביתן",
-        cover: "newcover (1).png",
-        summary: "נער שמגלה כי הוא חצי-אל יוצא למסע מסוכן ברחבי ארצות הברית כדי למנוע מלחמה בין האלים באולימפוס.",
-        quotes: ["מצחיק איך בני אדם מסוגלים לעוות את התמונה.", "רק בשלב מאוחר בהרבה הערכתי את החוכמה."],
-        tags: ["פנטזיה", "פרוזה", "נוער", "הרפתקאות"],
-        category: "prose",
-        color: "bg-book-navy",
-        textColor: "text-white",
-        bookContent: (typeof book1Content !== 'undefined' ? book1Content : '')
-    },
-    {
-        id: 2,
-        title: "תיאום כוונות",
-        author: "הרב חיים סבתו",
-        year: 1999,
-        publisher: "ידיעות ספרים",
-        cover: "newcover (2).png",
-        summary: "סיפורו המטלטל של צוות טנק במלחמת יום הכיפורים, המשלב זכרונות קרב עם חשבון נפש אמוני.",
-        quotes: ["אני אוסף את כל הכוחות ומרכז אותם בכוונת.", "עכשיו אנחנו רק מחפשים מטרות ויורים."],
-        tags: ["פרוזה", "דוקומנטרי", "רומן", "מלחמה", "אמונה"],
-        category: "prose",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 3,
-        title: "אולי בשבת יזרקו סוכריות",
-        author: "אורי אורבך",
-        year: 1996,
-        publisher: "בית אל",
-        cover: "newcover (3).png",
-        summary: "קובץ שירים וסיפורים מלאי הומור וחן על עולמם של ילדים במשפחה הדתית-לאומית.",
-        quotes: ["כשהוא רואה ילדים שמחים זה מביא לו נחמה.", "כל פעם שאני אומר לו 'תודה' אני חושב על הבן שלו."],
-        tags: ["ילדים", "מאויר", "הומור", "משפחה"],
-        category: "prose",
-        color: "bg-book-stone",
-        textColor: "text-maroon"
-    },
-    {
-        id: 4,
-        title: "אורות",
-        author: "הראי״ה קוק",
-        year: 1920,
-        publisher: "מוסד הרב קוק",
-        cover: "newcover (4).png",
-        summary: "ספר היסוד של המחשבה הציונית-דתית, העוסק בתחיית האומה בארצה ובקדושת הארץ.",
-        quotes: ["עלה למעלה עלה, כי כח עז לך.", "אל תכחש בם, פן יכחשו לך."],
-        tags: ["יהדות", "מחשבה", "ציונות", "קבלה"],
-        category: "thought",
-        color: "bg-book-green",
-        textColor: "text-white",
-        sefariaRef: "Orot, Lights from Darkness, Land of Israel.1"
-    },
-    {
-        id: 5,
-        title: "אורות התשובה",
-        author: "הראי״ה קוק",
-        year: 1925,
-        publisher: "מוסד הרב קוק",
-        cover: "newcover (5).png",
-        summary: "חיבור פסיכולוגי-רוחני המציג את התשובה כתנועה של שיבה אל המקור ואל האושר הפנימי.",
-        quotes: ["הרצון הטוב הוא הכל, וכל הכשרונות אינם אלא מילואיו."],
-        tags: ["יהדות", "מחשבה", "נפש", "תשובה"],
-        category: "thought",
-        color: "bg-book-navy",
-        textColor: "text-white",
-        sefariaRef: "Orot HaTeshuvah, Foreword"
-    },
-    {
-        id: 6,
-        title: "איך לבנות חיים",
-        author: "הדר גולדין",
-        year: 2015,
-        publisher: "קורן מגיד",
-        cover: "newcover (6).png",
-        summary: "עיונים במסילת ישרים מתוך מחברותיו של הדר גולדין ז״ל. מדריך מעשי לחיים של משמעות.",
-        quotes: ["בחיים יש לך שתי אפשרויות: להתעסק בעצמך או לעשות דברים גדולים."],
-        tags: ["יהדות", "מחשבה", "תיקון מידות", "השראה"],
-        category: "thought",
-        color: "bg-book-stone",
-        textColor: "text-maroon"
-    },
-    {
-        id: 7,
-        title: "איש האמונה הבודד",
-        author: "הרב יוסף דוב סולובייצ׳יק",
-        year: 1965,
-        publisher: "מוסד הרב קוק",
-        cover: "newcover (7).png",
-        summary: "מסה פילוסופית על הדילמה של האדם המודרני, הקרוע בין הרצון לשלוט לצורך בכניעה.",
-        quotes: ["בכל אחד מאתנו נמצאים שני אנשים, איש היצירה ואיש הענווה."],
-        tags: ["יהדות", "מחשבה", "פילוסופיה", "אקזיסטנציאליזם"],
-        category: "thought",
-        color: "bg-book-green",
-        textColor: "text-white"
-    },
-    {
-        id: 8,
-        title: "בבא",
-        author: "שי צ׳רקה",
-        year: 1999,
-        publisher: "מודן",
-        cover: "newcover (8).png",
-        summary: "קומיקס איקוני על תקופת המשנה. הומור ויזואלי מבריק המנגיש סוגיות תלמודיות.",
-        quotes: ["לפחות פרסום הנס יותר גדול ככה!"],
-        tags: ["ילדים", "מאויר", "קומיקס", "הומור"],
-        category: "prose",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 9,
-        title: "דתי נורמלי",
-        author: "אורי אורבך",
-        year: 2018,
-        publisher: "בית אל",
-        cover: "newcover (9).png",
-        summary: "מאמרים סאטיריים ושנונים המתבוננים בחיוך ובביקורת חדה על החברה הדתית-לאומית.",
-        quotes: ["הדרת? בטח, הדרתי במשרד. נהדר!"],
-        tags: ["עיון", "פוליטיקה", "סאטירה", "חברה"],
-        category: "prose",
-        color: "bg-book-navy",
-        textColor: "text-white"
-    },
-    {
-        id: 10,
-        title: "הארי פוטר ואבן החכמים",
-        author: "ג׳.ק. רולינג",
-        year: 2001,
-        publisher: "ידיעות ספרים",
-        cover: "10.png",
-        summary: "ילד יתום מגלה שהוא קוסם ויוצא להרפתקה בבית הספר הוגוורטס.",
-        quotes: ["היינו יכולים ליהרג, או גרוע מזה - להיות מסולקים מבית-הספר."],
-        tags: ["נוער", "פרוזה", "פנטזיה", "קלאסיקה"],
-        category: "prose",
-        color: "bg-book-stone",
-        textColor: "text-maroon",
-        bookContent: `
-            <h2>פרק א׳ - הילד שנשאר בחיים</h2>
-            <p>אדון וגברת דרסלי, דיירי דרך פריווט מספר ארבע, ידעו לדווח בגאווה שהם נורמליים לגמרי - ותודה ששאלתם. לא יעלה על הדעת כי מכל האנשים בעולם דווקא הם יסתבכו בפרשיות מוזרות או מסתוריות, והרי הם פשוט לא סובלים שטויות מסוג זה.</p>
-            <p>מר דרסלי היה מנכ״ל של חברה בשם גראנינגס לייצור מקדחות. הוא היה איש גדל־ממדים, בשרני, וכמעט נטול צוואר - למרות שדווקא היה לו שפם שמן למדי. גברת דרסלי היתה רזה ובלונדינית, ולה היה צוואר ארוך פי־שניים מהאורך המקובל, מה שהיה שימושי מאוד, כי רוב זמנה עבר עליה בהצצה מעל גדרות כדי לרגל אחר השכנים שלה. לדרסלים היה תינוק ששמו דאדלי, ובעיניהם לא היה בעולם ילד מוצלח ממנו.</p>
-            <p>דבר לא היה חסר לדרסלים. אולם היה להם סוד, והם חיו בפחד שמישהו יגלה אותו. הם חשבו שחייהם לא יהיו חיים ברגע שמישהו ישמע על משפחת פוטר. גברת פוטר היתה אחותה של גברת דרסלי, אבל עברו שנים רבות מאז נפגשו לאחרונה.</p>
-            <p>כשדרסלי ואשתו התעוררו בבוקר יום שלישי האפלולי והאפור שבו מתחיל סיפורנו, לא היה זכר בשמים המעוננים לכך שדברים מוזרים ומסתוריים עומדים להתרחש ברחבי המדינה. מר דרסלי פיזם לעצמו בשעה שבחר עניבה משעממת במיוחד ללבוש לעבודה, וגברת דרסלי ריכלה בעליצות וניסתה להכריח את דאדלי המצווח להיכנס לכיסא התינוקות שלו.</p>
-            <p>שניהם לא הבחינו בינשוף הזהוב שחלף בתעופה על פני חלונם.</p>
-            <p>בשעה שמונה וחצי מר דרסלי נטל את התיק שלו, הדביק נשיקה חפוזה על לחייה של גברת דרסלי וניסה לנשק לפרידה גם את דאדלי, אבל לא הצליח, מפני שדאדלי היה עסוק בלצרוח ולהעיף את ארוחת הבוקר שלו לכל הכיוונים. "איזה מתוק," התמוגג מר דרסלי ויצא מהבית.</p>
-            <p>רק בקרן הרחוב הוא הבחין בסימן הראשון למשהו מוזר - חתולה שעיינה במפה. לרגע אחד מר דרסלי לא עיכל את מה שעיניו הראו לו - אך מייד הוא הסב את ראשו להביט שנית. בפינת דרך פריווט אכן עמדה חתולה מנומרת, אבל שום זכר למפה לא נראה.</p>
-            <p>מר דרסלי התנער קלות וחדל לחשוב על החתולה. בדרכו העירה הוא לא חשב על דבר מלבד על משלוח גדול של מקדחות שקיווה לקבל מאוחר יותר באותו יום. אבל בכניסה לעיר המקדחות פרחו ממוחו. בזמן שעמד בפקקים של הבוקר, הוא לא היה יכול שלא להבחין במספר הגדול של אנשים שהיו לבושים באופן מוזר ביותר. אנשים עטויי גלימות.</p>
-
-            <h2>פרק ב׳ - הזכוכית הנעלמת</h2>
-            <p>כמעט עשר שנים עברו מהיום שבו התעוררו הדרסלים לגלות את אחיינם הפעוט על סף ביתם, אבל דרך פריווט כמעט שלא השתנתה. השמש זרחה על אותם הגנים המטופחים, והאירה את לוחית המספר ארבע על דלת הכניסה של בית משפחת דרסלי.</p>
-            <p>אולם הארי פוטר עדיין היה שם. הוא אומנם ישן ברגע זה, אבל לא לאורך זמן. דודתו פטומה כבר היתה ערה, וקולה המצווה היה הצליל הראשון ששמע אותו יום.</p>
-            <p>"קום! צא מהמיטה! מייד!"</p>
-            <p>הארי התעורר בבהלה. דודתו דפקה שוב על הדלת. הארי שמע אותה הולכת לכיוון המטבח, ואז שמע את הרעש שמשמיע מחבת הטיגון כששמים אותו על האש. הוא התגלגל אל גבו וניסה להיזכר בחלום שחלם. זה היה חלום טוב. היה בו אופנוע מעופף.</p>
-            <p>יום־ההולדת של דאדלי - איך היה יכול לשכוח? הארי קם באיטיות מהמיטה והחל לחפש את הגרביים שלו. הוא מצא זוג מתחת למיטה שלו, ואחרי ששלף מתוך אחד מהם עכביש הוא גרב אותם. הארי היה רגיל לעכבישים, מפני שהארון שמתחת לגרם המדרגות היה מלא בהם, ושם הוא ישן.</p>
-        `
-    },
-    {
-        id: 11,
-        title: "חסידים צוחקים מזה",
-        author: "הרב מנחם פרומן",
-        year: 2016,
-        publisher: "דברי שיר",
-        cover: "11.png",
-        summary: "לקט תורות וסיפורים המשלבים הומור חסידי עם עומק רוחני ושמחה.",
-        quotes: ["חסידים צוחקים מזה, תן חיוך - זו התשובה."],
-        tags: ["יהדות", "מחשבה", "חסידות", "שמחה"],
-        category: "thought",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 12,
-        title: "כל שושנה היא אי",
-        author: "זלדה",
-        year: 2017,
-        publisher: "קיבוץ מאוחד",
-        cover: "12.png",
-        summary: "שירה המבטאת עולם פנימי עשיר של אמונה פשוטה, התבוננות בטבע ורגישות אנושית.",
-        quotes: ["הלא קרקע הים מרכבה לאלוהים."],
-        tags: ["שירה", "יהדות", "רגש", "טבע"],
-        category: "poetry",
-        color: "bg-book-green",
-        textColor: "text-white"
-    },
-    {
-        id: 13,
-        title: "לא בשם האל",
-        author: "הרב יונתן זקס",
-        year: 2016,
-        publisher: "קורן",
-        cover: "newcover (13).png",
-        summary: "התמודדות עם אלימות בשם הדת וקריאה לאחריות מוסרית ושלום בין-דתי.",
-        quotes: ["כשהדת הופכת אנשים לרוצחים, אלוהים בוכה."],
-        tags: ["עיון", "יהדות", "מחשבה", "מוסר"],
-        category: "thought",
-        color: "bg-book-navy",
-        textColor: "text-white"
-    },
-    {
-        id: 14,
-        title: "סיפורי מעשיות",
-        author: "רבי נחמן מברסלב",
-        year: 1816,
-        publisher: "ידיעות ספרים",
-        cover: "14.png",
-        summary: "סיפורים אלגוריים ומסתוריים המקפלים בתוכם סודות קבליים ותובנות עמוקות.",
-        quotes: ["ולא התחלתי עדיין לחיות כלל, ואף על פי כן אני זקן מאד."],
-        tags: ["עיון", "יהדות", "מחשבה", "קבלה", "חסידות"],
-        category: "thought",
-        color: "bg-book-stone",
-        textColor: "text-maroon",
-        wikisourcePage: "סיפורי_מעשיות"
-    },
-    {
-        id: 15,
-        title: "תנ\"ך",
-        author: "",
-        year: 0,
-        publisher: "קורן",
-        cover: "15.png",
-        summary: "ספר הספרים - התורה, הנביאים והכתובים.",
-        quotes: ["בראשית ברא אלהים את השמים ואת הארץ."],
-        tags: ["יהדות", "תנ\"ך", "קלאסיקה"],
-        category: "thought",
-        color: "bg-book-navy",
-        textColor: "text-white",
-        sefariaRef: "Genesis.1"
-    },
-    {
-        id: 16,
-        title: "חזרה בלי תשובה",
-        author: "חיים באר",
-        year: 2019,
-        publisher: "עם עובד",
-        cover: "16.png",
-        summary: "רומן על חיים של זיכרון, אהבה ואובדן.",
-        quotes: ["הזיכרון הוא הבית שלנו."],
-        tags: ["פרוזה", "רומן", "ישראלי"],
-        category: "prose",
-        color: "bg-book-green",
-        textColor: "text-white"
-    },
-    {
-        id: 17,
-        title: "חרשתא",
-        author: "יצחק שמי",
-        year: 1929,
-        publisher: "עם עובד",
-        cover: "17.png",
-        summary: "נובלה על חיי הכפר הערבי בארץ ישראל.",
-        quotes: ["האדמה היא האם של הכל."],
-        tags: ["פרוזה", "קלאסיקה", "ארץ ישראל"],
-        category: "prose",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 18,
-        title: "לוחות ושברי לוחות",
-        author: "הרב שג\"ר",
-        year: 2013,
-        publisher: "ידיעות ספרים",
-        cover: "18.png",
-        summary: "עיונים בתורה ובמחשבת ישראל בעידן הפוסטמודרני.",
-        quotes: ["השבר הוא חלק מהשלמות."],
-        tags: ["יהדות", "מחשבה", "פילוסופיה"],
-        category: "thought",
-        color: "bg-book-stone",
-        textColor: "text-maroon"
-    },
-    {
-        id: 19,
-        title: "והארץ ניתנה לבני אדם",
-        author: "אברהם יהושע השל",
-        year: 1965,
-        publisher: "ידיעות ספרים",
-        cover: "19.png",
-        summary: "על האדם, האלוהים והעולם במחשבה היהודית.",
-        quotes: ["האדם הוא שליח של האלוהים."],
-        tags: ["יהדות", "מחשבה", "פילוסופיה"],
-        category: "thought",
-        color: "bg-book-navy",
-        textColor: "text-white"
-    },
-    {
-        id: 20,
-        title: "פניני הלכה",
-        author: "הרב אליעזר מלמד",
-        year: 2000,
-        publisher: "הר ברכה",
-        cover: "20.png",
-        summary: "סדרת ספרי הלכה מקיפה לדור החדש.",
-        quotes: ["ההלכה היא דרך חיים."],
-        tags: ["יהדות", "הלכה", "מדריך"],
-        category: "thought",
-        color: "bg-book-green",
-        textColor: "text-white"
-    },
-    {
-        id: 21,
-        title: "תמול שלשום",
-        author: "ש\"י עגנון",
-        year: 1945,
-        publisher: "שוקן",
-        cover: "21.png",
-        summary: "רומן על עלייתו של יצחק קומר לארץ ישראל.",
-        quotes: ["כל אדם הוא עולם בפני עצמו."],
-        tags: ["פרוזה", "קלאסיקה", "ארץ ישראל"],
-        category: "prose",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 22,
-        title: "הנסיך הקטן",
-        author: "אנטואן דה סנט אקזופרי",
-        year: 1943,
-        publisher: "עם עובד",
-        cover: "22.png",
-        summary: "סיפור פילוסופי על מהות החיים והאהבה.",
-        quotes: ["הדברים החשובים באמת נראים רק בלב."],
-        tags: ["פרוזה", "פילוסופיה", "קלאסיקה"],
-        category: "prose",
-        color: "bg-book-stone",
-        textColor: "text-maroon"
-    },
-    {
-        id: 23,
-        title: "התפילה",
-        author: "הרב יוסף דוב סולובייצ'יק",
-        year: 2003,
-        publisher: "קורן",
-        cover: "23.png",
-        summary: "הגות עמוקה על משמעות התפילה.",
-        quotes: ["התפילה היא שיחת הנפש עם בוראה."],
-        tags: ["יהדות", "מחשבה", "תפילה"],
-        category: "thought",
-        color: "bg-book-navy",
-        textColor: "text-white"
-    },
-    {
-        id: 24,
-        title: "שירת כל חי",
-        author: "הרב נתן שטרנהרץ",
-        year: 1870,
-        publisher: "ברסלב",
-        cover: "24.png",
-        summary: "ליקוט תפילות ושירים מבית מדרשו של רבי נחמן.",
-        quotes: ["השירה היא נשמת העולם."],
-        tags: ["יהדות", "שירה", "חסידות"],
-        category: "poetry",
-        color: "bg-book-green",
-        textColor: "text-white"
-    },
-    {
-        id: 25,
-        title: "מה את מבקשת",
-        author: "לאה אילון",
-        year: 2018,
-        publisher: "כנרת",
-        cover: "25.png",
-        summary: "רומן על נשים, אמונה וזהות.",
-        quotes: ["החיפוש הוא הדרך."],
-        tags: ["פרוזה", "רומן", "נשים"],
-        category: "prose",
-        color: "bg-book-brown",
-        textColor: "text-white"
-    },
-    {
-        id: 26,
-        title: "מדריך הטרמפיסט לגלקסיה",
-        author: "דאגלס אדמס",
-        year: 1979,
-        publisher: "כנרת",
-        cover: "26.png",
-        summary: "קומדיית מדע בדיוני קלאסית על החיים, היקום והכל.",
-        quotes: ["התשובה לחיים, ליקום ולכל דבר היא 42."],
-        tags: ["מדע בדיוני", "הומור", "קלאסיקה"],
-        category: "prose",
-        color: "bg-book-stone",
-        textColor: "text-maroon"
-    }
-];
+// BOOKS_DATA is now loaded from books_data.js
 
 // Update all books to use their matching cover by ID (1.png, 2.png, etc.)
 BOOKS_DATA.forEach((book) => {
@@ -476,6 +88,7 @@ let state = {
     activeCategory: 'all',
     activeBook: null,
     pan: { x: 0, y: 0 },
+    zoom: 1.0, // Zoom level: 0.7 (70%) to 1.5 (150%), default 1.0 (100%)
     isDragging: false,
     wasDragging: false, // Track if we actually moved during drag
     dragStart: { x: 0, y: 0 },
@@ -497,6 +110,7 @@ let state = {
     readerOpen: false,
     readerBook: null,
     selectedBookNode: null, // DOM node of selected book for isolation effect
+    readerTutorialShown: false, // Track if tutorial was shown
     // Infinite Scroll State
     currentRef: null,
     nextRef: null,
@@ -623,9 +237,9 @@ function generateScatteredLayout() {
     // Reset
     SCATTER_DATA.length = 0;
 
-    // Collision Config - Books 10% larger (Simulating camera zoom)
-    const BOOK_W = 304; // 276 * 1.1
-    const BOOK_H = 455; // 414 * 1.1
+    // Collision Config - Books 10% larger (Simulating camera zoom) -> Reduced by 15% requested by user
+    const BOOK_W = 258; // 304 * 0.85
+    const BOOK_H = 387; // 455 * 0.85
     // Adjusted radius - Increased further by 10% (Total ~15% spacing increase)
     const RADIUS = (Math.sqrt(BOOK_W * BOOK_W + BOOK_H * BOOK_H) / 2) * 1.15;
     const NEIGHBOR_RANGE = RADIUS * 2.5; // Range to check for rotation similarity
@@ -907,59 +521,7 @@ function createBookNode(index) {
     `;
     scene.appendChild(hoverInfo);
 
-    // === BOOKMARK TABS (Paper Strips) ===
-    // Create bookmark tabs for books with quotes
-    if (book.quotes && book.quotes.length > 0) {
-        const bookmarkColors = ['pink', 'yellow', 'green', 'blue', 'orange'];
-        const colorVars = {
-            'pink': 'rgba(255, 182, 193, 0.9)',
-            'yellow': 'rgba(255, 255, 150, 0.9)',
-            'green': 'rgba(180, 255, 180, 0.9)',
-            'blue': 'rgba(173, 216, 255, 0.9)',
-            'orange': 'rgba(255, 200, 150, 0.9)'
-        };
 
-        const tabsContainer = document.createElement('div');
-        tabsContainer.className = 'bookmark-tabs-container';
-
-        // Create a tab for each quote (max 3)
-        const maxTabs = Math.min(book.quotes.length, 3);
-
-        // Shuffle or Random start for variety so not all first tabs are pink
-        const startColorIndex = Math.floor(Math.random() * bookmarkColors.length);
-
-        for (let i = 0; i < maxTabs; i++) {
-            const quote = book.quotes[i];
-            // Use random start index + i to cycle through colors
-            const colorName = bookmarkColors[(startColorIndex + i) % bookmarkColors.length];
-            const colorVar = colorVars[colorName];
-
-            const tab = document.createElement('div');
-            tab.className = `bookmark-tab color-${colorName}`;
-            tab.style.setProperty('--bookmark-color', colorVar);
-
-            // Create the popup
-            const popup = document.createElement('div');
-            popup.className = 'bookmark-quote-popup';
-            popup.style.setProperty('--bookmark-color', colorVar);
-            popup.innerHTML = `
-                <span class="quote-mark">"</span>
-                <div class="quote-text">${quote}</div>
-                <div class="quote-source">${book.author || book.title}</div>
-            `;
-
-            tab.appendChild(popup);
-
-            // Prevent tab hover from triggering book click
-            tab.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-
-            tabsContainer.appendChild(tab);
-        }
-
-        scene.appendChild(tabsContainer);
-    }
     scene.addEventListener('click', (e) => {
         // Prevent opening if we just finished dragging
         if (state.wasDragging) {
@@ -1161,10 +723,10 @@ function openLightbox(book) {
     // Meta: Author | Publisher | Year
     DOM.lbMeta.innerHTML = `
         <span class="font-medium text-[#3E2723]">${book.author}</span>
-        <span class="text-[#3E2723]/30">|</span>
-        <span>${book.publisher}</span>
-        <span class="text-[#3E2723]/30">|</span>
-        <span>${book.year}</span>
+        <span class="text-[#3E2723]">|</span>
+        <span class="text-[#3E2723] font-medium">${book.publisher}</span>
+        <span class="text-[#3E2723]">|</span>
+        <span class="text-[#3E2723] font-medium">${book.year}</span>
     `;
 
     // Quote - Show only first quote, centered and elegant
@@ -1607,6 +1169,12 @@ async function openReaderPanel(book, bookNode = null) {
         state.currentPageIndex = 0;
         state.totalPages = state.pages.length;
         displayCurrentPages();
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
 
         // Store nextRef for loading more pages later
         state.nextRef = result.nextRef;
@@ -1642,6 +1210,12 @@ async function openReaderPanel(book, bookNode = null) {
             state.currentPageIndex = 0;
             state.totalPages = state.pages.length;
             displayCurrentPages();
+            // Trigger Swipe Tutorial (if first time)
+            if (!state.readerTutorialShown) {
+                setTimeout(() => {
+                    playReaderSwipeTutorial();
+                }, 1000);
+            }
             DOM.readerError.classList.add('hidden');
         } else {
             DOM.readerError.classList.remove('hidden');
@@ -1660,19 +1234,51 @@ async function openReaderPanel(book, bookNode = null) {
         state.currentPageIndex = 0;
         state.totalPages = state.pages.length;
         displayCurrentPages();
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
     } else {
         // Hide navigation for no-source books
         if (DOM.readerNav) {
             DOM.readerNav.classList.add('hidden');
         }
 
-        // No external source - show summary
         DOM.readerSpinner.classList.add('hidden');
 
-        const summaryContent = `
-            <div style="padding: 20px 0;">
-                <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 16px;">תקציר</h2>
-                <p>${book.summary}</p>
+        // Check if book has absolutely no content source
+        const hasNoContent = !book.sefariaRef && !book.wikisourcePage && !book.bookContent;
+
+        let summaryContent = `
+            <div class="summary-container" style="padding: 2rem; direction: rtl; text-align: right;">
+                <h2 style="font-family: var(--font-heading); color: var(--color-maroon); margin-bottom: 20px;">${book.title}</h2>
+                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 2rem;">
+                    ${book.summary}
+                </p>
+                
+                ${hasNoContent ? `
+                <div class="no-content-message" style="
+                    margin: 40px 0;
+                    padding: 20px;
+                    background: rgba(62, 39, 35, 0.05);
+                    border-radius: 8px;
+                    border: 1px dashed var(--color-maroon);
+                    text-align: center;
+                    font-weight: bold;
+                    color: var(--color-maroon);
+                ">
+                    <p>לצערנו לספר זה אין כרגע גישה, מוזמנים להמשיך לעיין</p>
+                </div>
+                ` : ''}
+
                 ${book.quotes && book.quotes.length > 0 ? `
                     <h3 style="font-family: var(--font-heading); font-size: 1.2rem; margin-top: 32px; margin-bottom: 12px;">ציטוטים</h3>
                     <blockquote style="border-right: 3px solid rgba(62, 39, 35, 0.2); padding-right: 16px; font-style: italic;">
@@ -1687,7 +1293,21 @@ async function openReaderPanel(book, bookNode = null) {
         state.pages = paginateContent(summaryContent);
         state.currentPageIndex = 0;
         state.totalPages = state.pages.length;
+        state.totalPages = state.pages.length;
         displayCurrentPages();
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
+    }
+
+    // Trigger Swipe Tutorial (if first time)
+    if (!state.readerTutorialShown) {
+        setTimeout(() => {
+            playReaderSwipeTutorial();
+        }, 1000);
     }
 }
 
@@ -2000,6 +1620,7 @@ DOM.searchInput.addEventListener('blur', () => {
     }, 200);
 });
 
+
 // Sidebar Open/Close Logic
 function openSidebar() {
     state.sidebarOpen = true;
@@ -2015,32 +1636,24 @@ function closeSidebar() {
     }
 }
 
-// Event Listeners for Legacy Overlay Sidebar (null checks for new layout)
-if (DOM.navTrigger) {
-    DOM.navTrigger.addEventListener('mouseenter', () => {
-        openSidebar();
-    });
-}
-
-// Auto-Close on Mouse Leave (Container includes Trigger + Panel)
-if (DOM.navDrawerContainer) {
-    DOM.navDrawerContainer.addEventListener('mouseleave', () => {
-        closeSidebar();
-    });
-}
-
-if (DOM.navTrigger) {
-    DOM.navTrigger.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent immediate closing
-        openSidebar();
+// Menu Toggle Button
+const menuToggle = document.getElementById('menu-toggle');
+if (menuToggle) {
+    menuToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (state.sidebarOpen) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
     });
 }
 
 // Close on Click Outside
 window.addEventListener('click', (e) => {
     if (state.sidebarOpen && DOM.sidebarPanel) {
-        // If click is NOT inside sidebar and NOT inside trigger
-        if (!DOM.sidebarPanel.contains(e.target) && (!DOM.navTrigger || !DOM.navTrigger.contains(e.target))) {
+        // If click is NOT inside sidebar and NOT inside menu button
+        if (!DOM.sidebarPanel.contains(e.target) && (!menuToggle || !menuToggle.contains(e.target))) {
             closeSidebar();
         }
     }
@@ -2240,6 +1853,8 @@ function playTutorialAnimation() {
     tutorialCursor.style.top = '50%';
 
     // Start the animation sequence
+    tutorialCursor.style.animation = 'tutorialSequence 3.5s ease-in-out forwards';
+
     setTimeout(() => {
         tutorialCursor.classList.add('active');
 
@@ -2331,13 +1946,75 @@ function playTutorialAnimation() {
             tutorialHint.style.opacity = '0';
         }
         tutorialCursor.style.opacity = '0';
-    }, 4800);
+    }, 5800);
 
     setTimeout(() => {
         tutorialOverlay.classList.add('hidden');
         tutorialCursor.classList.remove('active');
         tutorialCursor.style.transition = '';
-    }, 5500);
+    }, 6500);
+
+}
+
+/**
+ * Play Swipe Tutorial for Reader
+ */
+function playReaderSwipeTutorial() {
+    if (!tutorialOverlay || !tutorialCursor) return;
+
+    state.readerTutorialShown = true; // Mark as shown
+
+    // Show the tutorial overlay
+    tutorialOverlay.classList.remove('hidden');
+    tutorialCursor.style.animation = 'none'; // Reset any CSS anim
+    tutorialCursor.style.transition = 'left 1.2s ease-in-out, top 1.2s ease-in-out, opacity 0.5s ease';
+
+    // Position cursor in center
+    tutorialCursor.style.left = '30%'; // Start Left (RTL Next Page gesture starts left, swipes right)
+    tutorialCursor.style.top = '50%';
+
+    // Reveal
+    setTimeout(() => {
+        tutorialCursor.classList.add('active'); // opacity 1
+        if (tutorialHint) {
+            tutorialHint.innerText = 'גרור לדפדוף';
+            tutorialHint.style.opacity = '1';
+        }
+    }, 100);
+
+    // Simulate Press
+    setTimeout(() => {
+        tutorialCursor.classList.add('pressed');
+    }, 800);
+
+    // Drag Left (Next Page in RTL usually requires dragging Right->Left? Or Left->Right?)
+    // Wait, Dragging Page content to the Right usually reveals the Left page (Previous).
+    // Dragging Content Left reveals Right page (Next).
+    // But earlier logic: Drag Right -> Next Page (User Request/Code?)
+    // Code says: "if (deltaX > 0) nextPage()". YES.
+    // So Drag Right -> Next Page.
+    // So cursor should move Right.
+
+    // Drag Right (Left -> Right) to go Next Page
+    setTimeout(() => {
+        tutorialCursor.style.left = '80%'; // Move to Right
+    }, 1200);
+
+    // Release
+    setTimeout(() => {
+        tutorialCursor.classList.remove('pressed');
+    }, 2400);
+
+    // Hide
+    setTimeout(() => {
+        tutorialCursor.classList.remove('active');
+        if (tutorialHint) tutorialHint.style.opacity = '0';
+
+        // Hide overlay
+        setTimeout(() => {
+            tutorialOverlay.classList.add('hidden');
+        }, 500);
+    }, 3000);
 }
 
 /**
@@ -2527,8 +2204,113 @@ initWorld();
 /* =========================================
    Landing Page Scroll Logic
    ========================================= */
+/* =========================================
+   Image Preloading System
+   ========================================= */
+let allImagesLoaded = false;
+
+function preloadAllBookCovers() {
+    // Get all unique cover images from BOOKS_DATA
+    const coverImages = BOOKS_DATA.map(book => book.cover);
+    const uniqueCovers = [...new Set(coverImages)];
+
+    let loadedCount = 0;
+    const totalImages = uniqueCovers.length;
+
+    console.log(`Preloading ${totalImages} book covers...`);
+
+    return new Promise((resolve) => {
+        if (totalImages === 0) {
+            resolve();
+            return;
+        }
+
+        uniqueCovers.forEach(coverSrc => {
+            const img = new Image();
+
+            img.onload = () => {
+                loadedCount++;
+                console.log(`Loaded ${loadedCount}/${totalImages}: ${coverSrc}`);
+
+                if (loadedCount === totalImages) {
+                    console.log('All book covers loaded successfully!');
+                    allImagesLoaded = true;
+                    resolve();
+                }
+            };
+
+            img.onerror = () => {
+                loadedCount++;
+                console.warn(`Failed to load: ${coverSrc}`);
+
+                // Still count as "loaded" to not block the site
+                if (loadedCount === totalImages) {
+                    console.log('All book covers processed (some may have failed)');
+                    allImagesLoaded = true;
+                    resolve();
+                }
+            };
+
+            img.src = coverSrc;
+        });
+    });
+}
+
+// Start preloading images when script loads
+preloadAllBookCovers().then(() => {
+    console.log('Image preloading complete - site ready');
+    // Enable enter library button if it exists
+    if (DOM.enterLibrary) {
+        DOM.enterLibrary.disabled = false;
+        DOM.enterLibrary.style.opacity = '1';
+        DOM.enterLibrary.style.cursor = 'pointer';
+    }
+});
+
+// Disable enter library button initially
+if (DOM.enterLibrary) {
+    DOM.enterLibrary.disabled = true;
+    DOM.enterLibrary.style.opacity = '0.5';
+    DOM.enterLibrary.style.cursor = 'wait';
+}
+
+/* =========================================
+   Landing Page Scroll Logic
+   ========================================= */
+let isEnteringLibrary = false;
+
+function triggerEnterLibrary() {
+    // Don't allow entry until images are loaded
+    if (!allImagesLoaded) {
+        console.log('Please wait for images to load...');
+        return;
+    }
+
+    if (isEnteringLibrary) return;
+    isEnteringLibrary = true;
+
+    // Fade out landing page
+    if (DOM.landingPage) {
+        DOM.landingPage.style.transition = 'opacity 0.8s ease-out';
+        DOM.landingPage.style.opacity = '0';
+
+        setTimeout(() => {
+            DOM.landingPage.style.display = 'none';
+
+            // Show canvas
+            if (DOM.canvas) {
+                DOM.canvas.style.visibility = 'visible';
+                DOM.canvas.style.opacity = '1';
+            }
+
+            // Play tutorial
+            playTutorialAnimation();
+        }, 800);
+    }
+}
+
 if (DOM.landingPage) {
-    // 1. Title Shrink on Scroll
+    // 1. Title Shrink on Scroll & Scroll-to-Enter
     DOM.landingPage.addEventListener('scroll', () => {
         const scrollY = DOM.landingPage.scrollTop;
         const maxScroll = window.innerHeight * 0.5; // Shrink over first half of screen
@@ -2542,6 +2324,15 @@ if (DOM.landingPage) {
         }
         if (DOM.landingSubtitle) {
             DOM.landingSubtitle.style.opacity = 1 - progress;
+        }
+
+        // SCROLL TO ENTER TRIGGER
+        // If user is near the bottom (within 100px), trigger entry
+        if (DOM.landingPage.scrollTop + DOM.landingPage.clientHeight >= DOM.landingPage.scrollHeight - 100) {
+            // Only trigger if images are loaded
+            if (allImagesLoaded) {
+                triggerEnterLibrary();
+            }
         }
     });
 
@@ -2568,26 +2359,7 @@ if (DOM.landingPage) {
    Enter Library Button Handler
    ========================================= */
 if (DOM.enterLibrary) {
-    DOM.enterLibrary.addEventListener('click', () => {
-        // Fade out landing page
-        if (DOM.landingPage) {
-            DOM.landingPage.style.transition = 'opacity 0.8s ease-out';
-            DOM.landingPage.style.opacity = '0';
-
-            setTimeout(() => {
-                DOM.landingPage.style.display = 'none';
-
-                // Show canvas
-                if (DOM.canvas) {
-                    DOM.canvas.style.visibility = 'visible';
-                    DOM.canvas.style.opacity = '1';
-                }
-
-                // Play tutorial
-                playTutorialAnimation();
-            }, 800);
-        }
-    });
+    DOM.enterLibrary.addEventListener('click', triggerEnterLibrary);
 }
 
 /* =========================================
@@ -2695,159 +2467,149 @@ if (introLink) {
 }
 
 /* =========================================
-   Floating Quote Notes - Landing Page
+   Zoom System - Mouse Wheel Zoom for Library
    ========================================= */
-const floatingQuotesContainer = document.getElementById('floating-quotes');
 
-// Hebrew texts to fetch quotes from (using Sefaria API)
-const QUOTE_SOURCES = [
-    { ref: 'Pirkei Avot 1:1', name: 'פרקי אבות א׳:א׳' },
-    { ref: 'Pirkei Avot 2:5', name: 'פרקי אבות ב׳:ה׳' },
-    { ref: 'Ecclesiastes 1:2', name: 'קהלת א׳:ב׳' },
-    { ref: 'Ecclesiastes 3:1', name: 'קהלת ג׳:א׳' },
-    { ref: 'Psalms 23:1', name: 'תהלים כ״ג:א׳' },
-    { ref: 'Psalms 121:1', name: 'תהלים קכ״א:א׳' },
-    { ref: 'Proverbs 1:7', name: 'משלי א׳:ז׳' },
-    { ref: 'Genesis 1:1', name: 'בראשית א׳:א׳' }
-];
+// Apply zoom to the world/canvas
+function applyZoom() {
+    if (!DOM.world) return;
 
-// Fallback quotes if API fails
-const FALLBACK_QUOTES = [
-    { text: 'עשה לך רב, וקנה לך חבר', source: 'פרקי אבות א׳:ו׳' },
-    { text: 'אם אין אני לי מי לי, וכשאני לעצמי מה אני', source: 'פרקי אבות א׳:י״ד' },
-    { text: 'הכל צפוי והרשות נתונה', source: 'פרקי אבות ג׳:ט״ו' },
-    { text: 'לא עליך המלאכה לגמור', source: 'פרקי אבות ב׳:ט״ז' },
-    { text: 'הבל הבלים הכל הבל', source: 'קהלת א׳:ב׳' },
-    { text: 'ה׳ רועי לא אחסר', source: 'תהלים כ״ג:א׳' },
-    { text: 'והיו הדברים האלה אשר אנכי מצוך היום', source: 'דברים ו׳:ו׳' },
-    { text: 'בראשית ברא אלהים את השמים ואת הארץ', source: 'בראשית א׳:א׳' },
-    { text: 'שמע ישראל ה׳ אלהינו ה׳ אחד', source: 'דברים ו׳:ד׳' },
-    { text: 'ואהבת לרעך כמוך', source: 'ויקרא י״ט:י״ח' },
-    { text: 'צדק צדק תרדוף', source: 'דברים ט״ז:כ׳' },
-    { text: 'דע מאין באת ולאן אתה הולך', source: 'פרקי אבות ג׳:א׳' },
-    { text: 'איזהו חכם הלומד מכל אדם', source: 'פרקי אבות ד׳:א׳' },
-    { text: 'הסתכל בשלושה דברים', source: 'פרקי אבות ג׳:א׳' },
-    { text: 'אל תסתכל בקנקן אלא במה שיש בו', source: 'פרקי אבות ד׳:כ׳' },
-    { text: 'יפה שעה אחת בתשובה ומעשים טובים', source: 'פרקי אבות ד׳:י״ז' }
-];
-
-// Positions grid covering the entire screen (avoiding center)
-const NOTE_POSITIONS = [
-    // Top row
-    { top: '3vh', left: '2%' },
-    { top: '5vh', left: '18%' },
-    { top: '8vh', right: '20%' },
-    { top: '4vh', right: '3%' },
-    // Upper middle
-    { top: '20vh', left: '5%' },
-    { top: '25vh', right: '8%' },
-    { top: '22vh', left: '25%' },
-    { top: '18vh', right: '25%' },
-    // Middle edges (avoiding center title area)
-    { top: '40vh', left: '1%' },
-    { top: '45vh', right: '1%' },
-    { top: '50vh', left: '8%' },
-    { top: '48vh', right: '10%' },
-    // Lower middle
-    { top: '60vh', left: '3%' },
-    { top: '62vh', right: '5%' },
-    { top: '58vh', left: '22%' },
-    { top: '65vh', right: '22%' },
-    // Bottom row (Hero)
-    { top: '78vh', left: '5%' },
-    { top: '80vh', left: '25%' },
-    { top: '75vh', right: '25%' },
-    { top: '82vh', right: '5%' },
-
-    // --- Introduction Section (100vh - 200vh) ---
-    // Reduced count, slightly closer to text
-    { top: '110vh', left: '6%' },
-    { top: '130vh', right: '5%' },
-    { top: '150vh', left: '8%' },
-    { top: '170vh', right: '7%' },
-    { top: '185vh', left: '5%' }
-];
-
-// Create a floating quote note element
-function createQuoteNote(quote, index) {
-    const note = document.createElement('div');
-    note.className = 'floating-quote-note';
-
-    // Position from grid
-    const pos = NOTE_POSITIONS[index]; // Use exact index since we iterate positions
-    if (pos.left) note.style.left = pos.left;
-    if (pos.right) note.style.right = pos.right;
-    note.style.top = pos.top;
-
-    // Random rotation (-6 to +6 degrees)
-    const rotation = (Math.random() - 0.5) * 12;
-    note.style.setProperty('--rotation', `${rotation}deg`);
-
-    // Random animation delay
-    note.style.animationDelay = `${Math.random() * 10}s`;
-
-    // Vary sizes slightly
-    const sizeVariation = 0.8 + Math.random() * 0.4; // 0.8 to 1.2
-    note.style.transform = `scale(${sizeVariation})`;
-
-    note.innerHTML = `
-        <div class="quote-text">${quote.text}</div>
-        <div class="quote-source">${quote.source}</div>
-    `;
-
-    return note;
+    DOM.world.style.transform = `scale(${state.zoom})`;
+    DOM.world.style.transformOrigin = 'center center';
+    DOM.world.style.transition = 'transform 0.2s ease-out'; // Smooth zoom transition
 }
 
-// Fetch quote from Sefaria API
-async function fetchSefariaQuote(ref) {
-    try {
-        const response = await fetch(`https://www.sefaria.org/api/texts/${encodeURIComponent(ref)}?context=0&pad=0`);
-        if (!response.ok) throw new Error('API error');
-        const data = await response.json();
+// Handle zoom with mouse wheel
+function handleLibraryZoom(e) {
+    // Only zoom when library is visible (not on landing page or reader)
+    const landingPage = document.getElementById('landing-page');
+    const readerPanel = document.getElementById('reader-panel');
 
-        // Get Hebrew text
-        let hebrewText = data.he;
-        if (Array.isArray(hebrewText)) {
-            hebrewText = hebrewText[0];
-        }
-
-        // Clean HTML tags and limit length
-        hebrewText = hebrewText.replace(/<[^>]*>/g, '');
-        if (hebrewText.length > 100) {
-            hebrewText = hebrewText.substring(0, 100) + '...';
-        }
-
-        return hebrewText;
-    } catch (error) {
-        console.log('Sefaria API error:', error);
-        return null;
+    // Skip if landing page is visible or reader is open
+    if (landingPage && landingPage.style.display !== 'none' && landingPage.style.opacity !== '0') {
+        return;
     }
+    if (readerPanel && readerPanel.classList.contains('open')) {
+        return;
+    }
+
+    e.preventDefault();
+
+    // Calculate zoom change
+    const zoomSpeed = 0.03; // 3% per wheel tick for smoother control
+    const delta = e.deltaY > 0 ? -zoomSpeed : zoomSpeed; // Scroll down = zoom out
+
+    // Update zoom with limits
+    const newZoom = state.zoom + delta;
+    state.zoom = Math.max(0.7, Math.min(1.5, newZoom)); // Clamp between 70% and 150%
+
+    // Apply zoom
+    applyZoom();
 }
 
-// Initialize floating quotes
-async function initFloatingQuotes() {
-    if (!floatingQuotesContainer) return;
+// Attach zoom listener to canvas
+if (DOM.canvas) {
+    DOM.canvas.addEventListener('wheel', handleLibraryZoom, { passive: false });
+}
 
-    // Use more quotes to fill the screen
-    const quotes = FALLBACK_QUOTES;
+/* =========================================
+   Parallax Book Covers - Landing Page Background
+   ========================================= */
+const parallaxCoversContainer = document.getElementById('parallax-covers');
 
-    // Iterate over POSITIONS instead of quotes to ensure we fill all spots
-    NOTE_POSITIONS.forEach((pos, index) => {
-        // Cycle through quotes if we have more positions than quotes
-        const quote = quotes[index % quotes.length];
+// Positions for book covers (spread across the viewport)
+const COVER_POSITIONS = [
+    // Hero section (0-100vh)
+    { top: '10vh', left: '5%', rotation: -8 },
+    { top: '15vh', right: '8%', rotation: 12 },
+    { top: '30vh', left: '12%', rotation: 5 },
+    { top: '35vh', right: '15%', rotation: -10 },
+    { top: '55vh', left: '8%', rotation: 15 },
+    { top: '60vh', right: '10%', rotation: -5 },
+    { top: '75vh', left: '15%', rotation: 8 },
+    { top: '80vh', right: '12%', rotation: -12 },
 
-        const note = createQuoteNote(quote, index);
-        floatingQuotesContainer.appendChild(note);
+    // Introduction section (100vh-200vh)
+    { top: '110vh', left: '10%', rotation: -15 },
+    { top: '120vh', right: '8%', rotation: 10 },
+    { top: '135vh', left: '12%', rotation: -8 },
+    { top: '145vh', right: '15%', rotation: 12 },
+    { top: '160vh', left: '8%', rotation: 5 },
+    { top: '170vh', right: '10%', rotation: -10 },
+    { top: '185vh', left: '15%', rotation: 15 }
+];
 
-        // Fade in with staggered delay
+function createParallaxCover(coverSrc, position, index) {
+    const cover = document.createElement('div');
+    cover.className = 'parallax-cover';
+    cover.dataset.parallaxSpeed = (0.3 + Math.random() * 0.4).toFixed(2); // Random speed 0.3-0.7
+
+    // Position
+    if (position.left) cover.style.left = position.left;
+    if (position.right) cover.style.right = position.right;
+    cover.style.top = position.top;
+
+    // Rotation
+    cover.style.transform = `rotate(${position.rotation}deg)`;
+
+    // Create image
+    const img = document.createElement('img');
+    img.src = coverSrc;
+    img.alt = 'Book cover';
+    img.loading = 'lazy';
+
+    cover.appendChild(img);
+
+    return cover;
+}
+
+function initParallaxCovers() {
+    if (!parallaxCoversContainer || !BOOKS_DATA || BOOKS_DATA.length === 0) return;
+
+    // Select random covers from BOOKS_DATA
+    const shuffledBooks = [...BOOKS_DATA].sort(() => Math.random() - 0.5);
+
+    COVER_POSITIONS.forEach((position, index) => {
+        // Cycle through shuffled books
+        const book = shuffledBooks[index % shuffledBooks.length];
+        const cover = createParallaxCover(book.cover, position, index);
+
+        parallaxCoversContainer.appendChild(cover);
+
+        // Fade in with stagger
         setTimeout(() => {
-            note.classList.add('visible');
-        }, 300 + index * 150);
+            cover.classList.add('visible');
+        }, 200 + index * 100);
     });
 }
 
-// Start loading quotes when page loads
-initFloatingQuotes();
+// Parallax scroll effect
+function updateParallaxCovers() {
+    const landingPage = document.getElementById('landing-page');
+    if (!landingPage) return;
+
+    const scrollY = landingPage.scrollTop;
+    const covers = document.querySelectorAll('.parallax-cover');
+
+    covers.forEach(cover => {
+        const speed = parseFloat(cover.dataset.parallaxSpeed);
+        const yOffset = scrollY * speed;
+        const rotation = cover.style.transform.match(/rotate\(([^)]+)\)/)[1];
+
+        cover.style.transform = `translateY(${yOffset}px) rotate(${rotation})`;
+    });
+}
+
+// Initialize covers when page loads
+if (parallaxCoversContainer) {
+    initParallaxCovers();
+
+    // Attach scroll listener
+    const landingPage = document.getElementById('landing-page');
+    if (landingPage) {
+        landingPage.addEventListener('scroll', updateParallaxCovers);
+    }
+}
 
 /* =========================================
    Book Hover Quotes - Floating Notes on Hover
@@ -3215,6 +2977,12 @@ function nextPage() {
         state.currentPageIndex++;
         console.log('Moving to page:', state.currentPageIndex);
         displayCurrentPages();
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
 
         // Check if we need to load more content (Trigger when 2 spreads from end)
         if (state.currentPageIndex >= totalSpreads - 2) {
@@ -3235,6 +3003,12 @@ function prevPage() {
         state.currentPageIndex--;
         console.log('Moving to page:', state.currentPageIndex);
         displayCurrentPages();
+        // Trigger Swipe Tutorial (if first time)
+        if (!state.readerTutorialShown) {
+            setTimeout(() => {
+                playReaderSwipeTutorial();
+            }, 1000);
+        }
     } else {
         console.log('Already at first page');
     }
@@ -3250,114 +3024,130 @@ function initPageNavigation() {
 
     if (!readerPanel) return;
 
-    console.log('initPageNavigation: Initializing page navigation...');
+    console.log('initPageNavigation: Initializing page navigation (Swipe/Drag Mode)...');
 
-    // Track scroll debounce
-    let scrollDebounce = false;
+    // Remove Visual Click Cues & Custom Cursor Logic
+    const pageRight = document.getElementById('page-right');
+    const pageLeft = document.getElementById('page-left');
 
-    // Helper function for wheel handling
-    function handleWheel(e) {
-        // Only handle when reader is open
-        if (!readerPanel.classList.contains('open')) {
-            return;
-        }
+    // We no longer overwrite cursor with 'grab'
+    // The custom cursor will be visible naturally due to global 'cursor: none'
 
-        console.log('Wheel event on reader panel. DeltaY:', e.deltaY);
-
-        // Prevent default scrolling
-        e.preventDefault();
-        e.stopPropagation();
-
-        // Debounce to prevent rapid page flipping
-        if (scrollDebounce) {
-            return;
-        }
-        scrollDebounce = true;
-        setTimeout(() => scrollDebounce = false, 400);
-
-        // Check if cover is still visible
-        const coverHidden = readerPanel.classList.contains('cover-hidden');
-
-        if (!coverHidden) {
-            // First scroll: hide cover
-            console.log('Hiding cover');
-            readerPanel.classList.add('cover-hidden');
-            return;
-        }
-
-        // Subsequent scrolls: change pages
-        // Scroll down = advance in book, scroll up = go back
-        if (e.deltaY > 0) {
-            // Scroll down = next page (advance)
-            nextPage();
-        } else if (e.deltaY < 0) {
-            // Scroll up = previous page (go back)
-            prevPage();
-        }
+    if (pageRight) {
+        pageRight.title = 'גרור לדפדוף';
+        // Remove manual cursor override so custom cursor shows
+        pageRight.style.cursor = '';
+    }
+    if (pageLeft) {
+        pageLeft.title = 'גרור לדפדוף';
+        pageLeft.style.cursor = '';
     }
 
-    // Listen on the entire reader panel
-    // Use capture: true to ensure we get the event before children consume it if necessary,
-    // though bubbling usually works unless stopped.
+    // Handle Wheel for hiding cover (Keep existing logic)
+    function handleWheel(e) {
+        if (!readerPanel.classList.contains('open')) return;
+
+        const coverHidden = readerPanel.classList.contains('cover-hidden');
+        if (!coverHidden && e.deltaY > 0) {
+            readerPanel.classList.add('cover-hidden');
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+        if (coverHidden && e.deltaY < 0 && state.currentPageIndex === 0) {
+            readerPanel.classList.remove('cover-hidden');
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }
     readerPanel.addEventListener('wheel', handleWheel, { passive: false });
-    console.log('initPageNavigation: Event listener attached to reader-panel');
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (!readerPanel.classList.contains('open')) return;
-
-        if (e.key === 'ArrowLeft') {
-            nextPage(); // RTL: left arrow = next
-        } else if (e.key === 'ArrowRight') {
-            prevPage(); // RTL: right arrow = prev
-        } else if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-            nextPage();
-        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-            prevPage();
-        }
+        if (e.key === 'ArrowLeft') nextPage();
+        else if (e.key === 'ArrowRight') prevPage();
+        else if (e.key === 'ArrowDown' || e.key === 'PageDown') nextPage();
+        else if (e.key === 'ArrowUp' || e.key === 'PageUp') prevPage();
     });
 
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchStartY = 0;
+    // Unified Swipe/Drag Logic
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let currentX = 0;
 
-    readerContent.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
+    // Helper to handle swipe end
+    const handleSwipeEnd = (deltaX, deltaY) => {
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        const threshold = 50; // Minimum drag distance
 
-    readerContent.addEventListener('touchend', (e) => {
-        if (!state.readerOpen) return;
-
-        const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = touchEndY - touchStartY;
-
-        // Vertical swipe
-        if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
+        // Vertical Swipe (Dismiss Cover)
+        if (absY > absX && absY > threshold) {
             const coverHidden = readerPanel.classList.contains('cover-hidden');
-
             if (!coverHidden) {
                 readerPanel.classList.add('cover-hidden');
                 return;
             }
-
-            if (deltaY < 0) {
-                nextPage(); // Swipe up = next
-            } else {
-                prevPage(); // Swipe down = prev
-            }
+            // Optional: Swipe up/down for pages?
+            // if (deltaY < 0) nextPage(); else prevPage();
         }
-        // Horizontal swipe (RTL)
-        else if (Math.abs(deltaX) > 50) {
+        // Horizontal Swipe (Page Turn)
+        else if (absX > threshold) {
             if (deltaX > 0) {
-                nextPage(); // Swipe right = next (RTL)
+                // Drag Right -> Next Page (in RTL context)
+                nextPage();
             } else {
-                prevPage(); // Swipe left = prev (RTL)
+                // Drag Left -> Prev Page
+                prevPage();
             }
         }
+    };
+
+    // --- Mouse Events ---
+    readerContent.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        readerContent.style.cursor = 'grabbing';
+
+        // Update child cursors too
+        if (pageRight) pageRight.style.cursor = 'grabbing';
+        if (pageLeft) pageLeft.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault(); // Prevent text selection
+        currentX = e.clientX;
+    });
+
+    window.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        readerContent.style.cursor = 'default';
+        if (pageRight) pageRight.style.cursor = 'grab';
+        if (pageLeft) pageLeft.style.cursor = 'grab';
+
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
+        handleSwipeEnd(deltaX, deltaY);
+    });
+
+    // --- Touch Events ---
+    readerContent.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    readerContent.addEventListener('touchend', (e) => {
+        if (!state.readerOpen) return;
+        const touchEndX = e.changedTouches[0].clientX;
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - startX;
+        const deltaY = touchEndY - startY;
+        handleSwipeEnd(deltaX, deltaY);
     }, { passive: true });
 }
 

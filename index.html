@@ -43,42 +43,62 @@
 
 <body class="bg-cream text-maroon overflow-hidden h-screen w-screen select-none font-sans">
 
-    <!-- Arrange Mode Toggle (FAB - Bottom Left) -->
-    <button id="view-toggle"
-        class="fixed bottom-8 left-8 z-50 w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
-        aria-label="Toggle Arrange Mode">
-        <!-- Move Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="group-hover:scale-110 transition-transform">
-            <polyline points="5 9 2 12 5 15"></polyline>
-            <polyline points="9 5 12 2 15 5"></polyline>
-            <polyline points="15 19 12 22 9 19"></polyline>
-            <polyline points="19 9 22 12 19 15"></polyline>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <line x1="12" y1="2" x2="12" y2="22"></line>
-        </svg>
-        <!-- Tooltip -->
-        <span
-            class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">סדר
-            ספרים</span>
-    </button>
+    <!-- Unified Control Panel (Right Side Center) -->
+    <div id="control-panel" class="fixed right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4">
+        <!-- Menu Toggle (Hamburger) -->
+        <button id="menu-toggle"
+            class="w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+            aria-label="תפריט">
+            <!-- Hamburger Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="group-hover:scale-110 transition-transform">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <!-- Tooltip -->
+            <span
+                class="absolute right-full mr-3 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">תפריט</span>
+        </button>
 
-    <!-- Night Mode Toggle (FAB - Bottom Left, second button) -->
-    <button id="night-mode-toggle"
-        class="fixed bottom-8 left-24 z-50 w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
-        aria-label="Toggle Night Mode">
-        <!-- Moon Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="group-hover:scale-110 transition-transform">
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
-        <!-- Tooltip -->
-        <span
-            class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">מצב
-            לילה</span>
-    </button>
+        <!-- Arrange Mode Toggle -->
+        <button id="view-toggle"
+            class="w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+            aria-label="סדר ספרים">
+            <!-- Move Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="group-hover:scale-110 transition-transform">
+                <polyline points="5 9 2 12 5 15"></polyline>
+                <polyline points="9 5 12 2 15 5"></polyline>
+                <polyline points="15 19 12 22 9 19"></polyline>
+                <polyline points="19 9 22 12 19 15"></polyline>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <line x1="12" y1="2" x2="12" y2="22"></line>
+            </svg>
+            <!-- Tooltip -->
+            <span
+                class="absolute right-full mr-3 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">סדר
+                ספרים</span>
+        </button>
+
+        <!-- Night Mode Toggle -->
+        <button id="night-mode-toggle"
+            class="w-12 h-12 bg-[#3E2723] text-[#F9F5F0] rounded-full shadow-xl flex items-center justify-center hover:scale-110 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+            aria-label="מצב לילה">
+            <!-- Moon Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="group-hover:scale-110 transition-transform">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+            <!-- Tooltip -->
+            <span
+                class="absolute right-full mr-3 px-3 py-1.5 bg-[#3E2723] text-[#F9F5F0] text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">מצב
+                לילה</span>
+        </button>
+    </div>
 
     <!-- Candle Light Effect (follows cursor) -->
     <div id="candle-light" class="fixed pointer-events-none z-40 opacity-0 transition-opacity duration-500"></div>
@@ -91,9 +111,12 @@
     <div id="landing-page" class="fixed inset-0 z-[95] bg-cream overflow-y-auto">
         <div id="landing-content" class="relative min-h-full w-full">
 
-            <!-- Floating Quote Notes (Background - Scrolls with content) -->
-            <div id="floating-quotes" class="absolute inset-0 pointer-events-none overflow-hidden z-0">
-                <!-- Quote notes will be injected by JS -->
+            <!-- Book Shelf Silhouettes (Static Background) -->
+            <div id="shelf-silhouettes" class="fixed inset-0 pointer-events-none z-0">
+                <!-- Left shelf -->
+                <div class="shelf-left"></div>
+                <!-- Right shelf -->
+                <div class="shelf-right"></div>
             </div>
 
             <!-- Section 1: Hero Title (Full Screen) -->
@@ -120,40 +143,87 @@
             <!-- Section 2: Images & Story -->
             <section id="landing-story" class="min-h-screen flex flex-col items-center justify-start py-24 px-8">
 
-                <!-- Images Section -->
-                <div
-                    class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center mb-8 max-w-4xl intro-reveal">
-                    <div class="intro-image-container">
-                        <img src="library1.png" alt="הספרייה בבית הוריי" class="intro-image">
-                    </div>
-                    <div class="intro-image-container">
-                        <img src="library2.jpg" alt="הספרייה בבית הוריי" class="intro-image">
-                    </div>
-                </div>
 
-                <!-- Image Caption -->
-                <p class="text-xs text-maroon/40 font-sans mb-12 tracking-wide intro-reveal">הספרייה בבית הוריי</p>
 
-                <!-- Running Text -->
-                <div id="intro-text" dir="rtl"
-                    class="max-w-4xl text-right font-sans text-maroon/80 leading-loose text-base md:text-lg px-4 relative z-10">
-                    <p class="intro-paragraph">הספרייה היא מרכז הבית היהודי.</p>
-                    <p class="intro-paragraph">במשך דורות מה שחיבר אותנו לשורשים שלנו כעם היו הספרים - לא סתם אנו
-                        מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
-                    <p class="intro-paragraph">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
-                        הספרייה בסלון שמהווה את מרכז הבית. גם בשאר החדרים בבית בכל חדר ישנה <span
-                            class="whitespace-nowrap">ספרייה קטנה.</span></p>
-                    <p class="intro-paragraph">מהכניסה למערכת החינוך, הישיבות התיכוניות והמסגרות שאחריהן, ש"ס
-                        חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים והספרים שמכילים אותם הם חלק אינטגרלי
-                        מחיי היום יום של <span class="whitespace-nowrap">היהודי המאמין.</span></p>
-                    <p class="intro-paragraph">בפלטפורמה זו, אני רוצה ליצור ספרייה דיגיטלית שמיועדת לדור חדש של
-                        <span class="whitespace-nowrap">דתיים לאומיים.</span>
-                    </p>
-                    <p class="intro-paragraph">כאלה שמאמינים שלערכים אוניברסליים יש מקום לצד <span
-                            class="whitespace-nowrap">הערכיים התורניים.</span></p>
-                    <p class="intro-paragraph font-medium">כאלה ששמים דגש גם על התורה <span
-                            class="whitespace-nowrap">וגם על
-                            האדם.</span></p>
+                <!-- Integrated Intro Story with Images -->
+                <div class="intro-container max-w-2xl mx-auto px-4 relative z-10 flex flex-col gap-16 pb-20 mt-12">
+
+                    <!-- Text Part 1 -->
+                    <div
+                        class="intro-text space-y-6 text-center md:text-right font-sans text-maroon/80 leading-relaxed text-base md:text-lg">
+                        <p class="intro-paragraph">המחקר שלי התחיל מרצון לשים את אחד הקונפליקטים המרכזיים של המגזר כיום
+                            בפרונט.</p>
+
+                        <p class="intro-paragraph">הרבה צעירים דתיים היום מרגישים שעולם הערכים שלהם כבר לא בנוי אך ורק
+                            מערכים תורניים אלא מערכים גם מערביים אוניברסליים. עולם הערכים הזה משתקף במגוון מקומות בחיים,
+                            אבל אני בחרתי להתמקד דווקא בספרייה הביתית שיש לכל אדם דתי <span
+                                class="whitespace-nowrap">בבית.</span></p>
+
+                        <p class="intro-paragraph">הספרייה היא מרכז הבית היהודי. במשך דורות מה שחיבר אותנו לשורשים שלנו
+                            כעם היו הספרים - לא סתם אנו מכונים <span class="whitespace-nowrap">"עם הספר".</span></p>
+
+                        <p class="intro-paragraph">החוויה הדתית הולכת יד ביד עם ספרים. מהכניסה למערכת החינוך, הישיבות
+                            התיכוניות והמסגרות שאחריהן, שס חתנים וספרי ילדים, עד ספר סדר האזכרה שנאמר על הקבר, הטקסטים
+                            והספרים שמכילים אותם הם חלק אינטגרלי מחיי היום יום של היהודי המאמין ולכן הספרייה היא קודש
+                            הקודשים של <span class="whitespace-nowrap">הבית.</span></p>
+                    </div>
+
+                    <!-- Library Images Break -->
+                    <div class="flex flex-col items-center justify-center gap-4 intro-reveal w-full">
+                        <div class="flex flex-col md:flex-row gap-6 md:gap-10 items-center justify-center w-full">
+                            <div class="intro-image-container flex-1 max-w-sm">
+                                <img src="library1.png" alt="הספרייה בבית הוריי"
+                                    class="intro-image w-full h-auto rounded shadow-md">
+                            </div>
+                            <div class="intro-image-container flex-1 max-w-sm">
+                                <img src="library2.jpg" alt="הספרייה בבית הוריי"
+                                    class="intro-image w-full h-auto rounded shadow-md">
+                            </div>
+                        </div>
+                        <p class="text-xs text-maroon/40 font-sans tracking-wide">הספרייה בבית הוריי</p>
+                    </div>
+
+                    <!-- Text Part 2 -->
+                    <div
+                        class="intro-text space-y-6 text-center md:text-right font-sans text-maroon/80 leading-relaxed text-base md:text-lg">
+                        <p class="intro-paragraph">כשההורים שלי תיכננו את הבית שלהם, אחד הדברים שהם שמו עליהם דגש היה
+                            הספרייה בסלון וספריות בכלל.</p>
+
+                        <p class="intro-paragraph">בכל חדר ישנה ספרייה שגלמת בתוכה עולם ערכים שלם. איזה ספרים אני מכניס
+                            הביתה? איפה אני שם כל ספר? איפה הוא ממוקם על המדף? שאלות אלה מעצבות את החלל ואת הנוכחים בו.
+                        </p>
+
+                        <p class="intro-paragraph">ההחלטה על הספרייה בבית הפרטי שלך היא החלטה הרבה יותר גדולה מאשר החלטה
+                            ויזואלית, היא החלטה שמראה איזה ערכים חשובים לך, מה אתה שם במרכז החיים שלך. האם ספרי קודש
+                            וחול ישבו בערבוביה יחדיו על המדף? האם תהיה ספרייה נפרדת לכל ז'אנר?</p>
+
+                        <p class="intro-paragraph">לכן, בפרויקט זה, החלטתי ליצור פלטפורמה דיגיטלית שבה כל הספרים
+                            מעורבבים וחסרי היררכיה ברורה.</p>
+                    </div>
+
+                    <!-- Iggrot Image Break -->
+                    <div class="flex flex-col items-center justify-center gap-4 intro-reveal w-full">
+                        <div class="intro-image-container max-w-xs">
+                            <img src="iggrot_raayah_classic.png" alt="אגרות הראי&quot;ה בהוצאה קלאסית"
+                                class="intro-image w-full h-auto rounded shadow-md">
+                        </div>
+                        <p class="text-xs text-maroon/40 font-sans tracking-wide">אגרות הראי"ה בהוצאה קלאסית</p>
+                    </div>
+
+                    <!-- Text Part 3 (Split) -->
+                    <div
+                        class="intro-text space-y-6 text-center md:text-right font-sans text-maroon/80 leading-relaxed text-base md:text-lg">
+                        <p class="intro-paragraph">לקחתי 26 ספרים שבעיני מהווים את הקאנון התרבותי החדש של הדור
+                            שלי, ואותם עיצבתי מחדש בהתאם לעיצוב של אחד מסדרת ספרי היסוד של הציונות הדתית - הש"ס הלבן
+                            בהוצאת מוסד הרב קוק.</p>
+
+                        <p class="intro-paragraph">הכריכות האייקוניות האלה הן סמל ציוני דתי והן הרפרנס הויזואלי שלי
+                            ליצירה מחדש של הספרייה. ספרייה לדור שמאמין שלערכים הומניים יש מקום לצד הערכיים התורניים. דור
+                            שמחזיק ספרא וסייפא.</p>
+
+                        <p class="intro-paragraph">דור אמיץ שפורץ את גבולות היהדות הקלאסית ולוקח אותה למחוזות חדשים
+                            ונפלאים.</p>
+                    </div>
                 </div>
 
                 <!-- Enter Button -->
@@ -169,6 +239,9 @@
                     <span class="text-sm text-maroon/60 group-hover:text-maroon transition-colors font-medium">להיכנס
                         לספרייה</span>
                 </button>
+
+                <!-- Scroll Buffer -> Forces extra scrolling before entry trigger -->
+                <div class="h-[50vh] w-full"></div>
             </section>
         </div>
     </div>
@@ -180,79 +253,68 @@
         </div>
         <!-- Hint Text with Capsule Background -->
         <div id="tutorial-hint"
-            class="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-sm text-maroon/80 font-sans opacity-0 transition-opacity duration-500 bg-cream px-6 py-3 rounded-full shadow-lg border border-maroon/10">
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-lg text-maroon/90 font-sans opacity-0 transition-opacity duration-500 bg-cream px-8 py-4 rounded-full shadow-lg border border-maroon/10 font-bold tracking-wide">
             גרור כדי לחקור את המדף
         </div>
     </div>
 
     <!-- Background Texture -->
-    <div
-        class="fixed inset-0 pointer-events-none opacity-[0.03] z-0 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+    <!-- Background Texture -->
+    <div class="fixed inset-0 bg-grain">
     </div>
 
-    <!-- Immersive Navigation (Left Anchor) -->
-    <!-- Immersive Navigation (The Ethereal Reveal) -->
     <!-- Overlay Sidebar Navigation -->
-    <div id="nav-drawer-container" class="fixed right-0 top-0 h-full z-[60] flex items-center group">
 
-        <!-- Trigger Area (Click to Open) -->
-        <div id="nav-trigger"
-            class="absolute right-0 top-0 h-full w-[100px] flex items-center justify-end pr-8 cursor-pointer z-[50]">
-            <!-- The DOT Anchor -->
-            <div id="nav-dot" class="w-3 h-3 bg-maroon rounded-full transition-all duration-300">
+    <!-- Sidebar Panel (Overlay) -->
+    <!-- Translates in from right. Background solid cream to cover books. Border Left matches cursor. -->
+    <div id="sidebar-panel" dir="rtl"
+        class="fixed right-0 top-0 h-full w-[230px] bg-cream border-l-[1.5px] border-[#3E2723] transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center pr-8 pl-6 shadow-2xl text-right items-start z-[70]">
+
+        <div class="mb-10 text-right">
+            <h1 class="font-serif text-2xl font-bold text-maroon leading-none tracking-tight">הספריה</h1>
+            <p class="text-[9px] font-medium tracking-normal text-maroon/50 mt-2">ספרים לדור חדש</p>
+        </div>
+
+        <!-- Search & Filter Section -->
+        <div class="w-full mb-8 relative" dir="rtl">
+            <!-- Search Input -->
+            <div class="relative w-full flex items-center">
+                <input type="text" id="search-input" placeholder="חיפוש במדף..."
+                    class="w-full bg-transparent border-b border-[#3E2723] text-maroon placeholder-maroon/40 text-sm py-1 pl-12 pr-1 focus:outline-none focus:border-maroon/80 transition-colors text-right font-sans mb-6">
+
+                <!-- Reset Button: Positioned at end of input -->
+                <button id="reset-filter"
+                    class="hidden absolute left-0 bottom-7 text-[10px] font-bold text-maroon/60 hover:text-maroon transition-colors bg-transparent border-none cursor-pointer">
+                    נקה
+                </button>
+            </div>
+
+            <!-- Tag Cloud -->
+            <div id="tag-cloud-wrapper"
+                class="text-right overflow-hidden h-0 opacity-0 transition-all duration-500 ease-out">
+                <h3 class="text-[10px] font-bold text-maroon/60 mb-2 tracking-wide text-right">סינון לפי נושא:
+                </h3>
+                <div id="tag-cloud" class="flex flex-wrap justify-start gap-x-2 gap-y-2">
+                    <!-- Tags injected here -->
+                </div>
             </div>
         </div>
 
-        <!-- Sidebar Panel (Overlay) -->
-        <!-- Translates in from right. Background solid cream to cover books. Border Left matches cursor. -->
-        <div id="sidebar-panel" dir="rtl"
-            class="fixed right-0 top-0 h-full w-[230px] bg-cream border-l-[1.5px] border-[#3E2723] transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col justify-center pr-8 pl-6 shadow-2xl text-right items-start z-[70]">
+        <!-- Removed Category Navigation -->
 
-            <div class="mb-10 text-right">
-                <h1 class="font-serif text-2xl font-bold text-maroon leading-none tracking-tight">הספריה</h1>
-                <p class="text-[9px] font-medium tracking-normal text-maroon/50 mt-2">ספרים לדור חדש</p>
-            </div>
+        <div class="mt-16 border-t border-maroon/10 pt-6 text-right">
+            <a href="#" id="intro-link"
+                class="block text-xs text-maroon/40 hover:text-maroon mb-4 transition-colors">הקדמה</a>
 
-            <!-- Search & Filter Section -->
-            <div class="w-full mb-8 relative" dir="rtl">
-                <!-- Search Input -->
-                <div class="relative w-full flex items-center">
-                    <input type="text" id="search-input" placeholder="חיפוש במדף..."
-                        class="w-full bg-transparent border-b border-[#3E2723] text-maroon placeholder-maroon/40 text-sm py-1 pl-12 pr-1 focus:outline-none focus:border-maroon/80 transition-colors text-right font-sans mb-6">
-
-                    <!-- Reset Button: Positioned at end of input -->
-                    <button id="reset-filter"
-                        class="hidden absolute left-0 bottom-7 text-[10px] font-bold text-maroon/60 hover:text-maroon transition-colors bg-transparent border-none cursor-pointer">
-                        נקה
-                    </button>
-                </div>
-
-                <!-- Tag Cloud -->
-                <div id="tag-cloud-wrapper"
-                    class="text-right overflow-hidden h-0 opacity-0 transition-all duration-500 ease-out">
-                    <h3 class="text-[10px] font-bold text-maroon/60 mb-2 tracking-wide text-right">סינון לפי נושא:
-                    </h3>
-                    <div id="tag-cloud" class="flex flex-wrap justify-start gap-x-2 gap-y-2">
-                        <!-- Tags injected here -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Removed Category Navigation -->
-
-            <div class="mt-16 border-t border-maroon/10 pt-6 text-right">
-                <a href="#" id="intro-link"
-                    class="block text-xs text-maroon/40 hover:text-maroon mb-4 transition-colors">הקדמה</a>
-
-                <!-- Credits Section -->
-                <div class="text-[9px] text-maroon/30 leading-relaxed mt-4 border-t border-maroon/10 pt-4">
-                    <p class="mb-2">נוצר על ידי <span class="text-maroon/50">יונתן אלפרין</span></p>
-                    <p class="mb-2">במסגרת קורס "מעבדת מחקר - רב תרבותיות"</p>
-                    <p class="mb-2">מנחה: <span class="text-maroon/50">נסטיה פייביש</span></p>
-                    <p class="mt-3 text-[8px]">כל הזכויות שמורות ליוצרים והוצאות הספרים.</p>
-                </div>
+            <!-- Credits Section -->
+            <div class="text-[9px] text-maroon/30 leading-relaxed mt-4 border-t border-maroon/10 pt-4">
+                <p class="mb-2">נוצר על ידי <span class="text-maroon/50">יונתן אלפרין</span></p>
+                <p class="mb-2">במסגרת קורס "מעבדת מחקר - רב תרבותיות"</p>
+                <p class="mb-2">מנחה: <span class="text-maroon/50">נסטיה פייביש</span></p>
+                <p class="mt-3 text-[8px]">כל הזכויות שמורות ליוצרים והוצאות הספרים.</p>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- About Panel -->
@@ -427,6 +489,7 @@
     <div id="global-book-quote" class="book-hover-quote"></div>
 
     <script src="book1_content.js"></script>
+    <script src="books_data.js"></script>
     <script src="script.js"></script>
 </body>
 
